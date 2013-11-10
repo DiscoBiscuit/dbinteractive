@@ -1,0 +1,1 @@
+return (obj_control.movingstick1 = true or keyboard_check(vk_left) or keyboard_check(vk_right) or keyboard_check(vk_up) or keyboard_check(vk_down)) and point_distance(obj_control.cx,obj_control.cy,mouse_x+obj_control.dragmouseoffx,mouse_y+obj_control.dragmouseoffy)>24 and canshoot = 1

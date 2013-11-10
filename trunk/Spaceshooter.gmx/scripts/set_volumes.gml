@@ -1,0 +1,12 @@
+sound_volume(snd_laser,global.sfxvolume)
+sound_volume(snd_shieldimpact,global.sfxvolume)
+sound_volume(snd_boom1,global.sfxvolume)
+sound_volume(snd_combo,global.sfxvolume)
+sound_volume(snd_timer1,global.sfxvolume)
+sound_volume(snd_timer2,global.sfxvolume)
+sound_volume(snd_button,global.sfxvolume)
+sound_volume(snd_upgrade,global.sfxvolume)
+sound_volume(snd_charge,global.sfxvolume)
+
+sound_volume(snd_bgmusic,global.musicvolume)
+sound_volume(snd_menumusic,global.musicvolume)

@@ -1,0 +1,1 @@
+clickfuncenable = argument0
