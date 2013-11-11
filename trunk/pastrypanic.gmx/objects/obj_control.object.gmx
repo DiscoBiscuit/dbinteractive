@@ -82,6 +82,7 @@ donutspr[6] = spr_donut6
 donutspr[7] = spr_donut7
 donutspr[8] = spr_donut8
 donutspr[9] = spr_donut9
+donutspr[10] = spr_donut10
 
 for (k=0; k&lt;5; k+=1)
 {
@@ -630,10 +631,10 @@ scoredrawscl = scoredrawscl*0.95
 draw_set_alpha(1)
 scr_text_outline(scoredrawn,room_width/2,room_height-32,borderorange,make_color_rgb(255,125,0))
 //Draw streak
-draw_set_halign(fa_left)
+draw_set_halign(fa_right)
 draw_set_font(fnt_streak)
-scr_text_outline(string("+")+string(global.streak),16,room_height-32,borderorange,make_color_rgb(255,125,0))
-
+scr_text_outline(string("+")+string(global.streak),room_width-16,room_height-32,borderorange,make_color_rgb(255,125,0))
+draw_set_halign(fa_left)
 
 //Draw csas bar
 draw_set_color(c_gray)

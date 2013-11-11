@@ -23,8 +23,9 @@ for (i=0; i<5; i+=1)
         };
     };
 };
-var soundplayed;
+var soundplayed, specialcreated;
 soundplayed = 0
+specialcreated = 0
 if(count>=3)
 {
     for (i=0; i<5; i+=1)
@@ -64,8 +65,17 @@ if(count>=3)
                     score += (clamp(global.combo * 5,5,100) + global.streak) * 2
                     global.addscore = (clamp(global.combo * 5,5,100) + global.streak) * 2
                 }
-                ds_grid_set(maingrid,i,j,0)
-                ds_grid_set(sprinklegrid,i,j,0)
+                //Create special donut
+                if (count >= 5 and specialcreated == 0)
+                {
+                    ds_grid_set(maingrid,i,j,10)
+                    specialcreated = 1
+                }
+                else
+                {
+                    ds_grid_set(maingrid,i,j,0)
+                    ds_grid_set(sprinklegrid,i,j,0)
+                }
                 with (instance_create(i*64+32,j*64,obj_effect_score))
                 {
                     scoresfx = global.addscore;
