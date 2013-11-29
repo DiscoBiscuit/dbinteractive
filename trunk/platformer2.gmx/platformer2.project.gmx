@@ -12,7 +12,6 @@
     <sprites name="Player">
       <sprite>sprites\spr_player_idle</sprite>
       <sprite>sprites\spr_player_run</sprite>
-      <sprite>sprites\spr_player_jump</sprite>
       <sprite>sprites\spr_player_fall</sprite>
     </sprites>
   </sprites>
