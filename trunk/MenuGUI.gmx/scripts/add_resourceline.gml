@@ -1,5 +1,0 @@
-ds_list_add(obj_resourcelinedraw.x1,argument0)
-ds_list_add(obj_resourcelinedraw.y1,argument1)
-ds_list_add(obj_resourcelinedraw.x2,argument2)
-ds_list_add(obj_resourcelinedraw.y2,argument3)
-ds_list_add(obj_resourcelinedraw.col,argument4)
