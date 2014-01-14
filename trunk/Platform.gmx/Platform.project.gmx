@@ -8,17 +8,6 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
-  <objects name="objects">
-    <object>objects\obj_control</object>
-    <object>objects\obj_client</object>
-    <object>objects\obj_server</object>
-  </objects>
-  <rooms name="rooms">
-    <room>rooms\rm_main</room>
-  </rooms>
-  <constants number="1">
-    <constant name="CMD_HELLOWORLD">0</constant>
-  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

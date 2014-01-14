@@ -32,6 +32,7 @@ mailbox = network_create_socket(network_socket_tcp);
 if (instance_exists(obj_server))
 {
     client = network_connect(mailbox,"127.0.0.1", 27015); //That ip is our local ip use what you need.
+    show_message("connected")
 }
 else
 {
