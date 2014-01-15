@@ -27,8 +27,11 @@
             <kind>1</kind>
             <string>xspeed = 0
 yspeed = 0
+maxspeedx = 8
+maxspeedy = 64
 grav = 0
 jumping = false
+playerstate = 0
 </string>
           </argument>
         </arguments>
@@ -51,11 +54,11 @@ jumping = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-xspeed /= 1.1
+            <string>xspeed /= 1.1
 xspeed += keyboard_check(ord("D")) - keyboard_check(ord("A"))
-xspeed = clamp(xspeed,-8,8)
+xspeed = clamp(xspeed,-maxspeedx,maxspeedx)
 
+//Collision with walls
 if(place_free(x+xspeed,y-8))
 {
     x += xspeed
@@ -67,7 +70,8 @@ else
     xspeed /= 4
 }
 
-if(place_free(x,y+max(0,yspeed)))
+//Collision with ground
+if(place_free(x,y+max(1,yspeed)))
 {
     grav = 0.5
 }
@@ -81,6 +85,7 @@ else
     }
 }
 
+//Collision with ceil 
 if(yspeed&lt;0 and !place_free(x, y+yspeed))
 {
     move_outside_solid(270,8)
@@ -88,13 +93,74 @@ if(yspeed&lt;0 and !place_free(x, y+yspeed))
 }
 
 yspeed += grav
-yspeed = clamp(yspeed,-64,64)
+yspeed = clamp(yspeed,-maxspeedy,maxspeedy)
 y += yspeed
 
 if(keyboard_check(vk_space) and !place_free(x,y+4))
 {
     yspeed = -14
 }
+
+//State variables!!!!!!!!!!!!!
+if (xspeed &gt; 0.5 or xspeed &lt; -0.5)
+{
+    if not (place_free(x,y+max(8,yspeed)))
+    {
+        playerstate = 1
+    }
+    else
+    {
+        playerstate = 2
+    }
+}
+else
+{
+    if (place_free(x,y+max(8,yspeed)))
+    {
+        playerstate = 2
+    }
+    else
+    {
+        playerstate = 0
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var legvar;
+draw_self();
+switch (playerstate)
+{
+    case 0:
+        legvar = spr_player_test_legs_idle
+        break;
+    case 1:
+        legvar = spr_player_test_legs_run
+        break;
+    case 2:
+        legvar = spr_player_test_legs_fall
+        break;
+};
+draw_sprite_ext(legvar,0,x,y+sprite_height/2,sign(xspeed),1,image_angle,image_blend,image_alpha);
 </string>
           </argument>
         </arguments>
