@@ -65,6 +65,12 @@ if(place_free(x+xspeed,y-8))
     y -= 8
     move_contact_solid(270,8)
 }
+else if(place_free(x+xspeed,y+8))
+{
+    x += xspeed
+    y += 8
+    move_contact_solid(90,8)
+}
 else
 {
     xspeed /= 4
