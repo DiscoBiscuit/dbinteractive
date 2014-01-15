@@ -14,15 +14,24 @@
       <sprite>sprites\spr_player_test_legs_run</sprite>
       <sprite>sprites\spr_player_test_legs_fall</sprite>
     </sprites>
+    <sprite>sprites\util_xrd</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\ranger.gml</script>
+    <script>scripts\ranger_offset.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
+    <object>objects\lm</object>
     <object>objects\obj_player</object>
     <objects name="world">
       <object>objects\obj_block</object>
       <object>objects\obj_slope</object>
+    </objects>
+    <objects name="util">
+      <object>objects\xrd</object>
     </objects>
   </objects>
   <rooms name="rooms">

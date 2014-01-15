@@ -6,9 +6,9 @@
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>util_xrd</maskName>
   <events>
-    <event eventtype="7" enumb="4">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,26 +25,34 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(0,0,lm)
+            <string>if(global.xrd_points = true)
+{
+    dir = point_direction(global.xrd_x1,global.xrd_y1,global.xrd_x2,global.xrd_y2)
+    dist = point_distance(global.xrd_x1,global.xrd_y1,global.xrd_x2,global.xrd_y2)
+}
+else
+{
+    dir = global.xrd_dir
+    dist = global.xrd_dist
+}
+
+if(global.xrd_solid == true)
+{
+    move_contact_solid(dir,dist)
+}
+else
+{
+    move_contact_all(dir,dist)
+}
+
+global.xrd_x = x + lengthdir_x(global.xrd_pen,dir)
+global.xrd_y = y + lengthdir_y(global.xrd_pen,dir)
+global.xrd_d = point_distance(xstart,ystart,x,y) + global.xrd_pen
+
+instance_destroy()
 </string>
           </argument>
         </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="27">
-      <action>
-        <libid>1</libid>
-        <id>332</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_end_game</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
   </events>
@@ -59,5 +67,8 @@
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>1,1</point>
+    <point>2,2</point>
+  </PhysicsShapePoints>
 </object>
