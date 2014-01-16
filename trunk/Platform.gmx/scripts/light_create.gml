@@ -5,7 +5,8 @@ with(new)
     radius = argument2
     falloff = argument3
     prec = argument4
-    color = argument5
+    lrp = argument5
+    color = argument6
     
     flkr_col = color
     flkr_freq = 0
@@ -17,6 +18,9 @@ with(new)
     {
         ranger(x,y,radius,i,true)
         dist[i] = global.xrd_d
+        ldist[i] = dist[i]
     }
+    
+    check = true
 }
 return new
