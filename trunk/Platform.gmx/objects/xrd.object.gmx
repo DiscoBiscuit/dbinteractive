@@ -45,9 +45,9 @@ else
     move_contact_all(dir,dist)
 }
 
-global.xrd_x = x + lengthdir_x(global.xrd_pen,dir)
-global.xrd_y = y + lengthdir_y(global.xrd_pen,dir)
-global.xrd_d = point_distance(xstart,ystart,x,y) + global.xrd_pen
+global.xrd_x = x
+global.xrd_y = y
+global.xrd_d = point_distance(xstart,ystart,x,y)
 
 instance_destroy()
 </string>
