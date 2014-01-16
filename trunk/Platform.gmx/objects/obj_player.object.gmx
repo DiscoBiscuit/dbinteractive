@@ -35,7 +35,7 @@ playerstate = 0
 
 //        light_create(x,y,radius,penetration,falloff,precision,lerpspeed,color,on)
 lantern = light_create(x,y,512,128,128,128,0.4,make_color_rgb(32,32,32),true)
-lantern2 = light_create(x,y,128,64,64,64,0.7,make_color_rgb(255,128,0),false)
+lantern2 = light_create(x,y,128,64,64,64,0.7,make_color_rgb(255,192,128),false)
 </string>
           </argument>
         </arguments>
