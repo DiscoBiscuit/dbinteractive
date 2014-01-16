@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="7" enumb="4">
+    <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,26 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(0,0,lightmap)
+            <string>light_draw(self)
 </string>
           </argument>
         </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="27">
-      <action>
-        <libid>1</libid>
-        <id>332</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_end_game</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
   </events>

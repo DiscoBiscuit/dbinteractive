@@ -15,17 +15,24 @@
       <sprite>sprites\spr_player_test_legs_fall</sprite>
     </sprites>
     <sprite>sprites\util_xrd</sprite>
+    <sprite>sprites\spr_torch</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\ranger.gml</script>
-    <script>scripts\ranger_offset.gml</script>
-    <script>scripts\light_dynamic.gml</script>
+    <scripts name="util">
+      <script>scripts\ranger.gml</script>
+      <script>scripts\ranger_offset.gml</script>
+      <script>scripts\destroy.gml</script>
+    </scripts>
+    <scripts name="lighting">
+      <script>scripts\light_create.gml</script>
+      <script>scripts\light_update.gml</script>
+      <script>scripts\light_draw.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
-    <object>objects\lm</object>
     <object>objects\obj_player</object>
     <objects name="world">
       <object>objects\obj_block</object>
@@ -33,6 +40,10 @@
     </objects>
     <objects name="util">
       <object>objects\xrd</object>
+    </objects>
+    <objects name="lighting">
+      <object>objects\lightmap</object>
+      <object>objects\light</object>
     </objects>
   </objects>
   <rooms name="rooms">
