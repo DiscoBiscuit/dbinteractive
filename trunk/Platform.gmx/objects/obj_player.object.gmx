@@ -176,7 +176,7 @@ else
           <argument>
             <kind>1</kind>
             <string>var new;
-new = light_create(mouse_x,mouse_y,160,64,32,make_color_rgb(255,220,170))
+new = light_create(mouse_x,mouse_y,128,128,32,c_orange)
 light_add_flicker(new,3,10,16)
 new.sprite_index = spr_torch
 </string>
