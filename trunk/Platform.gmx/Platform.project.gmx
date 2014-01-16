@@ -27,6 +27,7 @@
     </scripts>
     <scripts name="lighting">
       <script>scripts\light_create.gml</script>
+      <script>scripts\light_add_flicker.gml</script>
       <script>scripts\light_update.gml</script>
       <script>scripts\light_draw.gml</script>
     </scripts>

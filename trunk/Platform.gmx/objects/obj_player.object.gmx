@@ -33,7 +33,7 @@ grav = 0
 jumping = false
 playerstate = 0
 
-lantern = light_create(x,y,384,128,64,c_white)
+lantern = light_create(x,y,384,128,64,make_color_rgb(32,32,32))
 </string>
           </argument>
         </arguments>
@@ -176,7 +176,8 @@ else
           <argument>
             <kind>1</kind>
             <string>var new;
-new = light_create(mouse_x,mouse_y,128,64,32,make_color_rgb(255,220,170))
+new = light_create(mouse_x,mouse_y,160,64,32,make_color_rgb(255,220,170))
+light_add_flicker(new,3,10,16)
 new.sprite_index = spr_torch
 </string>
           </argument>
