@@ -1,3 +1,5 @@
+// light_add_flicker(light,frequency,color dim %,size decrease range)
+
 with(argument0)
 {
     flkr_freq = argument1

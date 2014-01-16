@@ -72,16 +72,17 @@
     <instance objName="obj_slope" x="576" y="864" name="inst_DC16411E" locked="0" code="" scaleX="0.375" scaleY="0.125" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="416" y="992" name="inst_B276515E" locked="0" code="" scaleX="4.06349229812622" scaleY="0.5" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="576" y="896" name="inst_5DA07E93" locked="0" code="" scaleX="1.5" scaleY="1.5" colour="4294967295" rotation="0"/>
-    <instance objName="obj_block" x="1088" y="288" name="inst_C56D9729" locked="0" code="" scaleX="12" scaleY="2.5" colour="4294967295" rotation="0"/>
+    <instance objName="obj_block" x="1088" y="288" name="inst_C56D9729" locked="0" code="" scaleX="8.5" scaleY="2.5" colour="4294967295" rotation="0"/>
     <instance objName="obj_slope" x="1344" y="512" name="inst_E9B623E8" locked="0" code="" scaleX="-0.5" scaleY="-0.25" colour="4294967295" rotation="0"/>
     <instance objName="obj_slope" x="1472" y="512" name="inst_A12C8779" locked="0" code="" scaleX="0.875" scaleY="-0.25" colour="4294967295" rotation="0"/>
     <instance objName="obj_slope" x="1856" y="512" name="inst_EF934E26" locked="0" code="" scaleX="-0.375" scaleY="-0.25" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="1152" y="448" name="inst_3F28AA84" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_block" x="1696" y="448" name="inst_3A5A1FF0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_slope" x="1088" y="512" name="inst_3DD14365" locked="0" code="" scaleX="0.25" scaleY="-0.25" colour="4294967295" rotation="0"/>
     <instance objName="obj_slope" x="1056" y="448" name="inst_B681CA6D" locked="0" code="" scaleX="0.125" scaleY="-0.625" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="224" y="928" name="inst_919E6453" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="64" y="512" name="inst_696DFC4D" locked="0" code="" scaleX="8.5" scaleY="1" colour="4294967295" rotation="340"/>
+    <instance objName="obj_block" x="1632" y="288" name="inst_EC3E1164" locked="0" code="" scaleX="3.5" scaleY="0.5" colour="4294967295" rotation="0"/>
+    <instance objName="obj_block" x="1824" y="320" name="inst_50E03297" locked="0" code="" scaleX="0.5" scaleY="2.03174614906311" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

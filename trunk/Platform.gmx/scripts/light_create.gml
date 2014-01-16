@@ -1,12 +1,16 @@
+// light_create(x,y,radius,penetration,falloff,precision,lerpspeed,color)
+
 var new;
 new = instance_create(argument0,argument1,light)
 with(new)
 {
     radius = argument2
-    falloff = argument3
-    prec = argument4
-    lrp = argument5
-    color = argument6
+    pen = argument3
+    falloff = argument4
+    prec = argument5
+    lrp = argument6
+    color = argument7
+    on = argument8
     
     flkr_col = color
     flkr_freq = 0
@@ -16,11 +20,8 @@ with(new)
     
     for(i=0;i<=360;i+=(360/prec))
     {
-        ranger(x,y,radius,i,true)
-        dist[i] = global.xrd_d
+        dist[i] = ranger(x,y,i,radius)
         ldist[i] = dist[i]
     }
-    
-    check = true
 }
 return new

@@ -33,7 +33,9 @@ grav = 0
 jumping = false
 playerstate = 0
 
-lantern = light_create(x,y,384,128,64,0.4,make_color_rgb(32,32,32))
+//        light_create(x,y,radius,penetration,falloff,precision,lerpspeed,color,on)
+lantern = light_create(x,y,512,128,128,128,0.4,make_color_rgb(32,32,32),true)
+lantern2 = light_create(x,y,128,64,64,64,0.7,make_color_rgb(255,128,0),false)
 </string>
           </argument>
         </arguments>
@@ -153,6 +155,53 @@ else
           <argument>
             <kind>1</kind>
             <string>light_update(lantern,x,y)
+light_update(lantern2,mouse_x,mouse_y)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="57">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>lantern2.on = false
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="54">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>lantern2.on = true
 </string>
           </argument>
         </arguments>
@@ -176,7 +225,7 @@ else
           <argument>
             <kind>1</kind>
             <string>var new;
-new = light_create(mouse_x,mouse_y,128,128,32,0.5,c_orange)
+new = light_create(mouse_x,mouse_y,128,64,128,32,0.5,c_orange,true)
 light_add_flicker(new,4,20,12)
 new.sprite_index = spr_torch
 </string>

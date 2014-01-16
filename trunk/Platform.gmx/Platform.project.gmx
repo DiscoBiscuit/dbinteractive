@@ -22,7 +22,6 @@
   <scripts name="scripts">
     <scripts name="util">
       <script>scripts\ranger.gml</script>
-      <script>scripts\ranger_offset.gml</script>
       <script>scripts\destroy.gml</script>
     </scripts>
     <scripts name="lighting">
@@ -38,9 +37,6 @@
     <objects name="world">
       <object>objects\obj_block</object>
       <object>objects\obj_slope</object>
-    </objects>
-    <objects name="util">
-      <object>objects\xrd</object>
     </objects>
     <objects name="lighting">
       <object>objects\lightmap</object>
