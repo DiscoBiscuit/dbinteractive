@@ -14,7 +14,6 @@
       <sprite>sprites\spr_player_test_legs_run</sprite>
       <sprite>sprites\spr_player_test_legs_fall</sprite>
     </sprites>
-    <sprite>sprites\util_xrd</sprite>
     <sprite>sprites\spr_torch</sprite>
   </sprites>
   <backgrounds name="background"/>
@@ -30,6 +29,7 @@
       <script>scripts\light_update.gml</script>
       <script>scripts\light_draw.gml</script>
     </scripts>
+    <script>scripts\newroom.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
@@ -42,8 +42,11 @@
       <object>objects\lightmap</object>
       <object>objects\light</object>
     </objects>
+    <object>objects\obj_spawnroom</object>
+    <object>objects\obj_room</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_levelgen</room>
     <room>rooms\rm_test</room>
   </rooms>
   <help>

@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>xspeed = 0
+            <string>instance_create(0,0,lightmap)
+
+xspeed = 0
 yspeed = 0
 maxspeedx = 8
 maxspeedy = 64
