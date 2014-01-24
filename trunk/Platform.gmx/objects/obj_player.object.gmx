@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>instance_create(0,0,lightmap)
 scr_controls_init()
+scr_anim_initskel()
 
 xspeed = 0
 yspeed = 0
@@ -406,6 +407,14 @@ switch (playerstate)
 };
 draw_sprite_ext(legvar,0,x,y+sprite_height/2,sign(xspeed),1,image_angle,image_blend,image_alpha);
 
+//Draw skeleton (spooky)
+scr_anim_initskel() //Remove me after anims are in
+//Pelvis -&gt; Torso
+draw_line_color(skel_pelvis[0],skel_pelvis[1],skel_torso[0],skel_torso[1],c_green,c_blue)
+//Torso -&gt; Left Shoulder
+draw_line_color(skel_torso[0],skel_torso[1],skel_lshoulder[0],skel_lshoulder[1],c_green,c_blue)
+//Torso -&gt; Right Shoulder
+draw_line_color(skel_torso[0],skel_torso[1],skel_rshoulder[0],skel_rshoulder[1],c_green,c_blue)
 </string>
           </argument>
         </arguments>

@@ -32,6 +32,9 @@
       <script>scripts\light_update.gml</script>
       <script>scripts\light_draw.gml</script>
     </scripts>
+    <scripts name="animation">
+      <script>scripts\scr_anim_initskel.gml</script>
+    </scripts>
     <script>scripts\newroom.gml</script>
   </scripts>
   <objects name="objects">
