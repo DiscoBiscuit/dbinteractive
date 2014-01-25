@@ -415,6 +415,14 @@ draw_line_color(skel_pelvis[0],skel_pelvis[1],skel_torso[0],skel_torso[1],c_gree
 draw_line_color(skel_torso[0],skel_torso[1],skel_lshoulder[0],skel_lshoulder[1],c_green,c_blue)
 //Torso -&gt; Right Shoulder
 draw_line_color(skel_torso[0],skel_torso[1],skel_rshoulder[0],skel_rshoulder[1],c_green,c_blue)
+//Right Shoulder -&gt; Right Elbow
+draw_line_color(skel_rshoulder[0],skel_rshoulder[1],skel_relbow[0],skel_relbow[1],c_green,c_blue)
+//Left Shoulder -&gt; Left Elbow
+draw_line_color(skel_lshoulder[0],skel_lshoulder[1],skel_lelbow[0],skel_lelbow[1],c_green,c_blue)
+//Right Elbow -&gt; Right Hand
+draw_line_color(skel_relbow[0],skel_relbow[1],skel_rhand[0],skel_rhand[1],c_green,c_blue)
+//Left Elbow -&gt; Left Hand
+draw_line_color(skel_lelbow[0],skel_lelbow[1],skel_lhand[0],skel_lhand[1],c_green,c_blue)
 </string>
           </argument>
         </arguments>

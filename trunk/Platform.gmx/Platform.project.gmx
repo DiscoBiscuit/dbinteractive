@@ -25,6 +25,7 @@
     <scripts name="util">
       <script>scripts\ranger.gml</script>
       <script>scripts\destroy.gml</script>
+      <script>scripts\smooth.gml</script>
     </scripts>
     <scripts name="lighting">
       <script>scripts\light_create.gml</script>
@@ -34,6 +35,7 @@
     </scripts>
     <scripts name="animation">
       <script>scripts\scr_anim_initskel.gml</script>
+      <script>scripts\scr_anim_updateskel.gml</script>
     </scripts>
     <script>scripts\newroom.gml</script>
   </scripts>
@@ -51,6 +53,9 @@
     <object>objects\obj_spawnroom</object>
     <object>objects\obj_room</object>
   </objects>
+  <timelines name="timelines">
+    <timeline>timelines\anim_idle</timeline>
+  </timelines>
   <rooms name="rooms">
     <room>rooms\rm_test</room>
     <room>rooms\rm_levelgen</room>
