@@ -20,6 +20,7 @@
           <argument>
             <kind>1</kind>
             <string>skel_rshoulder_g[1] = -10
+skel_lshoulder_g[1] = -10
 </string>
           </argument>
         </arguments>

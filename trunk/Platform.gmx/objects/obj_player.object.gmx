@@ -141,6 +141,9 @@ else
         playerstate = 0
     }
 }
+
+//Animation
+scr_anim_updateskel();
 </string>
           </argument>
         </arguments>
@@ -408,7 +411,6 @@ switch (playerstate)
 draw_sprite_ext(legvar,0,x,y+sprite_height/2,sign(xspeed),1,image_angle,image_blend,image_alpha);
 
 //Draw skeleton (spooky)
-scr_anim_initskel() //Remove me after anims are in
 //Pelvis -&gt; Torso
 draw_line_color(skel_pelvis[0],skel_pelvis[1],skel_torso[0],skel_torso[1],c_green,c_blue)
 //Torso -&gt; Left Shoulder
