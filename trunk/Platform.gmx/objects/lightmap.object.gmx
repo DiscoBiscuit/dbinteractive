@@ -27,7 +27,6 @@
             <kind>1</kind>
             <string>parent = surface_create(view_wview,view_hview)
 dyn_lights = ds_map_create()
-drawlightsyesno = 1
 </string>
           </argument>
         </arguments>
@@ -78,35 +77,9 @@ surface_reset_target()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (drawlightsyesno)
-{
-    draw_set_blend_mode(bm_subtract)
-    draw_surface(parent,view_xview,view_yview)
-    draw_set_blend_mode(bm_normal)
-};
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="80">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>drawlightsyesno = -drawlightsyesno
+            <string>draw_set_blend_mode(bm_subtract)
+draw_surface(parent,view_xview,view_yview)
+draw_set_blend_mode(bm_normal)
 </string>
           </argument>
         </arguments>
