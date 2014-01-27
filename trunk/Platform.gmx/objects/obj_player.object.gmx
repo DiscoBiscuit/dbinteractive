@@ -38,6 +38,9 @@ playerstate = 0
 controlsetupstep = 0
 controlsetup = 0
 controltext = 0
+scr_skel_init();
+curanim = anim_idle
+facing = 1
 
 //        light_create(x,y,radius,penetration,falloff,precision,lerpspeed,color,on)
 lantern = light_create(x,y,512,128,128,128,0.4,make_color_rgb(32,32,32),true)
@@ -67,7 +70,10 @@ lantern2 = light_create(x,y,128,64,64,64,0.7,make_color_rgb(255,192,128),false)
             <string>xspeed /= 1.1
 xspeed += keyboard_check(control_right) - keyboard_check(control_left)
 xspeed = clamp(xspeed,-maxspeedx,maxspeedx)
-
+if (xspeed != 0)
+{
+    facing = sign(xspeed)
+}
 //Collision with walls
 if(place_free(x+xspeed,y-8))
 {
@@ -117,7 +123,7 @@ if(keyboard_check(control_up) and !place_free(x,y+4))
     yspeed = -14
 }
 
-//State variables!!!!!!!!!!!!!
+//State variables!!
 if (xspeed &gt; 0.5 or xspeed &lt; -0.5)
 {
     if not (place_free(x,y+max(8,yspeed)))
@@ -140,6 +146,12 @@ else
         playerstate = 0
     }
 }
+
+//Animation
+scr_skel_update();
+timeline_index = curanim
+timeline_running = true
+timeline_loop = true
 </string>
           </argument>
         </arguments>
@@ -404,8 +416,24 @@ switch (playerstate)
         legvar = spr_player_test_legs_fall
         break;
 };
-draw_sprite_ext(legvar,0,x,y+sprite_height/2,sign(xspeed),1,image_angle,image_blend,image_alpha);
+draw_sprite_ext(legvar,0,x,y+sprite_height/2,facing,1,image_angle,image_blend,image_alpha);
 
+//Draw skeleton (spooky)
+draw_line_color(skel_pelvis[0],skel_pelvis[1],skel_torso[0],skel_torso[1],c_blue,c_lime)
+draw_line_color(skel_torso[0],skel_torso[1],skel_lshoulder[0],skel_lshoulder[1],c_blue,c_lime)
+draw_line_color(skel_torso[0],skel_torso[1],skel_rshoulder[0],skel_rshoulder[1],c_blue,c_lime)
+draw_line_color(skel_rshoulder[0],skel_rshoulder[1],skel_relbow[0],skel_relbow[1],c_blue,c_lime)
+draw_line_color(skel_lshoulder[0],skel_lshoulder[1],skel_lelbow[0],skel_lelbow[1],c_blue,c_lime)
+draw_line_color(skel_relbow[0],skel_relbow[1],skel_rhand[0],skel_rhand[1],c_blue,c_lime)
+draw_line_color(skel_lelbow[0],skel_lelbow[1],skel_lhand[0],skel_lhand[1],c_blue,c_lime)
+if (facing == 1)
+{
+    draw_line_color(skel_rhand[0],skel_rhand[1],skel_weapon1[0],skel_weapon1[1],c_purple,c_fuchsia)
+}
+else
+{
+    draw_line_color(skel_lhand[0],skel_lhand[1],skel_weapon1[0],skel_weapon1[1],c_purple,c_fuchsia)
+}
 </string>
           </argument>
         </arguments>
