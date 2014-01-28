@@ -55,6 +55,7 @@
   </objects>
   <timelines name="timelines">
     <timeline>timelines\anim_idle</timeline>
+    <timeline>timelines\anim_run</timeline>
     <timeline>timelines\anim_jump</timeline>
   </timelines>
   <rooms name="rooms">

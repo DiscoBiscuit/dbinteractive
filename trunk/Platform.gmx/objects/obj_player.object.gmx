@@ -124,7 +124,7 @@ if(keyboard_check(control_up) and !place_free(x,y+4))
 }
 
 //State variables!!
-if (xspeed &gt; 0.5 or xspeed &lt; -0.5)
+if (xspeed &gt; 1 or xspeed &lt; -1)
 {
     if not (place_free(x,y+max(8,yspeed)))
     {
@@ -157,9 +157,13 @@ if (playerstate == 2)
 {
     curanim = anim_jump
 }
-else
+if (playerstate == 0)
 {
     curanim = anim_idle
+}
+if (playerstate == 1)
+{
+    curanim = anim_run
 }
 </string>
           </argument>
