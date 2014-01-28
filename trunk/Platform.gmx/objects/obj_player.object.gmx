@@ -152,6 +152,15 @@ scr_skel_update();
 timeline_index = curanim
 timeline_running = true
 timeline_loop = true
+
+if (playerstate == 2)
+{
+    curanim = anim_jump
+}
+else
+{
+    curanim = anim_idle
+}
 </string>
           </argument>
         </arguments>
