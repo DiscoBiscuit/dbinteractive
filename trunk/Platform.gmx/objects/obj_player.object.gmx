@@ -163,7 +163,12 @@ if (playerstate == 0)
 }
 if (playerstate == 1)
 {
+    timeline_speed = abs(xspeed / 8)
     curanim = anim_run
+}
+else
+{
+    timeline_speed = 1
 }
 </string>
           </argument>
@@ -447,6 +452,12 @@ else
 {
     draw_line_color(skel_lhand[0],skel_lhand[1],skel_weapon1[0],skel_weapon1[1],c_purple,c_fuchsia)
 }
+draw_line_color(skel_pelvis[0],skel_pelvis[1],skel_lhip[0],skel_lhip[1],c_blue,c_lime)
+draw_line_color(skel_pelvis[0],skel_pelvis[1],skel_rhip[0],skel_rhip[1],c_blue,c_lime)
+draw_line_color(skel_lhip[0],skel_lhip[1],skel_lknee[0],skel_lknee[1],c_blue,c_lime)
+draw_line_color(skel_rhip[0],skel_rhip[1],skel_rknee[0],skel_rknee[1],c_blue,c_lime)
+draw_line_color(skel_lknee[0],skel_lknee[1],skel_lfoot[0],skel_lfoot[1],c_blue,c_lime)
+draw_line_color(skel_rknee[0],skel_rknee[1],skel_rfoot[0],skel_rfoot[1],c_blue,c_lime)
 </string>
           </argument>
         </arguments>

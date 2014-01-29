@@ -20,9 +20,12 @@
           <argument>
             <kind>1</kind>
             <string>skel_speed = 5
+skel_legspeed = 5
 skel_torso_ln = 50
 skel_lshoulder_dir_g = 200
 skel_rshoulder_dir_g = -20
+skel_lhip_dir_g = 220
+skel_rhip_dir_g = -40
 if (facing == 1)
 {
     skel_lelbow_dir_g = 240
@@ -31,6 +34,10 @@ if (facing == 1)
     skel_rhand_dir_g = 220
     skel_torso_dir_g = 80
     skel_weapon1_dir_g = 190
+    skel_lknee_dir_g = 255
+    skel_lfoot_dir_g = 240
+    skel_rknee_dir_g = 295
+    skel_rfoot_dir_g = 260
 }
 else
 {
@@ -40,6 +47,10 @@ else
     skel_lhand_dir_g = 320
     skel_torso_dir_g = 100
     skel_weapon1_dir_g = 350
+    skel_rknee_dir_g = 285
+    skel_rfoot_dir_g = 300
+    skel_lknee_dir_g = 245
+    skel_lfoot_dir_g = 280
 }
 
 </string>
@@ -68,9 +79,12 @@ else
           <argument>
             <kind>1</kind>
             <string>skel_speed = 5
+skel_legspeed = 5
 skel_torso_ln = 40
 skel_lshoulder_dir_g = 205
 skel_rshoulder_dir_g = -25
+skel_lhip_dir_g = 225
+skel_rhip_dir_g = -45
 if (facing == 1)
 {
     skel_lelbow_dir_g = 240
@@ -79,6 +93,10 @@ if (facing == 1)
     skel_rhand_dir_g = 220
     skel_torso_dir_g = 80
     skel_weapon1_dir_g = 190
+    skel_lknee_dir_g = 255
+    skel_lfoot_dir_g = 240 - 2
+    skel_rknee_dir_g = 295
+    skel_rfoot_dir_g = 260 + 2
 }
 else
 {
@@ -88,6 +106,10 @@ else
     skel_lhand_dir_g = 320
     skel_torso_dir_g = 100
     skel_weapon1_dir_g = 350
+    skel_rknee_dir_g = 285
+    skel_rfoot_dir_g = 300 + 2
+    skel_lknee_dir_g = 245
+    skel_lfoot_dir_g = 280 - 2
 }
 
 </string>
@@ -123,6 +145,10 @@ else
     skel_rhand_dir_g = 220
     skel_torso_dir_g = 80
     skel_weapon1_dir_g = 190
+    skel_lknee_dir_g = 255
+    skel_lfoot_dir_g = 240
+    skel_rknee_dir_g = 295
+    skel_rfoot_dir_g = 260
 }
 else
 {
@@ -132,6 +158,10 @@ else
     skel_lhand_dir_g = 320
     skel_torso_dir_g = 100
     skel_weapon1_dir_g = 350
+    skel_rknee_dir_g = 285
+    skel_rfoot_dir_g = 300
+    skel_lknee_dir_g = 245
+    skel_lfoot_dir_g = 280
 }
 
 </string>
