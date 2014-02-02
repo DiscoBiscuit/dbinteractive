@@ -153,22 +153,20 @@ timeline_index = curanim
 timeline_running = true
 timeline_loop = true
 
-if (playerstate == 2)
+switch (playerstate)
 {
-    curanim = anim_jump
-}
-if (playerstate == 0)
-{
-    curanim = anim_idle
-}
-if (playerstate == 1)
-{
-    timeline_speed = abs(xspeed / 8)
-    curanim = anim_run
-}
-else
-{
-    timeline_speed = 1
+    case 0:
+        curanim = anim_idle
+        timeline_speed = 1
+        break;
+    case 1:
+        curanim = anim_run
+        timeline_speed = abs(xspeed / 8)
+        break;
+    case 2:
+        curanim = anim_jump
+        timeline_speed = 1
+        break;
 }
 </string>
           </argument>

@@ -30,7 +30,7 @@ if (facing == 1)
     skel_relbow_dir_g = 260
     skel_lhand_dir_g = 260
     skel_rhand_dir_g = 220
-    skel_torso_dir_g = 70
+    skel_torso_dir_g = 90 - (xspeed * 2)
     skel_weapon1_dir_g = 185
     skel_lknee_dir_g = 300
     skel_lfoot_dir_g = 210
@@ -43,7 +43,7 @@ else
     skel_lelbow_dir_g = 280
     skel_rhand_dir_g = 280
     skel_lhand_dir_g = 320
-    skel_torso_dir_g = 110
+    skel_torso_dir_g = 90 - (xspeed * 2)
     skel_weapon1_dir_g = 355
     skel_rknee_dir_g = 240
     skel_rfoot_dir_g = 330
@@ -86,7 +86,7 @@ if (facing == 1)
     skel_relbow_dir_g = 260
     skel_lhand_dir_g = 260
     skel_rhand_dir_g = 220
-    skel_torso_dir_g = 60
+    skel_torso_dir_g = 85 - (xspeed * 2)
     skel_weapon1_dir_g = 185
     skel_lknee_dir_g = 340
     skel_lfoot_dir_g = 260
@@ -99,7 +99,7 @@ else
     skel_lelbow_dir_g = 280
     skel_rhand_dir_g = 280
     skel_lhand_dir_g = 320
-    skel_torso_dir_g = 120
+    skel_torso_dir_g = 100 - (xspeed * 2)
     skel_weapon1_dir_g = 355
     skel_rknee_dir_g = 200
     skel_rfoot_dir_g = 240
@@ -138,12 +138,12 @@ else
     skel_relbow_dir_g = 260
     skel_lhand_dir_g = 260
     skel_rhand_dir_g = 220
-    skel_torso_dir_g = 80
+    skel_torso_dir_g = 90 - (xspeed * 2)
     skel_weapon1_dir_g = 190
-    skel_lknee_dir_g = 330
+    skel_lknee_dir_g = 300 + (xspeed * 3)
     skel_lfoot_dir_g = 330
-    skel_rknee_dir_g = 195
-    skel_rfoot_dir_g = 190
+    skel_rknee_dir_g = 220 - (xspeed * 3)
+    skel_rfoot_dir_g = 220 - (xspeed * 3)
 }
 else
 {
@@ -151,12 +151,12 @@ else
     skel_lelbow_dir_g = 280
     skel_rhand_dir_g = 280
     skel_lhand_dir_g = 320
-    skel_torso_dir_g = 100
+    skel_torso_dir_g = 90 - (xspeed * 2)
     skel_weapon1_dir_g = 350
-    skel_rknee_dir_g = 210
+    skel_rknee_dir_g = 240 + (xspeed * 3)
     skel_rfoot_dir_g = 210
-    skel_lknee_dir_g = 345
-    skel_lfoot_dir_g = 350
+    skel_lknee_dir_g = 320 - (xspeed * 3)
+    skel_lfoot_dir_g = 320 - (xspeed * 3)
 }
 
 </string>
@@ -195,7 +195,7 @@ if (facing == 1)
     skel_relbow_dir_g = 260
     skel_lhand_dir_g = 260
     skel_rhand_dir_g = 220
-    skel_torso_dir_g = 70
+    skel_torso_dir_g = 80 - (xspeed * 2)
     skel_weapon1_dir_g = 185
     skel_rknee_dir_g = 300
     skel_rfoot_dir_g = 210
@@ -208,7 +208,7 @@ else
     skel_lelbow_dir_g = 280
     skel_rhand_dir_g = 280
     skel_lhand_dir_g = 320
-    skel_torso_dir_g = 110
+    skel_torso_dir_g = 90 - (xspeed * 2)
     skel_weapon1_dir_g = 355
     skel_lknee_dir_g = 240
     skel_lfoot_dir_g = 330
@@ -250,7 +250,7 @@ if (facing == 1)
     skel_relbow_dir_g = 260
     skel_lhand_dir_g = 260
     skel_rhand_dir_g = 220
-    skel_torso_dir_g = 60
+    skel_torso_dir_g = 80 - (xspeed * 2)
     skel_weapon1_dir_g = 185
     skel_rknee_dir_g = 340
     skel_rfoot_dir_g = 260
@@ -263,7 +263,7 @@ else
     skel_lelbow_dir_g = 280
     skel_rhand_dir_g = 280
     skel_lhand_dir_g = 320
-    skel_torso_dir_g = 120
+    skel_torso_dir_g = 100 - (xspeed * 2)
     skel_weapon1_dir_g = 355
     skel_lknee_dir_g = 200
     skel_lfoot_dir_g = 280
@@ -302,11 +302,11 @@ else
     skel_relbow_dir_g = 260
     skel_lhand_dir_g = 260
     skel_rhand_dir_g = 220
-    skel_torso_dir_g = 80
+    skel_torso_dir_g = 90 - (xspeed * 2)
     skel_weapon1_dir_g = 190
-    skel_rknee_dir_g = 330
+    skel_rknee_dir_g = 300 + (xspeed * 3)
     skel_rfoot_dir_g = 330
-    skel_lknee_dir_g = 195
+    skel_lknee_dir_g = 230 - (xspeed * 3)
     skel_lfoot_dir_g = 190
 }
 else
@@ -315,11 +315,11 @@ else
     skel_lelbow_dir_g = 280
     skel_rhand_dir_g = 280
     skel_lhand_dir_g = 320
-    skel_torso_dir_g = 100
+    skel_torso_dir_g = 90 - (xspeed * 2)
     skel_weapon1_dir_g = 350
-    skel_lknee_dir_g = 210
+    skel_lknee_dir_g = 240 + (xspeed * 3)
     skel_lfoot_dir_g = 210
-    skel_rknee_dir_g = 345
+    skel_rknee_dir_g = 310 - (xspeed * 3)
     skel_rfoot_dir_g = 350
 }
 
