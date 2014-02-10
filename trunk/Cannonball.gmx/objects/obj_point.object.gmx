@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>dist = 0
+goal_x = x
+goal_y = y
 </string>
           </argument>
         </arguments>
@@ -49,8 +51,11 @@
           <argument>
             <kind>1</kind>
             <string>dist = smooth(dist,radius,20)
-phy_position_x = obj_cannon.x + lengthdir_x(dist,step+obj_cannon.spin)
-phy_position_y = obj_cannon.y + lengthdir_y(dist,step+obj_cannon.spin)
+goal_x = obj_cannon.x + lengthdir_x(dist,step+obj_cannon.spin)
+goal_y = obj_cannon.y + lengthdir_y(dist,step+obj_cannon.spin)
+var dir = point_direction(x, y, goal_x, goal_y), spd = point_distance(x, y, goal_x, goal_y) / 32;
+phy_speed_x = lengthdir_x(spd, dir);
+phy_speed_y = lengthdir_y(spd, dir);
 </string>
           </argument>
         </arguments>
