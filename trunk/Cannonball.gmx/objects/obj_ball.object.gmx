@@ -69,7 +69,7 @@ image_yscale = 0.5
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
   <PhysicsObjectDensity>1</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>1</PhysicsObjectRestitution>
+  <PhysicsObjectRestitution>3</PhysicsObjectRestitution>
   <PhysicsObjectGroup>1</PhysicsObjectGroup>
   <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
   <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
