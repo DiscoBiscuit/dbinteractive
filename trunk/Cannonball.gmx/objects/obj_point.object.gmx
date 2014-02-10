@@ -66,7 +66,7 @@ phy_speed_y = lengthdir_y(spd, dir);
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
   <PhysicsObjectDensity>5</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>1</PhysicsObjectRestitution>
+  <PhysicsObjectRestitution>1.25</PhysicsObjectRestitution>
   <PhysicsObjectGroup>-1</PhysicsObjectGroup>
   <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
   <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
