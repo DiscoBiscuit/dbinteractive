@@ -54,19 +54,19 @@ var pspeed,pdir,pfreex,pfreey;
 switch (keyboard_key)
 {
     case ord ('W'):
-        player_dir = scr_rotate(player_dir,90)
+        player_dir = 90
         pspeed = player_speed
         break;
     case ord ('A'):
-        player_dir = scr_rotate(player_dir,180)
+        player_dir = 180
         pspeed = player_speed
         break;
     case ord ('S'):
-        player_dir = scr_rotate(player_dir,270)
+        player_dir = 270
         pspeed = player_speed
         break;
     case ord ('D'):
-        player_dir = scr_rotate(player_dir,0)
+        player_dir = 0
         pspeed = player_speed
         break;
     default:
@@ -75,7 +75,7 @@ switch (keyboard_key)
 };
 if (obj_control.stickpressed == 1)
 {
-    player_dir = scr_rotate(player_dir,point_direction(obj_control.stickcenterx,obj_control.stickcentery,obj_control.stickccenterx,obj_control.stickccentery))
+    player_dir = point_direction(obj_control.stickcenterx,obj_control.stickcentery,obj_control.stickccenterx,obj_control.stickccentery)
     pspeed = point_distance(obj_control.stickcenterx,obj_control.stickcentery,obj_control.stickccenterx,obj_control.stickccentery)/24
 }
 pdir = round(player_dir/45) * 45;
