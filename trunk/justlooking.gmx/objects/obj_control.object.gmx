@@ -25,96 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>stickcenterx = 96
-stickcentery = view_hview - 96
-stickccenterx = 96
-stickccentery = view_hview - 96
-stickradius = 96
-stickpressed = 0
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>stickcenterx = 96
-stickcentery = view_hview - 96
-
-if(stickpressed == 0)
-{
-    stickccenterx = 96
-    stickccentery = view_hview - 96
-}
-else
-{
-    stickccenterx = stickcenterx + lengthdir_x(min(point_distance(stickcenterx,stickcentery,mouse_x,mouse_y),96),point_direction(stickcenterx,stickcentery,mouse_x,mouse_y))
-    stickccentery = stickcentery + lengthdir_y(min(point_distance(stickcenterx,stickcentery,mouse_x,mouse_y),96),point_direction(stickcenterx,stickcentery,mouse_x,mouse_y))
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>stickpressed = 0
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="53">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (point_distance (mouse_x,mouse_y, stickcenterx, stickcentery) &lt;= stickradius)
-{
-    stickpressed = 1
-}
+            <string>global.grid = mp_grid_create(0,0,room_width/64,room_height/48,64,48);
+mp_grid_add_instances(global.grid,obj_wall,0);
 </string>
           </argument>
         </arguments>
@@ -137,9 +49,9 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_black)
-draw_circle(stickcenterx,stickcentery,stickradius,1)
-draw_sprite(spr_hud_stick,0,stickccenterx,stickccentery)
+            <string>draw_set_alpha(0.25);
+mp_grid_draw(global.grid);
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>

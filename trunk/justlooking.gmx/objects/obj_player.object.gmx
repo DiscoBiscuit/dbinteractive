@@ -25,8 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>player_speed = 3
-player_dir = 0
+            <string>movepath = path_add();
+pspeed = 4;
+pmove = 0;
 </string>
           </argument>
         </arguments>
@@ -49,48 +50,46 @@ player_dir = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = - y
-var pspeed,pdir,pfreex,pfreey;
-switch (keyboard_key)
+            <string>depth = -y
+
+if (pmove == 0 and path_index == -1)
 {
-    case ord ('W'):
-        player_dir = 90
-        pspeed = player_speed
-        break;
-    case ord ('A'):
-        player_dir = 180
-        pspeed = player_speed
-        break;
-    case ord ('S'):
-        player_dir = 270
-        pspeed = player_speed
-        break;
-    case ord ('D'):
-        player_dir = 0
-        pspeed = player_speed
-        break;
-    default:
-        pspeed = 0
-        break;
-};
-if (obj_control.stickpressed == 1)
-{
-    player_dir = point_direction(obj_control.stickcenterx,obj_control.stickcentery,obj_control.stickccenterx,obj_control.stickccentery)
-    pspeed = point_distance(obj_control.stickcenterx,obj_control.stickcentery,obj_control.stickccenterx,obj_control.stickccentery)/24
-}
-pdir = round(player_dir/45) * 45;
-if (keyboard_check (ord ('W') or ord ('A') or ord('S') or ord('D')) or obj_control.stickpressed == 1)
-{
-    pfreex = lengthdir_x (pspeed,pdir)
-    pfreey = lengthdir_y (pspeed,pdir)
-    if (place_free (x + pfreex,y + pfreey))
+    switch (keyboard_key)
     {
-        x += pfreex
-        y += pfreey
-    }
+        case ord('W'):
+            if (mp_grid_path(global.grid,movepath,x,y+48,x,y-48+48,0) == true)
+            {
+                pmove = 1
+            }
+            break;
+        case ord('A'):
+            if (mp_grid_path(global.grid,movepath,x,y+48,x-64,y+48,0) == true)
+            {
+                pmove = 1
+            }
+            break;
+        case ord('S'):
+            if (mp_grid_path(global.grid,movepath,x,y+48,x,y+48+48,0) == true)
+            {
+                pmove = 1
+            }
+            break;
+        case ord('D'):
+            if (mp_grid_path(global.grid,movepath,x,y+48,x+64,y+48,0) == true)
+            {
+                pmove = 1
+            }
+            break;
+    };
 };
-
-
+else
+{
+    if (path_index == -1 )
+    {
+        path_start(movepath,pspeed,0,0)
+    };
+    pmove = 0
+};
 </string>
           </argument>
         </arguments>
