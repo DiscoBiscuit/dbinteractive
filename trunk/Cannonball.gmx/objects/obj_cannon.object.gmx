@@ -31,10 +31,10 @@ physics_world_create(1/32)
 physics_world_gravity(0,10)
 
 size = 32
-space = 0
+space = 8
 
 radius = 240
-count = (2*pi*radius)/(size+space)
+count = round((2*pi*radius)/(size+space))
 var new;
 for(i=0;i&lt;count;i+=1)
 {
