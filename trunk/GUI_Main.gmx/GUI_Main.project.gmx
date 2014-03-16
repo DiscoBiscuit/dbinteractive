@@ -5,9 +5,39 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\skn_default</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <scripts name="GUI">
+      <script>scripts\gui_init.gml</script>
+      <script>scripts\gui_draw.gml</script>
+      <script>scripts\gui_add.gml</script>
+      <script>scripts\gui_collision.gml</script>
+      <script>scripts\gui_mouse_on_rect.gml</script>
+      <script>scripts\gui_mouse_on_circle.gml</script>
+      <scripts name="panel">
+        <script>scripts\gui_panel_create.gml</script>
+        <script>scripts\gui_panel_draw.gml</script>
+      </scripts>
+      <scripts name="circlepanel">
+        <script>scripts\gui_circlepanel_create.gml</script>
+        <script>scripts\gui_circlepanel_draw.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="UTIL">
+      <script>scripts\draw_rectangle_skin.gml</script>
+      <script>scripts\point_inside_triangle.gml</script>
+    </scripts>
+  </scripts>
+  <objects name="objects">
+    <object>objects\obj_control</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\room0</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
