@@ -2,19 +2,19 @@ var new,cldr;
 new = ds_map_create()
 
 ds_map_add(new,"type","panel")
+ds_map_add(new,"step",gui_panel_step)
 ds_map_add(new,"draw",gui_panel_draw)
+ds_map_add(new,"parent","NULL")
 
-cldr = ds_list_create()
-ds_list_add(cldr,"self")
-ds_map_add(new,"collider",cldr)
+ds_map_add(new,"collider",gui_collider_create("rect",1,0,0,argument2,argument3))
 
-ds_map_add(new,"name",argument0)
-ds_map_add(new,"x",argument1)
-ds_map_add(new,"y",argument2)
-ds_map_add(new,"width",argument3)
-ds_map_add(new,"height",argument4)
-ds_map_add(new,"color",argument5)
-ds_map_add(new,"canfocus",argument6)
-ds_map_add(new,"draggable",argument7)
+ds_map_add(new,"x",argument0)
+ds_map_add(new,"y",argument1)
+ds_map_add(new,"lx",argument0)
+ds_map_add(new,"ly",argument1)
+ds_map_add(new,"width",argument2)
+ds_map_add(new,"height",argument3)
+ds_map_add(new,"color",argument4)
+ds_map_add(new,"canfocus",argument5)
 
 return new

@@ -1,23 +1,27 @@
 gui_mx = window_mouse_get_x()
 gui_my = window_mouse_get_y()
 
-var new,size,cldr;
-size = ds_list_size(gui_elements)
+var new,size;
+size = ds_list_size(gui_list)
 
 gui_mouseover = false
-gui_id_mouseover = -1
+for(l=1;l<=gui_layers;l+=1){gui_id_mouseover[l] = -1}
+
 for(gui_id=0;gui_id<size;gui_id+=1)
 {
-    new = ds_list_find_value(gui_elements,gui_id)
-    cldr = ds_map_find_value(new,"collider")
-    if(cldr!=0)
-    {
-        gui_collision(new,cldr)
-    }
+    new = ds_map_find_value(gui_elements,ds_list_find_value(gui_list,gui_id))
+    gui_element_localize(new)
+    gui_element_collide(new)
 }
 
 for(gui_id=0;gui_id<size;gui_id+=1)
 {
-    new = ds_list_find_value(gui_elements,gui_id)
-    script_execute(ds_map_find_value(new,"draw"),new)
+    new = ds_map_find_value(gui_elements,ds_list_find_value(gui_list,gui_id))
+    gui_element_step(new)
+}
+
+for(gui_id=0;gui_id<size;gui_id+=1)
+{
+    new = ds_map_find_value(gui_elements,ds_list_find_value(gui_list,gui_id))
+    gui_element_draw(new)
 }

@@ -9,8 +9,8 @@ x1 = min(argument2,argument4)
 y1 = min(argument3,argument5)
 x2 = max(argument4,argument2)
 y2 = max(argument5,argument3)
-blend = argument6
-alpha = argument7
+blend = c_white
+alpha = argument6
 
 border = sprite_get_width(sprite)/3
 hor = (x2-x1) - border*2

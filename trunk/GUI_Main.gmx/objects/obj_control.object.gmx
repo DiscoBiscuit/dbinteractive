@@ -26,12 +26,16 @@
           <argument>
             <kind>1</kind>
             <string>gui_init()
-//gui_panel_create(name,x,y,width,height,color,can focus,draggable)
-gui_add( gui_panel_create("panel1",0,0,256,128,c_gray,true,true) )
-gui_add( gui_panel_create("panel2",128,64,256,128,c_dkgray,true,true) )
+//gui_panel_create(name,x,y,width,height,color,can focus)
+gui_add("panel1", gui_skinpanel_create(0,0,256,128,skn_default,false) )
+gui_add("panel2", gui_panel_create(128,64,256,128,c_dkgray,true) )
 
-//gui_circlepanel_create(name,x,y,radius,color,can focus,draggable)
-gui_add( gui_circlepanel_create("panel3",128,64,128,c_blue,true,true) )
+gui_add("label1", gui_label_create(16,16,"Panel 2","default",c_white) )
+gui_parent("label1","panel2")
+
+//gui_circlepanel_create(name,x,y,radius,color,can focus)
+gui_add("panel3", gui_circlepanel_create(192,256,128,c_blue,true) )
+//gui_edit("panel3","hide",true)
 </string>
           </argument>
         </arguments>
@@ -54,8 +58,16 @@ gui_add( gui_circlepanel_create("panel3",128,64,128,c_blue,true,true) )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw_rectangle_skin(skn_default,0,128,128,mouse_x,mouse_y,c_white,1)
+            <string>//move the panel around to prove that parented elements work
+gui_move("panel2",128,192+lengthdir_x(128,current_time/10))
+gui_move_local("label1",16,60+lengthdir_x(56,current_time/10))
+
+//draw the gui
 gui_draw()
+
+//draw debug information
+draw_set_color(c_white)
+draw_text(0,0,fps)
 </string>
           </argument>
         </arguments>

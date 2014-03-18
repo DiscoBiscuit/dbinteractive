@@ -1,9 +1,14 @@
-var new,tx,ty,tx,th;
-new = argument0
-tx = ds_map_find_value(new,"x")
-ty = ds_map_find_value(new,"y")
-tw = ds_map_find_value(new,"width")
-th = ds_map_find_value(new,"height")
-draw_set_color(ds_map_find_value(new,"color"))
+var name,new;
+name = ds_list_find_value(gui_list,gui_id)
 
-draw_rectangle(tx,ty,tx+tw,ty+th,false)
+if(gui_id_mouseover[1] == gui_id)
+{ 
+    if(mouse_check_button_pressed(mb_left))
+    {
+        new = ds_map_find_value(gui_elements,name)
+        if(ds_map_find_value(new,"canfocus")==true)
+        {
+            gui_focus(name)
+        }
+    }
+}
