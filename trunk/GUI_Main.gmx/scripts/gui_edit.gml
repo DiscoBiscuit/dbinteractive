@@ -1,6 +1,7 @@
 var new;
 
-new = ds_map_find_value(gui_elements,argument0)
+new = argument0
+
 if(ds_map_exists(new,argument1))
 {
     ds_map_replace(new,argument1,argument2)

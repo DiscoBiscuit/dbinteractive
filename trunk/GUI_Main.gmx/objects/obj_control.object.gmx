@@ -25,17 +25,103 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>gui_init()
-//gui_panel_create(name,x,y,width,height,color,can focus)
+            <string>//initialize the gui system
+gui_init()
+
+//gui_skinpanel_create() creates the data structure for a skinpanel. gui_add() adds that panel to the gui with the name in argument0
 gui_add("panel1", gui_skinpanel_create(0,0,256,128,skn_default,false) )
+//gui_addto() adds a new element and immediately parents it to the second argument. Using this method, position values for the new label are relative to the parent object
+gui_addto("label0","panel1", gui_label_create_format(128,64,"Panel1",c_white,-1,fa_center,fa_middle) )
+
+
+
 gui_add("panel2", gui_panel_create(128,64,256,128,c_dkgray,true) )
+//dragbars allow you to move elements around. These must be parented to something in order to work
+gui_addto("dragbar1", "panel2", gui_dragbar_create(0,0,256,16,c_black))
+gui_addto("label1", "panel2", gui_label_create(1,1,"Panel 2",c_white) )
+gui_addto("label2", "panel2", gui_label_create(1,17,"Info",c_white) )
+gui_addto("label3", "panel2", gui_label_create(1,33,"Test",c_white) )
 
-gui_add("label1", gui_label_create(16,16,"Panel 2","default",c_white) )
-gui_parent("label1","panel2")
 
-//gui_circlepanel_create(name,x,y,radius,color,can focus)
-gui_add("panel3", gui_circlepanel_create(192,256,128,c_blue,true) )
-//gui_edit("panel3","hide",true)
+
+//just a test to see if a panel can be parented to another panel, and then a dragbar parented to that to have a draggable element within another draggable element
+gui_addto("panel4","panel2", gui_circlepanel_create(112,48,32,c_red,false) )
+gui_addto("dragbar3", "panel4", gui_dragbar_create(0,0,32,32,c_black))
+gui_edit(gui_lookup("dragbar3"),"alpha",0)
+gui_addto("label7","panel4", gui_label_create_format(16,16,"Drag Me!",c_white,-1,fa_center,fa_middle) )
+
+
+
+//make a custom color for this panel
+var blue;
+blue = make_color_rgb(32,128,255)
+
+gui_add("panel3", gui_panel_create(192,96,256,128,blue,true) )
+
+//gui_edit takes in a data structure and edits one of its values. To get the data structure after it has been created, use gui_lookup() and pass in the name
+gui_edit(gui_lookup("panel3"),"alpha",0.5)
+
+//another way to do this is to reference the data structure in a temporary var, and edit it directly. This can be done at any time.
+var db2;
+db2 = gui_dragbar_create(0,0,256,16,blue)
+gui_addto("dragbar2", "panel3", db2 )
+
+//The dragbar has been added to the gui already, but db2 still references it, so it can be used to modify values without looking it up first
+gui_edit(db2,"alpha",0.5)
+
+gui_addto("label4", "panel3", gui_label_create_format(1,1,"Panel 3",c_blue,fnt_main,fa_left,fa_top) )
+gui_addto("label5", "panel3", gui_label_create_format(1,17,"Data",c_blue,fnt_main,fa_left,fa_top) )
+gui_addto("label6", "panel3", gui_label_create_format(1,33,"Values",c_blue,fnt_main,fa_left,fa_top) )
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>background_color = c_ltgray
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//gui_over() will return true if the mouse is currently over a gui element that has a collider
+//world events related to clicking should not occur if the mouse is over the gui
+
+if(!gui_over())
+background_color = c_gray
 </string>
           </argument>
         </arguments>
@@ -58,15 +144,11 @@ gui_add("panel3", gui_circlepanel_create(192,256,128,c_blue,true) )
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//move the panel around to prove that parented elements work
-gui_move("panel2",128,192+lengthdir_x(128,current_time/10))
-gui_move_local("label1",16,60+lengthdir_x(56,current_time/10))
-
-//draw the gui
+            <string>//draw the gui
 gui_draw()
 
 //draw debug information
-draw_set_color(c_white)
+draw_set_identity()
 draw_text(0,0,fps)
 </string>
           </argument>

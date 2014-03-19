@@ -15,19 +15,28 @@
       <script>scripts\gui_init.gml</script>
       <script>scripts\gui_draw.gml</script>
       <script>scripts\gui_add.gml</script>
+      <script>scripts\gui_destroy.gml</script>
+      <script>scripts\gui_addto.gml</script>
       <script>scripts\gui_edit.gml</script>
+      <script>scripts\gui_lookup.gml</script>
+      <script>scripts\gui_get.gml</script>
       <script>scripts\gui_parent.gml</script>
       <script>scripts\gui_move.gml</script>
       <script>scripts\gui_move_local.gml</script>
       <script>scripts\gui_focus.gml</script>
+      <script>scripts\gui_collider_create.gml</script>
       <script>scripts\gui_mouse_on_rect.gml</script>
       <script>scripts\gui_mouse_on_circle.gml</script>
-      <script>scripts\gui_empty.gml</script>
-      <script>scripts\gui_collider_create.gml</script>
-      <script>scripts\gui_element_localize.gml</script>
-      <script>scripts\gui_element_collide.gml</script>
-      <script>scripts\gui_element_step.gml</script>
-      <script>scripts\gui_element_draw.gml</script>
+      <script>scripts\gui_over.gml</script>
+      <scripts name="generic">
+        <script>scripts\gui_element_create.gml</script>
+        <script>scripts\gui_element_localize.gml</script>
+        <script>scripts\gui_element_collide.gml</script>
+        <script>scripts\gui_element_step.gml</script>
+        <script>scripts\gui_element_draw.gml</script>
+        <script>scripts\gui_empty.gml</script>
+        <script>scripts\gui_generic_destroy.gml</script>
+      </scripts>
       <scripts name="panel">
         <script>scripts\gui_panel_create.gml</script>
         <script>scripts\gui_panel_step.gml</script>
@@ -39,18 +48,27 @@
       </scripts>
       <scripts name="label">
         <script>scripts\gui_label_create.gml</script>
+        <script>scripts\gui_label_create_format.gml</script>
         <script>scripts\gui_label_draw.gml</script>
       </scripts>
       <scripts name="skinpanel">
         <script>scripts\gui_skinpanel_create.gml</script>
         <script>scripts\gui_skinpanel_draw.gml</script>
       </scripts>
+      <scripts name="dragbar">
+        <script>scripts\gui_dragbar_create.gml</script>
+        <script>scripts\gui_dragbar_step.gml</script>
+      </scripts>
     </scripts>
     <scripts name="UTIL">
       <script>scripts\draw_rectangle_skin.gml</script>
       <script>scripts\point_inside_triangle.gml</script>
+      <script>scripts\draw_set_identity.gml</script>
     </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_main</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
   </objects>

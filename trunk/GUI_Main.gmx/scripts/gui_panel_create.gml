@@ -1,20 +1,15 @@
 var new,cldr;
-new = ds_map_create()
+new = gui_element_create(argument0,argument1)
 
-ds_map_add(new,"type","panel")
-ds_map_add(new,"step",gui_panel_step)
-ds_map_add(new,"draw",gui_panel_draw)
-ds_map_add(new,"parent","NULL")
+gui_edit(new,"type","panel")
+gui_edit(new,"step",gui_panel_step)
+gui_edit(new,"draw",gui_panel_draw)
 
-ds_map_add(new,"collider",gui_collider_create("rect",1,0,0,argument2,argument3))
+gui_edit(new,"collider",gui_collider_create("rect",1,0,0,argument2,argument3))
 
-ds_map_add(new,"x",argument0)
-ds_map_add(new,"y",argument1)
-ds_map_add(new,"lx",argument0)
-ds_map_add(new,"ly",argument1)
-ds_map_add(new,"width",argument2)
-ds_map_add(new,"height",argument3)
-ds_map_add(new,"color",argument4)
-ds_map_add(new,"canfocus",argument5)
+gui_edit(new,"width",argument2)
+gui_edit(new,"height",argument3)
+gui_edit(new,"color",argument4)
+gui_edit(new,"canfocus",argument5)
 
 return new

@@ -11,10 +11,6 @@ dx = ds_map_find_value(new,"x")
 dy = ds_map_find_value(new,"y")
 dcolor = ds_map_find_value(new,"color")
 dalpha = ds_map_find_value(new,"alpha")
-
-if(dcolor==0){dcolor=c_white}
-if(dalpha==0){dalpha=1}
-
 draw_set_color(dcolor)
 draw_set_alpha(dalpha)
 

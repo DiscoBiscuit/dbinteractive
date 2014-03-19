@@ -1,5 +1,6 @@
-var new,dstring;
+var new;
 new = argument0
-dstring = ds_map_find_value(new,"text")
-
-draw_text(dx,dy,dstring)
+draw_set_font(ds_map_find_value(new,"font"))
+draw_set_halign(ds_map_find_value(new,"halign"))
+draw_set_valign(ds_map_find_value(new,"valign"))
+draw_text(dx,dy,ds_map_find_value(new,"text"))
