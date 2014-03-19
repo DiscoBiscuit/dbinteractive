@@ -10,7 +10,9 @@
     <sprite>sprites\spr_ball</sprite>
     <sprite>sprites\spr_line</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\tex_brush</background>
+  </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\obj_control</object>
