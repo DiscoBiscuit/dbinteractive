@@ -7,8 +7,8 @@ gui_edit(new,"draw",gui_label_draw)
 
 gui_edit(new,"text",argument2)
 gui_edit(new,"color",argument3)
-gui_edit(new,"font",-1)
-gui_edit(new,"halign",fa_left)
-gui_edit(new,"valign",fa_top)
+gui_edit(new,"font",gui_font_default)
+gui_edit(new,"halign",gui_halign_default)
+gui_edit(new,"valign",gui_halign_default)
 
 return new

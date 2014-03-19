@@ -13,6 +13,7 @@
   <scripts name="scripts">
     <scripts name="GUI">
       <script>scripts\gui_init.gml</script>
+      <script>scripts\gui_set_default_font.gml</script>
       <script>scripts\gui_draw.gml</script>
       <script>scripts\gui_add.gml</script>
       <script>scripts\gui_destroy.gml</script>
@@ -58,6 +59,12 @@
       <scripts name="dragbar">
         <script>scripts\gui_dragbar_create.gml</script>
         <script>scripts\gui_dragbar_step.gml</script>
+      </scripts>
+      <scripts name="textbox">
+        <script>scripts\gui_textbox_create.gml</script>
+        <script>scripts\gui_textbox_step.gml</script>
+        <script>scripts\gui_textbox_draw.gml</script>
+        <script>scripts\gui_textbox_destroy.gml</script>
       </scripts>
     </scripts>
     <scripts name="UTIL">
