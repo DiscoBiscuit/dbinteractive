@@ -5,9 +5,30 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
-  <backgrounds name="background"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_glyph</sprite>
+  </sprites>
+  <backgrounds name="background">
+    <background>background\bg_paper</background>
+  </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\add_combo.gml</script>
+    <script>scripts\combine_glyphs.gml</script>
+    <script>scripts\clear_children.gml</script>
+    <script>scripts\update_children.gml</script>
+  </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_glyph</font>
+  </fonts>
+  <objects name="objects">
+    <object>objects\obj_center</object>
+    <object>objects\obj_glyph</object>
+    <object>objects\obj_glyph_button</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rm_paper</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
