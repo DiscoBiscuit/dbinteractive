@@ -25,7 +25,7 @@ if(gui_get(new,"active"))
 {
     if(keyboard_check_pressed(vk_enter))
     {
-        gui_edit(new,"laststring",keyboard_string)
+        script_execute(gui_get(new,"enter"),gui_get(new,"string"))
         keyboard_string = ""
         
         if(!persist)

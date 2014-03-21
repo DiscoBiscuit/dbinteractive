@@ -66,12 +66,18 @@
         <script>scripts\gui_textbox_draw.gml</script>
         <script>scripts\gui_textbox_destroy.gml</script>
       </scripts>
+      <scripts name="textlog">
+        <script>scripts\gui_textlog_create.gml</script>
+        <script>scripts\gui_textlog_append.gml</script>
+        <script>scripts\gui_textlog_draw.gml</script>
+      </scripts>
     </scripts>
     <scripts name="UTIL">
       <script>scripts\draw_rectangle_skin.gml</script>
       <script>scripts\point_inside_triangle.gml</script>
       <script>scripts\draw_set_identity.gml</script>
     </scripts>
+    <script>scripts\append_to_console.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_main</font>

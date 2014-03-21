@@ -32,7 +32,8 @@ gui_set_default_font(fnt_main,fa_left,fa_top)
 gui_add("console_panel", gui_skinpanel_create(0,0,256,128,skn_default,false) )
 gui_addto("console_dragbar","console_panel", gui_dragbar_create(0,0,256,128,c_white) )
 gui_edit(gui_lookup("console_dragbar"),"alpha",0)
-gui_addto("console_textbox","console_panel", gui_textbox_create(8,102,240,18,c_dkgray,c_white,-1,0) )
+gui_addto("console_textlog","console_panel", gui_textlog_create(8,8,240,80,c_dkgray,c_white,-1) )
+gui_addto("console_textbox","console_panel", gui_textbox_create(8,102,240,18,c_dkgray,c_white,-1,0,append_to_console) )
 </string>
           </argument>
         </arguments>
