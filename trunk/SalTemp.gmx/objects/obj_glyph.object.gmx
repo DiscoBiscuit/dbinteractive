@@ -32,6 +32,7 @@ parent1 = noone
 parent2 = noone
 glyph = ""
 
+image_speed = 0
 </string>
           </argument>
         </arguments>
@@ -54,14 +55,20 @@ glyph = ""
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(drag==true)
+            <string>
+if(drag==true)
 {
-    gx = mouse_x + drag_x
-    gy = mouse_y + drag_y
+    var pos;
+    pos = snap_hexgrid(mouse_x, mouse_y, global.grw,global.grh)
+    if(!collision_point(pos[1],pos[2],obj_glyph,true,true) and !collision_point(pos[1],pos[2],obj_center,true,false))
+    {
+        gx = pos[1]
+        gy = pos[2]
+    }
 }
 
-x = lerp(x,gx,0.3)
-y = lerp(y,gy,0.3)
+x = lerp(x,gx,0.2)
+y = lerp(y,gy,0.2)
 </string>
           </argument>
         </arguments>
@@ -173,6 +180,7 @@ if(linking==true)
     instance_destroy()
 }
 else
+if(glyph!="")
 {
 linking = true
 if(child!=noone)
@@ -215,8 +223,6 @@ if(child!=noone)
           <argument>
             <kind>1</kind>
             <string>drag = true
-drag_x = x-mouse_x
-drag_y = y-mouse_y
 </string>
           </argument>
         </arguments>
@@ -252,6 +258,8 @@ if(child!=noone)
 over = (over*4 + (point_distance(x,y,mouse_x,mouse_y)&lt;32))/5
 
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,image_blend,0.5 + over*0.5)
+
+if(image_index==0)
 draw_text(x,y,string_upper(glyph))
 </string>
           </argument>

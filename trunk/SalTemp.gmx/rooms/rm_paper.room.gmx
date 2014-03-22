@@ -2,11 +2,11 @@
 <room>
   <caption></caption>
   <width>640</width>
-  <height>480</height>
+  <height>640</height>
   <vsnap>16</vsnap>
   <hsnap>16</hsnap>
   <isometric>0</isometric>
-  <speed>30</speed>
+  <speed>60</speed>
   <persistent>0</persistent>
   <colour>13625329</colour>
   <showcolour>-1</showcolour>
@@ -51,13 +51,13 @@
   </views>
   <instances>
     <instance objName="obj_center" x="320" y="240" name="inst_13224C08" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_glyph_button" x="240" y="432" name="inst_BD093C1D" locked="0" code="glyph = &quot;earth&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_glyph_button" x="400" y="432" name="inst_B1FAE31A" locked="0" code="glyph = &quot;air&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_glyph_button" x="480" y="432" name="inst_F0C6E48A" locked="0" code="glyph = &quot;order&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_glyph_button" x="160" y="432" name="inst_AA5BA053" locked="0" code="glyph = &quot;water&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_glyph_button" x="320" y="432" name="inst_BB13FCC8" locked="0" code="glyph = &quot;&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_glyph_button" x="80" y="432" name="inst_255A6DCF" locked="0" code="glyph = &quot;fire&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_glyph_button" x="560" y="432" name="inst_F7F87725" locked="0" code="glyph = &quot;chaos&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_glyph_button" x="240" y="592" name="inst_BD093C1D" locked="0" code="glyph = &quot;earth&quot;&#xA;image_index = 3&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_glyph_button" x="400" y="592" name="inst_B1FAE31A" locked="0" code="glyph = &quot;air&quot;&#xA;image_index = 4&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_glyph_button" x="480" y="592" name="inst_F0C6E48A" locked="0" code="glyph = &quot;order&quot;&#xA;image_index = 5&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_glyph_button" x="160" y="592" name="inst_AA5BA053" locked="0" code="glyph = &quot;water&quot;&#xA;image_index = 2&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_glyph_button" x="320" y="592" name="inst_BB13FCC8" locked="0" code="glyph = &quot;&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_glyph_button" x="80" y="592" name="inst_255A6DCF" locked="0" code="glyph = &quot;fire&quot;&#xA;image_index = 1&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_glyph_button" x="560" y="592" name="inst_F7F87725" locked="0" code="glyph = &quot;chaos&quot;&#xA;image_index = 6&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

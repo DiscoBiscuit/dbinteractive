@@ -13,7 +13,8 @@ if(ds_map_exists(global.combos,g1))
     map = ds_map_find_value(global.combos,g1)
     if(ds_map_exists(map,g2))
     {
-        return ds_map_find_value(map,g2)
+        glyph = ds_map_find_value(map,g2)
+        image_index = ds_map_find_value(global.glyphs,glyph)
     }
     else
     {

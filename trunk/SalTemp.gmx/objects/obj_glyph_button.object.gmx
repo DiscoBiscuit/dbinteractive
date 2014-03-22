@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>over = 0
+image_speed = 0
 </string>
           </argument>
         </arguments>
@@ -52,10 +53,9 @@
 new = instance_create(x,y,obj_glyph)
 new.glyph = glyph
 new.drag = true
-new.drag_x = x-mouse_x
-new.drag_y = y-mouse_y
 new.gx = x
 new.gy = y
+new.image_index = image_index
 </string>
           </argument>
         </arguments>
@@ -81,7 +81,7 @@ new.gy = y
             <string>over = (over*4 + (point_distance(x,y,mouse_x,mouse_y)&lt;32))/5
 
 draw_sprite_ext(sprite_index,image_index,x,y,1+over*0.25,1+over*0.25,image_angle,image_blend,0.25 + over*0.75)
-draw_text(x,y,string_upper(glyph))
+//draw_text(x,y,string_upper(glyph))
 </string>
           </argument>
         </arguments>

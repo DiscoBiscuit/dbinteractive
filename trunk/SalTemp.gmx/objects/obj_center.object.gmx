@@ -25,53 +25,63 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = room_width/2
-y = room_height/2
+            <string>global.grw = 80
+global.grh = 70
+
+var pos;
+pos = snap_hexgrid(room_width/2,(room_height - 100)/2,global.grw,global.grh)
+x = pos[1]
+y = pos[2]
+
+image_speed = 0
 
 draw_set_font(fnt_glyph)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 
 global.combos = ds_map_create()
-add_combo("air","chaos","push")
-add_combo("air","order","pull")
-add_combo("fire","order","energy")
-add_combo("water","order","ice")
-add_combo("earth","order","metal")
-add_combo("water","earth","life")
-add_combo("water","air","weather")
+global.glyphs = ds_map_create()
 
-add_combo("life","fire","reproduce")
-add_combo("life","water","blood")
-add_combo("life","earth","body")
-add_combo("life","air","sense")
-add_combo("life","order","mind")
-add_combo("life","chaos","death")
-add_combo("fire","metal","smelt")
-add_combo("push","order","ball")
-add_combo("pull","order","compress")
-add_combo("push","chaos","explode")
-add_combo("pull","chaos","bind")
-add_combo("metal","order","armor")
+add_combo("air","order","pull",7)
+add_combo("air","chaos","push",8)
+add_combo("fire","order","energy",9)
+add_combo("water","order","ice",10)
+add_combo("earth","order","metal",11)
+add_combo("water","earth","life",12)
+add_combo("water","air","weather",13)
 
-add_combo("sense","chaos","stun")
-add_combo("push","energy","distance")
-add_combo("body","order","heal")
-add_combo("body","chaos","harm")
+add_combo("life","fire","reproduce",0)
+add_combo("life","water","blood",0)
+add_combo("life","earth","body",0)
+add_combo("life","air","sense",0)
+add_combo("life","order","mind",0)
+add_combo("life","chaos","death",0)
+add_combo("fire","metal","smelt",0)
+add_combo("push","order","ball",0)
+add_combo("pull","order","compress",0)
+add_combo("push","chaos","explode",0)
+add_combo("pull","chaos","bind",0)
+add_combo("metal","order","armor",0)
 
-add_combo("bind","energy","enchant")
-add_combo("armor","energy","ward")
-add_combo("life","mind","humanity")
+add_combo("sense","chaos","stun",0)
+add_combo("push","energy","distance",0)
+add_combo("body","order","heal",0)
+add_combo("body","chaos","harm",0)
+add_combo("water","death","poison",0)
 
-add_combo("body","death","spirit")
-add_combo("humanity","order","creation")
-add_combo("humanity","chaos","destruction")
-add_combo("distance","energy","beam")
-add_combo("distance","push","blast")
+add_combo("bind","energy","enchant",0)
+add_combo("armor","energy","ward",0)
+add_combo("life","mind","humanity",0)
 
-add_combo("mind","distance","time")
+add_combo("body","death","spirit",0)
+add_combo("humanity","order","creation",0)
+add_combo("humanity","chaos","destruction",0)
+add_combo("distance","energy","beam",0)
+add_combo("distance","push","blast",0)
 
-add_combo("time","spirit","ancient")
+add_combo("mind","distance","time",0)
+
+add_combo("time","spirit","ancient",0)
 </string>
           </argument>
         </arguments>
