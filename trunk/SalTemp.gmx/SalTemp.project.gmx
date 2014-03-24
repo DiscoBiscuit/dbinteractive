@@ -18,6 +18,7 @@
     <script>scripts\clear_children.gml</script>
     <script>scripts\update_children.gml</script>
     <script>scripts\snap_hexgrid.gml</script>
+    <script>scripts\check_link.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_glyph</font>

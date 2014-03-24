@@ -98,7 +98,7 @@ if(linking==true)
     child = collision_point(mouse_x,mouse_y,obj_glyph,true,true)
     if(child!=noone)
     {
-        if(child.glyph=="")
+        if(child.glyph=="" and point_distance(x,y,child.gx,child.gy)&lt;=150)
         {
             if(child.parent1==noone)
             {
@@ -124,6 +124,21 @@ if(linking==true)
             child = noone
         }
     }
+    else
+    {
+        child = collision_point(mouse_x,mouse_y,obj_center,true,true)
+        if(child!=noone)
+        {
+            if(point_distance(x,y,child.x,child.y)&lt;=150)
+            {
+                
+            }
+            else
+            {
+                child = noone
+            }
+        }
+    }
 }
 </string>
           </argument>
@@ -147,7 +162,18 @@ if(linking==true)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>drag = false
+            <string>if(drag==true)
+{
+    drag = false
+    if(child!=noone)
+    check_link()
+    
+    if(parent1!=noone)
+    with(parent1){check_link()}
+    
+    if(parent2!=noone)
+    with(parent2){check_link()}
+}
 </string>
           </argument>
         </arguments>
