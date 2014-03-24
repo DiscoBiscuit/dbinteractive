@@ -97,6 +97,7 @@ add_combo("distance","push","blast",0)
 
 //11
 add_combo("body","death","undead",0)
+add_combo("sense","bind","illusion",0)
 add_combo("humanity","order","creation",0)
 add_combo("humanity","chaos","destruction",0)
 add_combo("mind","distance","time",0)
