@@ -132,37 +132,32 @@ else if (p_image == 1)
 {
     if (p_step == 0)
     {
-        alarm[0] = 7
+        alarm[0] = 7;
         p_step = 1;
     }
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_wall">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>x = round(x)
-y = round(y)
-move_contact_solid(direction, speed)
-move_outside_solid(direction - 180, speed)
-speed = 0
+//Collision
+var cleft,cright,cup,cdown;
+cleft = place_meeting(x-1,y,obj_wall);
+cright = place_meeting(x+1,y,obj_wall);
+cup = place_meeting(x,y-1,obj_wall);
+cdown = place_meeting(x,y+1,obj_wall);
+if (cleft)
+{
+    hspeed = max(0,hspeed);
+}
+else if (cright)
+{
+    hspeed = min(0,hspeed);
+}
+if (cup)
+{
+    vspeed = max(0,vspeed);
+}
+else if (cdown)
+{
+    vspeed = min(0,vspeed);
+}
 </string>
           </argument>
         </arguments>
