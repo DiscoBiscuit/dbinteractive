@@ -77,6 +77,42 @@ p_step = 0;
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Collision
+var xmot, ymot;
+x = xprevious;
+y = yprevious;
+for (i=0; i&lt;90; i+=15)
+	{
+    	xmot = x + lengthdir_x(speed, direction + i);
+    	ymot = y + lengthdir_y(speed, direction + i);
+	   if !place_meeting(xmot, ymot, obj_wall) {x = xmot; y = ymot; exit;}
+    	xmot = x + lengthdir_x(speed, direction - i);
+    	ymot = y + lengthdir_y(speed, direction - i);
+	if !place_meeting(xmot, ymot, obj_wall){x = xmot; y = ymot; exit;
+}
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -135,28 +171,6 @@ else if (p_image == 1)
         alarm[0] = 7;
         p_step = 1;
     }
-}
-//Collision
-var cleft,cright,cup,cdown;
-cleft = place_meeting(x-1,y,obj_wall);
-cright = place_meeting(x+1,y,obj_wall);
-cup = place_meeting(x,y-1,obj_wall);
-cdown = place_meeting(x,y+1,obj_wall);
-if (cleft)
-{
-    hspeed = max(0,hspeed);
-}
-if (cright)
-{
-    hspeed = min(0,hspeed);
-}
-if (cup)
-{
-    vspeed = max(0,vspeed);
-}
-if (cdown)
-{
-    vspeed = min(0,vspeed);
 }
 </string>
           </argument>
