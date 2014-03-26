@@ -160,8 +160,8 @@ else if (p_image == 1)
             <kind>1</kind>
             <string>x = round(x)
 y = round(y)
-move_outside_solid(direction - 180, speed)
 move_contact_solid(direction, speed)
+move_outside_solid(direction - 180, speed)
 speed = 0
 </string>
           </argument>
