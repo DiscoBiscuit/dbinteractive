@@ -146,7 +146,7 @@ if (cleft)
 {
     hspeed = max(0,hspeed);
 }
-else if (cright)
+if (cright)
 {
     hspeed = min(0,hspeed);
 }
@@ -154,7 +154,7 @@ if (cup)
 {
     vspeed = max(0,vspeed);
 }
-else if (cdown)
+if (cdown)
 {
     vspeed = min(0,vspeed);
 }
