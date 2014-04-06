@@ -19,5 +19,5 @@ map = ds_map_find_value(global.combos,g1)
 if(!ds_map_exists(map,g2))
 {
     ds_map_add(map,g2,r)
-    ds_map_add(global.glyphs,r,argument3)
+    ds_list_add(global.glyphs,r)
 }
