@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_player_mask</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -30,8 +30,6 @@ xspeed = 0;
 yspeed = 0;
 xspeedmax = 5;
 yspeedmax = 5;
-xx = 0;
-yy = 0;
 fric = 8
 accel = 1;
 myspeed = 0;
@@ -40,8 +38,8 @@ mydir = 0;
 //Sprite
 image_xscale = 2;
 image_yscale = 2;
-walkframe = 0
-alarm[0] = 6
+walkframe = 0;
+alarm[0] = 6;
 </string>
           </argument>
         </arguments>
@@ -84,7 +82,7 @@ alarm[0] = 6
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (x != xx or y != yy)
+            <string>if (myspeed &gt; 1)
 {
     if (walkframe &lt; 2)
     {
@@ -183,16 +181,21 @@ else
     xspeed = (xspeed*((fric-3)-1))/(fric-3);
     yspeed = (yspeed*((fric-3)-1))/(fric-3);
 }
-x += clamp(xspeed,-xspeedmax,xspeedmax);
-y += clamp(yspeed,-yspeedmax,yspeedmax);
+if (place_free(x+xspeed,y))
+{
+    x += clamp(xspeed,-xspeedmax,xspeedmax);
+}
+if (place_free(x,y+yspeed))
+{
+    y += clamp(yspeed,-yspeedmax,yspeedmax);
+}
 
 //Sprite
-xx = xprevious;
-yy = yprevious;
-mydir = point_direction(0,0,xspeed,yspeed);
+depth = -y-32;
 image_speed = 0;
 if (myspeed &gt; 1)
 {
+    mydir = point_direction(0,0,xspeed,yspeed);
     sprite_index = spr_knight_walk;
     image_index = (floor(mydir+22)/45 mod 8) + (8 * walkframe);
 }
