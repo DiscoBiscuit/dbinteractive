@@ -74,13 +74,11 @@ if (h == 1 and image_xscale &lt; hsize)
 {
     image_xscale += 0.015;
     image_yscale += 0.015;
-    //depth = -1;
 };
 if (h == 0 and image_xscale &gt; 1)
 {
     image_xscale -= 0.015;
     image_yscale -= 0.015;
-    //depth = 0;
 };
 //Move to correct position
 if ((sgx &gt; x or sgx &lt; x))
@@ -156,6 +154,7 @@ sel = 0;
             <string>sel = h;
 mx = mouse_x;
 my = mouse_y;
+depth = -sel;
 </string>
           </argument>
         </arguments>
