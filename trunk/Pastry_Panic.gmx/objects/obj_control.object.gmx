@@ -25,24 +25,26 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Variable variables
-gridwidth = 5
-gridheight = 9
-grid_xpos = 40
-grid_ypos = 32
-donutw = sprite_get_width(spr_donut);
-donuth = sprite_get_height(spr_donut);
+            <string>donut_width = sprite_get_width(spr_donut);
+donut_height = sprite_get_height(spr_donut);
+donut_xoffset = sprite_get_xoffset(spr_donut);
+donut_yoffset = sprite_get_yoffset(spr_donut);
+grid_width = 5; //How many donuts wide the grid should be
+grid_height = 9; //How many donuts tall the grid should be
+grid_xoffset = 40;
+grid_yoffset = 0;
+grid_main = ds_grid_create(grid_width,grid_height);
+mx = 0;
+my = 0;
+validcell = 0;
+switchdir = 0;
 
-//Umm don't touch??
-global.stx = 0;
-global.sty = 0;
-
-//It's time to make the Donuts
-for (i=0; i&lt;(gridwidth*donutw); i+=donutw)
+//Make the initial donuts
+for (i=0; i&lt;grid_width; i+=1)
 {
-    for (j=0; j&lt;(gridheight*donuth); j+=donuth)
+    for (j=0; j&lt;grid_height; j+=1)
     {
-        instance_create(i+grid_xpos+sprite_get_xoffset(spr_donut),j+grid_ypos+sprite_get_yoffset(spr_donut),obj_donut);
+        ds_grid_set(grid_main,i,j,irandom_range(0,sprite_get_number(spr_donut)));
     };
 };
 
@@ -51,20 +53,112 @@ for (i=0; i&lt;(gridwidth*donutw); i+=donutw)
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="27">
+    <event eventtype="6" enumb="56">
       <action>
         <libid>1</libid>
-        <id>332</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_end_game</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (validcell == 1 and point_distance(mx,my,mouse_x,mouse_y) &gt; donut_width and scr_isingrid(mouse_x,mouse_y))
+{
+    switchdir = round(point_direction(mx+donut_xoffset,my+donut_yoffset,mouse_x,mouse_y)/90);
+    switch (switchdir)
+    {
+        case 0:
+            scr_switchcells(grid_main,gmx,gmy,gmx+1,gmy);
+            break;
+        case 1:
+            scr_switchcells(grid_main,gmx,gmy,gmx,gmy-1);
+            break;
+        case 2:
+            scr_switchcells(grid_main,gmx,gmy,gmx-1,gmy);
+            break;
+        case 3:
+            scr_switchcells(grid_main,gmx,gmy,gmx,gmy+1);
+            break;
+    }
+};
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Grab mouse pos
+if (scr_isingrid(mouse_x,mouse_y))
+{
+    mx = mouse_x - grid_xoffset;
+    my = mouse_y - grid_yoffset;
+    gmx = floor(mx / donut_width);
+    gmy = floor(my / donut_height);
+    validcell = 1;
+};
+else
+{
+    validcell = 0;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Draw the donuts
+for (i=0; i&lt;grid_width; i+=1)
+{
+    for (j=0; j&lt;grid_height; j+=1)
+    {
+        draw_sprite(spr_donut,ds_grid_get(grid_main,i,j),i*donut_width+grid_xoffset+donut_xoffset,j*donut_height+grid_yoffset+donut_yoffset);
+    };
+};
+//Draw the score bar
+draw_sprite(spr_scorebar,0,0,room_height);
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>
