@@ -38,13 +38,14 @@ mx = 0;
 my = 0;
 validcell = 0;
 switchdir = 0;
+score = 0;
 
 //Make the initial donuts
 for (i=0; i&lt;grid_width; i+=1)
 {
     for (j=0; j&lt;grid_height; j+=1)
     {
-        ds_grid_set(grid_main,i,j,irandom_range(0,sprite_get_number(spr_donut)));
+        ds_grid_set(grid_main,i,j,irandom_range(1,sprite_get_number(spr_donut)));
     };
 };
 
@@ -70,24 +71,67 @@ for (i=0; i&lt;grid_width; i+=1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (validcell == 1 and point_distance(mx,my,mouse_x,mouse_y) &gt; donut_width and scr_isingrid(mouse_x,mouse_y))
+            <string>if (validcell == 1 and point_distance(mx,my,mouse_x,mouse_y) &gt; donut_width/2 and scr_isingrid(mouse_x,mouse_y))
 {
+    var donuttype1,donuttype2;
+    donuttype1 = ds_grid_get(grid_main,gmx,gmy);
     switchdir = round(point_direction(mx+donut_xoffset,my+donut_yoffset,mouse_x,mouse_y)/90);
     switch (switchdir)
     {
         case 0:
-            scr_switchcells(grid_main,gmx,gmy,gmx+1,gmy);
-            break;
+            if (gmx &lt; grid_width)
+            {
+                donuttype2 = ds_grid_get(grid_main,gmx+1,gmy);
+                nnn = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,gmy*donut_width+donut_xoffset,obj_donut_switch);
+                nnn.image_index = donuttype1;
+                nnn.xgoal = (gmx+1)*donut_width+donut_xoffset+grid_xoffset;
+                nnn2 = instance_create((gmx+1)*donut_width+donut_xoffset+grid_xoffset,gmy*donut_width+donut_xoffset,obj_donut_switch);
+                nnn2.image_index = donuttype2;
+                nnn2.xgoal = gmx*donut_width+donut_xoffset+grid_xoffset;
+                ds_grid_set(grid_main,gmx+1,gmy,0);
+                break;
+            };
         case 1:
-            scr_switchcells(grid_main,gmx,gmy,gmx,gmy-1);
-            break;
+            if (gmy &gt; 0)
+            {
+                donuttype2 = ds_grid_get(grid_main,gmx,gmy-1);
+                nnn = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,gmy*donut_height+donut_yoffset,obj_donut_switch);
+                nnn.image_index = donuttype1;
+                nnn.ygoal = (gmy-1)*donut_height+donut_xoffset+grid_yoffset;
+                nnn2 = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,(gmy-1)*donut_height+donut_yoffset,obj_donut_switch);
+                nnn2.image_index = donuttype2;
+                nnn2.ygoal = gmy*donut_height+donut_yoffset+grid_yoffset;
+                ds_grid_set(grid_main,gmx,gmy-1,0);
+                break;
+            };
         case 2:
-            scr_switchcells(grid_main,gmx,gmy,gmx-1,gmy);
-            break;
+            if (gmx &gt; 0)
+            {
+                donuttype2 = ds_grid_get(grid_main,gmx-1,gmy);
+                nnn = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,gmy*donut_width+donut_xoffset,obj_donut_switch);
+                nnn.image_index = donuttype1;
+                nnn.xgoal = (gmx-1)*donut_width+donut_xoffset+grid_xoffset;
+                nnn2 = instance_create((gmx-1)*donut_width+donut_xoffset+grid_xoffset,gmy*donut_width+donut_xoffset,obj_donut_switch);
+                nnn2.image_index = donuttype2;
+                nnn2.xgoal = gmx*donut_width+donut_xoffset+grid_xoffset;
+                ds_grid_set(grid_main,gmx-1,gmy,0);
+                break;
+            };
         case 3:
-            scr_switchcells(grid_main,gmx,gmy,gmx,gmy+1);
-            break;
-    }
+            if (gmy &lt; grid_height)
+            {
+                donuttype2 = ds_grid_get(grid_main,gmx,gmy+1);
+                nnn = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,gmy*donut_height+donut_yoffset,obj_donut_switch);
+                nnn.image_index = donuttype1;
+                nnn.ygoal = (gmy+1)*donut_height+donut_xoffset+grid_yoffset;
+                nnn2 = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,(gmy+1)*donut_height+donut_yoffset,obj_donut_switch);
+                nnn2.image_index = donuttype2;
+                nnn2.ygoal = gmy*donut_height+donut_yoffset+grid_yoffset;
+                ds_grid_set(grid_main,gmx,gmy+1,0);
+                break;
+            };
+    };
+    ds_grid_set(grid_main,gmx,gmy,0);
 };
 </string>
           </argument>
@@ -124,6 +168,7 @@ else
 {
     validcell = 0;
 }
+
 </string>
           </argument>
         </arguments>
@@ -156,6 +201,12 @@ for (i=0; i&lt;grid_width; i+=1)
 };
 //Draw the score bar
 draw_sprite(spr_scorebar,0,0,room_height);
+//Draw the score
+draw_set_halign(fa_center);
+draw_set_valign(fa_bottom);
+draw_set_font(fnt_score);
+draw_set_color(c_white);
+draw_text(room_width/2,room_height,string(score));
 </string>
           </argument>
         </arguments>

@@ -14,9 +14,16 @@
   <scripts name="scripts">
     <script>scripts\scr_switchcells.gml</script>
     <script>scripts\scr_isingrid.gml</script>
+    <script>scripts\scr_getgridcellx.gml</script>
+    <script>scripts\scr_getgridcelly.gml</script>
+    <script>scripts\scr_falldonuts.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_score</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
+    <object>objects\obj_donut_switch</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
