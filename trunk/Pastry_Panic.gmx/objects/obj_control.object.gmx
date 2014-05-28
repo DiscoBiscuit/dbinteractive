@@ -75,7 +75,7 @@ for (i=0; i&lt;grid_width; i+=1)
 {
     var donuttype1,donuttype2;
     donuttype1 = ds_grid_get(grid_main,gmx,gmy);
-    switchdir = round(point_direction(mx+donut_xoffset,my+donut_yoffset,mouse_x,mouse_y)/90);
+    switchdir = round(point_direction((mx - grid_xoffset)+donut_xoffset,(my - grid_yoffset)+donut_yoffset,mouse_x,mouse_y)/90);
     switch (switchdir)
     {
         case 0:
@@ -158,10 +158,10 @@ for (i=0; i&lt;grid_width; i+=1)
             <string>//Grab mouse pos
 if (scr_isingrid(mouse_x,mouse_y))
 {
-    mx = mouse_x - grid_xoffset;
-    my = mouse_y - grid_yoffset;
-    gmx = floor(mx / donut_width);
-    gmy = floor(my / donut_height);
+    mx = mouse_x;
+    my = mouse_y;
+    gmx = floor((mouse_x - grid_xoffset) / donut_width);
+    gmy = floor((mouse_y - grid_yoffset) / donut_height);
     validcell = 1;
 };
 else
