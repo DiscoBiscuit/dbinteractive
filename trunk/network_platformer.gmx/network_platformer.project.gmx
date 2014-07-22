@@ -11,30 +11,47 @@
       <sprite>sprites\spr_block</sprite>
       <sprite>sprites\spr_slope</sprite>
     </sprites>
+    <sprites name="player">
+      <sprite>sprites\spr_player_idle</sprite>
+      <sprite>sprites\spr_player_run</sprite>
+      <sprite>sprites\spr_player_jump</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="menu">
       <script>scripts\scr_empty.gml</script>
-      <script>scripts\scr_menu_localgame.gml</script>
+      <script>scripts\scr_menu_host.gml</script>
+      <script>scripts\scr_menu_join.gml</script>
+    </scripts>
+    <scripts name="net">
+      <script>scripts\server_receivedpacket.gml</script>
+      <script>scripts\client_receivedpacket.gml</script>
+      <script>scripts\send_toall.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_menu</font>
+    <font>fonts\fnt_debug</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_menu_element</object>
     <object>objects\obj_player</object>
+    <object>objects\obj_player_dummy</object>
     <objects name="world">
       <object>objects\obj_world</object>
       <object>objects\obj_slope</object>
     </objects>
+    <objects name="net">
+      <object>objects\obj_server</object>
+      <object>objects\obj_client</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
-    <room>rooms\rm_local</room>
+    <room>rooms\rm_main</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
