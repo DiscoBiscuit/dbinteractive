@@ -1,60 +1,54 @@
 var buffer = argument[0]; 
-var socket = argument[1]; 
+var socket = argument[1];
 var msgid = buffer_read(buffer,buffer_u8);
-var global.clientid = ds_list_find_index(socketlist,socket)+1;
 
 switch(msgid) 
 {
-    //x position
     case 1:
-        with (obj_player_dummy)
-        {
-            if (global.clientid == clientid)
-            {
-                x = buffer_read(buffer,buffer_u32);
-            }
-        }
-    break;
-    //y position
+        //Receive ping request from client
+        var time = buffer_read(buffer,buffer_u32);
+        //send it back to the client
+        buffer_seek(buffer,buffer_seek_start,0);
+        buffer_write(buffer,buffer_u8,2);
+        buffer_write(buffer,buffer_u32,time);
+        network_send_packet(socket,buffer,buffer_tell(buffer));
+        break;
     case 2:
-        //stuff
+        //Get client x pos
+        globalvar idcheck,xset;
+        idcheck = socket;
+        xset = buffer_read(buffer,buffer_u32);
         with (obj_player_dummy)
         {
-            if (global.clientid == clientid)
+            if (idcheck == clientid)
             {
-                y = buffer_read(buffer,buffer_u32);
+                newx = xset;
             }
         }
-    break;
-    //client disconnected
+        //send it to other clients
+        buffer_seek(buffer,buffer_seek_start,0);
+        buffer_write(buffer,buffer_u8,4);
+        buffer_write(buffer,buffer_u16,idcheck);
+        buffer_write(buffer,buffer_u32,xset);
+        send_toall();
+        break;
     case 3:
-        obj_server.disconnectid = buffer_read(buffer,buffer_u16);
-    break;
-    //sprite index
-    case 4:
+        //Get client y pos
+        globalvar idcheck,yset;
+        idcheck = socket;
+        yset = buffer_read(buffer,buffer_u32);
         with (obj_player_dummy)
         {
-            if (global.clientid == clientid)
+            if (idcheck == clientid)
             {
-                sprite_index = buffer_read(buffer,buffer_u32);
+                newy = yset;
             }
         }
-    //image index
-    case 5:
-        with (obj_player_dummy)
-        {
-            if (global.clientid == clientid)
-            {
-                image_index = buffer_read(buffer,buffer_u32);
-            }
-        }
-    //xscale index
-    case 6:
-        with (obj_player_dummy)
-        {
-            if (global.clientid == clientid)
-            {
-                image_xscale = buffer_read(buffer,buffer_s32);
-            }
-        }
+        //send it to other clients
+        buffer_seek(buffer,buffer_seek_start,0);
+        buffer_write(buffer,buffer_u8,5);
+        buffer_write(buffer,buffer_u16,idcheck);
+        buffer_write(buffer,buffer_u32,yset);
+        send_toall();
+        break;
 }

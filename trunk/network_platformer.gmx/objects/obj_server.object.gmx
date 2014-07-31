@@ -28,102 +28,14 @@
             <string>var type,port;
 type = network_socket_tcp;
 port = 10142;
-maxclients = 3;
+maxclients = 4;
 var size,type,alignment;
 size = 1024;
 buffertype = buffer_fixed;
 alignment = 1;
 Buffer = buffer_create(size,buffertype,alignment);
 socketlist = ds_list_create();
-for (i=0;i&lt;maxclients;i+=1)
-{
-    ds_list_replace(socketlist,i,0);
-}
 Server = network_create_server(type,port,maxclients);
-disconnectid = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//send number of players to the client
-buffer_seek(Buffer,buffer_seek_start,0);
-buffer_write(Buffer,buffer_u8,2);
-buffer_write(Buffer,buffer_u32,ds_list_size(socketlist));
-send_toall();
-//send player dummy stuff to the clients
-if (ds_list_size(socketlist)&gt;=1)
-{
-    with (obj_player_dummy)
-    {
-        buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-        buffer_write(obj_server.Buffer,buffer_u8,5);
-        buffer_write(obj_server.Buffer,buffer_u16,clientid);
-        buffer_write(obj_server.Buffer,buffer_u32,x);
-        send_toall();
-        buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-        buffer_write(obj_server.Buffer,buffer_u8,6);
-        buffer_write(obj_server.Buffer,buffer_u16,clientid);
-        buffer_write(obj_server.Buffer,buffer_u32,y);
-        send_toall();
-        buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-        buffer_write(obj_server.Buffer,buffer_u8,12);
-        buffer_write(obj_server.Buffer,buffer_u16,clientid);
-        buffer_write(obj_server.Buffer,buffer_u32,sprite_index);
-        send_toall();
-        buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-        buffer_write(obj_server.Buffer,buffer_u8,13);
-        buffer_write(obj_server.Buffer,buffer_u16,clientid);
-        buffer_write(obj_server.Buffer,buffer_u32,image_index);
-        send_toall();
-        buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-        buffer_write(obj_server.Buffer,buffer_u8,14);
-        buffer_write(obj_server.Buffer,buffer_u16,clientid);
-        buffer_write(obj_server.Buffer,buffer_s32,image_xscale);
-        send_toall();
-    }
-}
-//send host's stuff to the clients
-with (obj_player)
-{
-    buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-    buffer_write(obj_server.Buffer,buffer_u8,7);
-    buffer_write(obj_server.Buffer,buffer_u32,x);
-    send_toall();
-    buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-    buffer_write(obj_server.Buffer,buffer_u8,8);
-    buffer_write(obj_server.Buffer,buffer_u32,y);
-    send_toall();
-    buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-    buffer_write(obj_server.Buffer,buffer_u8,9);
-    buffer_write(obj_server.Buffer,buffer_u32,sprite_index);
-    send_toall();
-    buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-    buffer_write(obj_server.Buffer,buffer_u8,10);
-    buffer_write(obj_server.Buffer,buffer_u32,image_index);
-    send_toall();
-    buffer_seek(obj_server.Buffer,buffer_seek_start,0);
-    buffer_write(obj_server.Buffer,buffer_u8,11);
-    buffer_write(obj_server.Buffer,buffer_s32,image_xscale);
-    send_toall();
-}
 </string>
           </argument>
         </arguments>
@@ -151,40 +63,37 @@ switch(type_event)
 { 
     case network_type_connect: 
         var socket = ds_map_find_value(async_load,"socket");
-        ds_list_add(socketlist,socket);
-        //send client id
+        //send connected client their ID for future reference
         buffer_seek(Buffer,buffer_seek_start,0);
         buffer_write(Buffer,buffer_u8,1);
         buffer_write(Buffer,buffer_u32,socket);
         network_send_packet(socket,Buffer,buffer_tell(Buffer));
-        //tell other clients that someone else joined
+        //add the socket to the list of connected sockets
+        ds_list_add(socketlist,socket);
+        //create a dummy for the client
+        nnn = instance_create(0,0,obj_player_dummy);
+        nnn.clientid = socket;
+        //send number of clients to the client
         buffer_seek(Buffer,buffer_seek_start,0);
         buffer_write(Buffer,buffer_u8,3);
-        buffer_write(Buffer,buffer_u16,socket);
-        send_toall();
-        //create dummy
-        var nn;
-        nn = instance_create(0,0,obj_player_dummy);
-        nn.clientid = socket;
+        buffer_write(Buffer,buffer_u32,ds_list_size(socketlist));
+        network_send_packet(socket,Buffer,buffer_tell(Buffer));
         break; 
     case network_type_disconnect: 
         var socket = ds_map_find_value(async_load,"socket");
-        //tell other clients that someone else left
-        buffer_seek(Buffer,buffer_seek_start,0);
-        buffer_write(Buffer,buffer_u8,4);
-        buffer_write(Buffer,buffer_u16,socket);
-        send_toall();
-        //remove dummy
-        obj_player_dummy.socketcheck = socket;
+        var findsocket = ds_list_find_index(socketlist,socket);
+        //remove the disconnected socket from the list
+        ds_list_delete(socketlist,findsocket);
+        //remove the dummy
+        globalvar checksocket;
+        checksocket = socket;
         with (obj_player_dummy)
         {
-            if (socketcheck == clientid)
+            if (checksocket == clientid)
             {
                 instance_destroy();
             }
         }
-        var findsocket = ds_list_find_index(socketlist,socket);
-        ds_list_delete(socketlist,findsocket);
         break; 
     case network_type_data: 
         var buffer = ds_map_find_value(async_load,"buffer"); 
@@ -193,7 +102,6 @@ switch(type_event)
         server_receivedpacket(buffer,socket); 
         break; 
 } 
-
 </string>
           </argument>
         </arguments>

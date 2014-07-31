@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-99999</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>//Controls
-globalvar moveleft,moveright,jump;
+globalvar moveleft,moveright,jump,chat;
 </string>
           </argument>
         </arguments>
@@ -49,15 +49,38 @@ globalvar moveleft,moveright,jump;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>moveleft = keyboard_check(ord('A'));
-moveright = keyboard_check(ord('D'));
-jump = keyboard_check(ord('W'));
+            <string>chat = 192;
+moveleft = ord('A');
+moveright = ord('D');
+jump = vk_space;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="9" enumb="122">
+      <action>
+        <libid>1</libid>
+        <id>531</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_fullscreen</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -74,39 +97,10 @@ jump = keyboard_check(ord('W'));
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Toggle fullscreen mode
-if (window_get_fullscreen())
-{
-    window_set_fullscreen(false);
-    view_wport[0] = 960;
-    view_hport[0] = 540;
-    window_set_size(960,540);
-}
-else
-{
-    window_set_fullscreen(true);
-    view_wport[0] = 1920;
-    view_hport[0] = 1080;
-}
+            <string>game_end();
 </string>
           </argument>
         </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="27">
-      <action>
-        <libid>1</libid>
-        <id>332</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_end_game</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
   </events>

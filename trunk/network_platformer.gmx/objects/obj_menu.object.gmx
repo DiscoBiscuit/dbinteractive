@@ -25,15 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>width = 256;
-height = 128;
-color1 = c_ltgray;
-color2 = c_dkgray;
-hover = false;
-text = "none";
-x = x-width/2;
-y = y-height/2;
-script = scr_empty;
+            <string>menu = ds_list_create();
+ds_list_add(menu,"Local Game");
+ds_list_add(menu,"Host Game");
+ds_list_add(menu,"Join Game");
+menu_height = 64;
+menu_font = fnt_menu;
+menu_color = c_black;
+menu_sel = 0;
 </string>
           </argument>
         </arguments>
@@ -56,17 +55,51 @@ script = scr_empty;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (mouse_x &gt; x and mouse_x &lt; (x + width) and mouse_y &gt; y and mouse_y &lt; (y + height))
+            <string>var menuposx,menuposy;
+menuposx = room_width/2;
+for (i=0;i&lt;ds_list_size(menu);i+=1)
 {
-    hover = true;
+    menuposy = ((room_height/2)-(menu_height*(ds_list_size(menu)/2))+(i*menu_height));
+    if (mouse_x &gt; menuposx-128 and mouse_x &lt; menuposx+128 and mouse_y &gt; menuposy-(menu_height/2) and mouse_y &lt; menuposy+(menu_height/2))
+    {
+        menu_sel = i;
+    }
 }
-else
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>switch (menu_sel)
 {
-    hover = false;
-}
-if (hover and mouse_check_button_pressed(mb_left))
-{
-    script_execute(script);
+    case 0:
+        room_goto(rm_main);
+        break;
+    case 1:
+        room_goto(rm_main);
+        instance_create(0,0,obj_server);
+        break;
+    case 2:
+        room_goto(rm_main);
+        instance_create(0,0,obj_client);
+        break;
 }
 </string>
           </argument>
@@ -90,27 +123,20 @@ if (hover and mouse_check_button_pressed(mb_left))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(color1);
-draw_rectangle(x,y,x+width,y+height,false);
-draw_set_color(color2);
-draw_rectangle(x,y,x+width,y+height,true);
-draw_set_halign(fa_center);
+            <string>draw_set_halign(fa_center);
 draw_set_valign(fa_center);
-draw_set_font(fnt_menu);
-draw_text(x+(width/2),y+(height/2),text);
-if (hover and not mouse_check_button(mb_left))
+for (i=0;i&lt;ds_list_size(menu);i+=1)
 {
-    draw_set_blend_mode(bm_add);
-    draw_set_color(make_color_rgb(20,20,20));
-    draw_rectangle(x,y,x+width,y+height,false);
-    draw_set_blend_mode(bm_normal);
-}
-else if (hover and mouse_check_button(mb_left))
-{
-    draw_set_blend_mode(bm_subtract);
-    draw_set_color(make_color_rgb(20,20,20));
-    draw_rectangle(x,y,x+width,y+height,false);
-    draw_set_blend_mode(bm_normal);
+    draw_set_font(menu_font);
+    if (i = menu_sel)
+    {
+        draw_set_color(c_gray);
+    }
+    else
+    {
+        draw_set_color(menu_color);
+    }
+    draw_text(room_width/2,(room_height/2)-(menu_height*(ds_list_size(menu)/2))+(i*menu_height),string(ds_list_find_value(menu,i)))
 }
 </string>
           </argument>

@@ -20,11 +20,6 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <scripts name="menu">
-      <script>scripts\scr_empty.gml</script>
-      <script>scripts\scr_menu_host.gml</script>
-      <script>scripts\scr_menu_join.gml</script>
-    </scripts>
     <scripts name="net">
       <script>scripts\server_receivedpacket.gml</script>
       <script>scripts\client_receivedpacket.gml</script>
@@ -34,12 +29,15 @@
   <fonts name="fonts">
     <font>fonts\fnt_menu</font>
     <font>fonts\fnt_debug</font>
+    <font>fonts\fnt_chat</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
-    <object>objects\obj_menu_element</object>
-    <object>objects\obj_player</object>
-    <object>objects\obj_player_dummy</object>
+    <object>objects\obj_menu</object>
+    <objects name="player">
+      <object>objects\obj_player</object>
+      <object>objects\obj_player_dummy</object>
+    </objects>
     <objects name="world">
       <object>objects\obj_world</object>
       <object>objects\obj_slope</object>
