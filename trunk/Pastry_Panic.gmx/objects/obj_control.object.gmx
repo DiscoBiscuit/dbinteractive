@@ -88,8 +88,8 @@ for (i=0; i&lt;grid_width; i+=1)
 if(validclick==true)
 {
     
-    gx1 = floor((mx - grid_xoffset) / donut_width);
-    gy1 = floor((my - grid_yoffset) / donut_height);
+    gx1 = togrid_x(mx);
+    gy1 = togrid_y(my);
     
     if(swapmode==0)
     {
@@ -109,8 +109,8 @@ if(validclick==true)
     }
     if(swapmode==2)
     {
-        gx2 = floor((mouse_x - grid_xoffset) / donut_width);
-        gy2 = floor((mouse_y - grid_yoffset) / donut_height);
+        gx2 = togrid_x(mouse_x);
+        gy2 = togrid_y(mouse_y);
         swapspeed = 1+(0.5/sqrt(point_distance(gx1,gy1,gx2,gy2)));
     }
     
@@ -141,6 +141,46 @@ if(validclick==true)
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="54">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+var tx,ty,i,newval,new;
+tx = togrid_x(mouse_x);
+ty = togrid_y(mouse_y);
+
+ds_grid_set(grid_main,tx,ty,0);
+
+for(i=ty-1;i&gt;=0;i-=1)
+{
+    newval = ds_grid_get(grid_main,tx,i);
+    if(newval&gt;0)
+    {
+        new = instance_create(toworld_x(tx), toworld_y(i),obj_fallingdonut);
+        new.image_index = newval
+        ds_grid_set(grid_main,tx,i,0);
+    }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
@@ -159,7 +199,7 @@ if(validclick==true)
           <argument>
             <kind>1</kind>
             <string>
-if(swap==0 and mouse_x&gt;grid_xoffset and mouse_y&gt;grid_yoffset and mouse_x&lt;grid_xoffset+grid_width*donut_width and mouse_y&lt;grid_yoffset+grid_height*donut_height)
+if(swap==0 and instance_number(obj_fallingdonut)==0 and mouse_x&gt;grid_xoffset and mouse_y&gt;grid_yoffset and mouse_x&lt;grid_xoffset+grid_width*donut_width and mouse_y&lt;grid_yoffset+grid_height*donut_height)
 {
     mx = mouse_x;
     my = mouse_y;
@@ -214,7 +254,7 @@ for (i=0; i&lt;grid_width; i+=1)
         }
         if(shoulddraw==true)
         {
-            draw_sprite(spr_donut,ds_grid_get(grid_main,i,j),i*donut_width+grid_xoffset,j*donut_height+grid_yoffset);
+            draw_sprite(spr_donut,ds_grid_get(grid_main,i,j),toworld_x(i),toworld_y(j));
         }
     };
 };

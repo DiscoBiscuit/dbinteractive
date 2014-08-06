@@ -13,12 +13,17 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_switchcells.gml</script>
+    <script>scripts\togrid_x.gml</script>
+    <script>scripts\togrid_y.gml</script>
+    <script>scripts\toworld_x.gml</script>
+    <script>scripts\toworld_y.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_score</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
+    <object>objects\obj_fallingdonut</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
