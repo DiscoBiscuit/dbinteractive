@@ -124,6 +124,14 @@ if(validclick==true)
         swap_dd2 = ds_grid_get(grid_main,gx2,gy2);
         swap = 1;
     }
+    else
+    {
+        swap = 0;
+        gx1 = -1;
+        gy1 = -1;
+        gx2 = -1;
+        gy2 = -1;
+    }
     
     validclick = false;
     swapmode = 0;
@@ -151,7 +159,7 @@ if(validclick==true)
           <argument>
             <kind>1</kind>
             <string>
-if(swap==0)
+if(swap==0 and mouse_x&gt;grid_xoffset and mouse_y&gt;grid_yoffset and mouse_x&lt;grid_xoffset+grid_width*donut_width and mouse_y&lt;grid_yoffset+grid_height*donut_height)
 {
     mx = mouse_x;
     my = mouse_y;
