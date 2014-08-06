@@ -27,18 +27,31 @@
             <kind>1</kind>
             <string>donut_width = sprite_get_width(spr_donut);
 donut_height = sprite_get_height(spr_donut);
-donut_xoffset = sprite_get_xoffset(spr_donut);
-donut_yoffset = sprite_get_yoffset(spr_donut);
 grid_width = 5; //How many donuts wide the grid should be
 grid_height = 9; //How many donuts tall the grid should be
 grid_xoffset = 40;
 grid_yoffset = 0;
 grid_main = ds_grid_create(grid_width,grid_height);
+
 mx = 0;
 my = 0;
-validcell = 0;
-switchdir = 0;
-score = 0;
+validclick = false;
+
+gx1 = -1;
+gy1 = -1;
+gx2 = -1;
+gy2 = -1;
+
+swapmode = 0;
+
+swapspeed = 1.3;
+swap = 0;
+swap_dx1 = 0;
+swap_dy1 = 0;
+swap_dx2 = 0;
+swap_dy2 = 0;
+swap_dd1 = 0;
+swap_dd2 = 0;
 
 //Make the initial donuts
 for (i=0; i&lt;grid_width; i+=1)
@@ -71,68 +84,50 @@ for (i=0; i&lt;grid_width; i+=1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (validcell == 1 and point_distance(mx,my,mouse_x,mouse_y) &gt; donut_width/2 and scr_isingrid(mouse_x,mouse_y))
+            <string>
+if(validclick==true)
 {
-    var donuttype1,donuttype2;
-    donuttype1 = ds_grid_get(grid_main,gmx,gmy);
-    switchdir = round(point_direction((mx - grid_xoffset)+donut_xoffset,(my - grid_yoffset)+donut_yoffset,mouse_x,mouse_y)/90);
-    switch (switchdir)
+    
+    gx1 = floor((mx - grid_xoffset) / donut_width);
+    gy1 = floor((my - grid_yoffset) / donut_height);
+    
+    if(swapmode==0)
     {
-        case 0:
-            if (gmx &lt; grid_width)
-            {
-                donuttype2 = ds_grid_get(grid_main,gmx+1,gmy);
-                nnn = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,gmy*donut_width+donut_xoffset,obj_donut_switch);
-                nnn.image_index = donuttype1;
-                nnn.xgoal = (gmx+1)*donut_width+donut_xoffset+grid_xoffset;
-                nnn2 = instance_create((gmx+1)*donut_width+donut_xoffset+grid_xoffset,gmy*donut_width+donut_xoffset,obj_donut_switch);
-                nnn2.image_index = donuttype2;
-                nnn2.xgoal = gmx*donut_width+donut_xoffset+grid_xoffset;
-                ds_grid_set(grid_main,gmx+1,gmy,0);
-                break;
-            };
-        case 1:
-            if (gmy &gt; 0)
-            {
-                donuttype2 = ds_grid_get(grid_main,gmx,gmy-1);
-                nnn = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,gmy*donut_height+donut_yoffset,obj_donut_switch);
-                nnn.image_index = donuttype1;
-                nnn.ygoal = (gmy-1)*donut_height+donut_xoffset+grid_yoffset;
-                nnn2 = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,(gmy-1)*donut_height+donut_yoffset,obj_donut_switch);
-                nnn2.image_index = donuttype2;
-                nnn2.ygoal = gmy*donut_height+donut_yoffset+grid_yoffset;
-                ds_grid_set(grid_main,gmx,gmy-1,0);
-                break;
-            };
-        case 2:
-            if (gmx &gt; 0)
-            {
-                donuttype2 = ds_grid_get(grid_main,gmx-1,gmy);
-                nnn = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,gmy*donut_width+donut_xoffset,obj_donut_switch);
-                nnn.image_index = donuttype1;
-                nnn.xgoal = (gmx-1)*donut_width+donut_xoffset+grid_xoffset;
-                nnn2 = instance_create((gmx-1)*donut_width+donut_xoffset+grid_xoffset,gmy*donut_width+donut_xoffset,obj_donut_switch);
-                nnn2.image_index = donuttype2;
-                nnn2.xgoal = gmx*donut_width+donut_xoffset+grid_xoffset;
-                ds_grid_set(grid_main,gmx-1,gmy,0);
-                break;
-            };
-        case 3:
-            if (gmy &lt; grid_height)
-            {
-                donuttype2 = ds_grid_get(grid_main,gmx,gmy+1);
-                nnn = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,gmy*donut_height+donut_yoffset,obj_donut_switch);
-                nnn.image_index = donuttype1;
-                nnn.ygoal = (gmy+1)*donut_height+donut_xoffset+grid_yoffset;
-                nnn2 = instance_create(gmx*donut_width+donut_xoffset+grid_xoffset,(gmy+1)*donut_height+donut_yoffset,obj_donut_switch);
-                nnn2.image_index = donuttype2;
-                nnn2.ygoal = gmy*donut_height+donut_yoffset+grid_yoffset;
-                ds_grid_set(grid_main,gmx,gmy+1,0);
-                break;
-            };
-    };
-    ds_grid_set(grid_main,gmx,gmy,0);
-};
+        var ddir;
+        ddir = round(point_direction(mx,my,mouse_x,mouse_y)/90)*90;
+        gx2 = gx1 + round(cos(degtorad(ddir)));
+        gy2 = gy1 - round(sin(degtorad(ddir)));
+        swapspeed = 1.5;
+    }
+    if(swapmode==1)
+    {
+        var ddir;
+        ddir = round( (point_direction(mx,my,mouse_x,mouse_y)-45)/90)*90 +45;
+        gx2 = gx1 + round(cos(degtorad(ddir)));
+        gy2 = gy1 - round(sin(degtorad(ddir)));
+        swapspeed = 1.4;
+    }
+    if(swapmode==2)
+    {
+        gx2 = floor((mouse_x - grid_xoffset) / donut_width);
+        gy2 = floor((mouse_y - grid_yoffset) / donut_height);
+        swapspeed = 1+(0.5/sqrt(point_distance(gx1,gy1,gx2,gy2)));
+    }
+    
+    if(gx1&gt;=0 and gy1&gt;=0 and gx1&lt;grid_width and gy1&lt;grid_height and gx2&gt;=0 and gy2&gt;=0 and gx2&lt;grid_width and gy2&lt;grid_height)
+    {
+        swap_dx1 = gx1*donut_width+grid_xoffset;
+        swap_dy1 = gy1*donut_height+grid_yoffset;
+        swap_dx2 = gx2*donut_width+grid_xoffset;
+        swap_dy2 = gy2*donut_height+grid_yoffset;
+        swap_dd1 = ds_grid_get(grid_main,gx1,gy1);
+        swap_dd2 = ds_grid_get(grid_main,gx2,gy2);
+        swap = 1;
+    }
+    
+    validclick = false;
+    swapmode = 0;
+}
 </string>
           </argument>
         </arguments>
@@ -155,20 +150,13 @@ for (i=0; i&lt;grid_width; i+=1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Grab mouse pos
-if (scr_isingrid(mouse_x,mouse_y))
+            <string>
+if(swap==0)
 {
     mx = mouse_x;
     my = mouse_y;
-    gmx = floor((mouse_x - grid_xoffset) / donut_width);
-    gmy = floor((mouse_y - grid_yoffset) / donut_height);
-    validcell = 1;
-};
-else
-{
-    validcell = 0;
+    validclick = true;
 }
-
 </string>
           </argument>
         </arguments>
@@ -191,22 +179,94 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Draw the donuts
+            <string>
+var lswap;
+lswap = swap;
+swap = swap/swapspeed;
+if(swap&lt;0.002 and lswap&gt;=0.002)
+{
+    scr_switchcells(grid_main,gx1,gy1,gx2,gy2)
+    swap = 0;
+    gx1 = -1;
+    gy1 = -1;
+    gx2 = -1;
+    gy2 = -1;
+}
+
+var shoulddraw;
+//Draw the donuts
 for (i=0; i&lt;grid_width; i+=1)
 {
     for (j=0; j&lt;grid_height; j+=1)
     {
-        draw_sprite(spr_donut,ds_grid_get(grid_main,i,j),i*donut_width+grid_xoffset+donut_xoffset,j*donut_height+grid_yoffset+donut_yoffset);
+        shoulddraw = true;
+        if( (i==gx1 and j==gy1) or (i==gx2 and j==gy2) )
+        {
+            shoulddraw = false;
+        }
+        if(shoulddraw==true)
+        {
+            draw_sprite(spr_donut,ds_grid_get(grid_main,i,j),i*donut_width+grid_xoffset,j*donut_height+grid_yoffset);
+        }
     };
 };
-//Draw the score bar
-draw_sprite(spr_scorebar,0,0,room_height);
-//Draw the score
-draw_set_halign(fa_center);
-draw_set_valign(fa_bottom);
-draw_set_font(fnt_score);
-draw_set_color(c_white);
-draw_text(room_width/2,room_height,string(score));
+
+if(swap&gt;0)
+{
+    draw_sprite(spr_donut,swap_dd2,lerp(swap_dx1,swap_dx2,swap),lerp(swap_dy1,swap_dy2,swap))
+    draw_sprite(spr_donut,swap_dd1,lerp(swap_dx2,swap_dx1,swap),lerp(swap_dy2,swap_dy1,swap))
+}
+
+if(validclick==true)
+{
+    draw_sprite(spr_move,swapmode,floor((mx-grid_xoffset)/donut_width)*donut_width + grid_xoffset,floor((my-grid_yoffset)/donut_height)*donut_height + grid_yoffset)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="84">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>swapmode = 2;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="68">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>swapmode = 1;
 </string>
           </argument>
         </arguments>
