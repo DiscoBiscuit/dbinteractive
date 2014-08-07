@@ -53,6 +53,8 @@ swap_dy2 = 0;
 swap_dd1 = 0;
 swap_dd2 = 0;
 
+matchcount = 0;
+
 //Make the initial donuts
 for (i=0; i&lt;grid_width; i+=1)
 {
@@ -114,7 +116,7 @@ if(validclick==true)
         swapspeed = 1+(0.5/sqrt(point_distance(gx1,gy1,gx2,gy2)));
     }
     
-    if(gx1&gt;=0 and gy1&gt;=0 and gx1&lt;grid_width and gy1&lt;grid_height and gx2&gt;=0 and gy2&gt;=0 and gx2&lt;grid_width and gy2&lt;grid_height)
+    if(validcell(gx1,gy1) and validcell(gx2,gy2))
     {
         swap_dx1 = gx1*donut_width+grid_xoffset;
         swap_dy1 = gy1*donut_height+grid_yoffset;
@@ -136,46 +138,6 @@ if(validclick==true)
     validclick = false;
     swapmode = 0;
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="54">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>
-var tx,ty,i,newval,new;
-tx = togrid_x(mouse_x);
-ty = togrid_y(mouse_y);
-
-ds_grid_set(grid_main,tx,ty,0);
-
-for(i=ty-1;i&gt;=0;i-=1)
-{
-    newval = ds_grid_get(grid_main,tx,i);
-    if(newval&gt;0)
-    {
-        new = instance_create(toworld_x(tx), toworld_y(i),obj_fallingdonut);
-        new.image_index = newval
-        ds_grid_set(grid_main,tx,i,0);
-    }
-}
-
 </string>
           </argument>
         </arguments>
@@ -233,7 +195,7 @@ lswap = swap;
 swap = swap/swapspeed;
 if(swap&lt;0.002 and lswap&gt;=0.002)
 {
-    scr_switchcells(grid_main,gx1,gy1,gx2,gy2)
+    scr_switchcells(gx1,gy1,gx2,gy2)
     swap = 0;
     gx1 = -1;
     gy1 = -1;
@@ -254,7 +216,7 @@ for (i=0; i&lt;grid_width; i+=1)
         }
         if(shoulddraw==true)
         {
-            draw_sprite(spr_donut,ds_grid_get(grid_main,i,j),toworld_x(i),toworld_y(j));
+            draw_sprite(spr_donut,abs(ds_grid_get(grid_main,i,j)),toworld_x(i),toworld_y(j));
         }
     };
 };

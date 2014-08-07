@@ -17,6 +17,11 @@
     <script>scripts\togrid_y.gml</script>
     <script>scripts\toworld_x.gml</script>
     <script>scripts\toworld_y.gml</script>
+    <script>scripts\scr_setdonut.gml</script>
+    <script>scripts\scr_removedonut.gml</script>
+    <script>scripts\scr_findmatch.gml</script>
+    <script>scripts\scr_finishmatch.gml</script>
+    <script>scripts\validcell.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_score</font>
