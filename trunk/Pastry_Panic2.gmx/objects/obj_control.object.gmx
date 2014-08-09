@@ -34,10 +34,11 @@ grid_width = grid_width_cells*donut_width;
 grid_height = grid_height_cells*donut_height;
 grid_x = 40;
 grid_y = 0;
-hoversizemax = 1.1;
+selsizemin = 0.9;
+switchmode = 0; //0 is normal, 1 is diagonal, 2 is anywhere
 background_hspeed[0] = 0.5;
-selx = 0;
-sely = 0;
+selx = -1;
+sely = -1;
 //create grid
 grid = ds_grid_create(grid_width_cells,grid_height_cells);
 //shuffle board
@@ -47,9 +48,69 @@ for (i=0;i&lt;grid_width_cells;i+=1)
     for (j=0;j&lt;grid_height_cells;j+=1)
     {
         ds_grid_set(grid,i,j,irandom_range(1,8));
-        hoversize[i,j] = 1;
+        selsize[i,j] = 1;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var switchdir,switchtemp,target;
+if (switchmode == 0)
+{
+    switchdir = round(point_direction(mx,my,mouse_x,mouse_y)/90);
+}
+switch (switchdir)
+{
+    case 0:
+        target[0] = selx + 1;
+        target[1] = sely;
+        break;
+    case 1:
+        target[0] = selx;
+        target[1] = sely - 1;
+        break;
+    case 2:
+        target[0] = selx - 1;
+        target[1] = sely;
+        break;
+    case 3:
+        target[0] = selx;
+        target[1] = sely + 1;
+        break;
+    case 4:
+        target[0] = selx + 1;
+        target[1] = sely;
+        break;
+}
+if (point_distance(mx,my,mouse_x,mouse_y) &gt; 64)
+{
+    target[0] = clamp(target[0],0,grid_width_cells-1);
+    target[1] = clamp(target[1],0,grid_height_cells-1);
+    switchtemp = ds_grid_get(grid,target[0],target[1]);
+    ds_grid_set(grid,target[0],target[1],ds_grid_get(grid,selx,sely));
+    ds_grid_set(grid,selx,sely,switchtemp);
+}
+selx = -1;
+sely = -1;
 </string>
           </argument>
         </arguments>
@@ -81,7 +142,7 @@ and not (instance_exists(obj_donut_switch)))
     nn = instance_create(xx,grid_y-donut_height,obj_donut_fall);
     nn.image_index = irandom_range(1,8);
     ds_grid_set(grid,scr_getgridcellx(mouse_x),scr_getgridcelly(mouse_y),0);
-    scr_felldonuts();
+    scr_felldonuts(scr_getgridcellx(mouse_x),scr_getgridcelly(mouse_y));
 }
 </string>
           </argument>
@@ -111,6 +172,8 @@ and scr_getgridcelly(mouse_y) &gt;= 0 and scr_getgridcelly(mouse_y) &lt; grid_he
 {
     if (ds_grid_get(grid,scr_getgridcellx(mouse_x),scr_getgridcelly(mouse_y)) != 0)
     {
+        mx = mouse_x;
+        my = mouse_y;
         selx = scr_getgridcellx(mouse_x);
         sely = scr_getgridcelly(mouse_y);
     }
@@ -149,22 +212,22 @@ for (i=0;i&lt;grid_width_cells;i+=1)
 {
     for (j=0;j&lt;grid_height_cells;j+=1)
     {
-        if (scr_getgridcellx(mouse_x) == i and scr_getgridcelly(mouse_y) == j)
+        if (selx == i and sely == j)
         {
-            if (hoversize[i,j] &lt; hoversizemax)
+            if (selsize[i,j] &gt; selsizemin)
             {
-                hoversize[i,j] += 0.02;
+                selsize[i,j] -= 0.02;
             }
         }
         else
         {
-            if (hoversize[i,j] &gt; 1)
+            if (selsize[i,j] &lt; 1)
             {
-                hoversize[i,j] -= 0.02;
+                selsize[i,j] += 0.02;
             }
         }
         sprite_set_offset(spr_donut,donut_width/2,donut_height/2);
-        draw_sprite_ext(spr_donut,ds_grid_get(grid,i,j),grid_x+i*donut_width+(donut_width/2),grid_y+j*donut_height+(donut_height/2),hoversize[i,j],hoversize[i,j],image_angle,image_blend,image_alpha);
+        draw_sprite_ext(spr_donut,ds_grid_get(grid,i,j),grid_x+i*donut_width+(donut_width/2),grid_y+j*donut_height+(donut_height/2),selsize[i,j],selsize[i,j],image_angle,image_blend,image_alpha);
         sprite_set_offset(spr_donut,0,0);
     }
 }
