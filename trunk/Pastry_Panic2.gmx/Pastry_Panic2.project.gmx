@@ -16,6 +16,8 @@
     <script>scripts\scr_getgridcellx.gml</script>
     <script>scripts\scr_getgridcelly.gml</script>
     <script>scripts\scr_felldonuts.gml</script>
+    <script>scripts\scr_findmatch.gml</script>
+    <script>scripts\scr_match.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
@@ -26,7 +28,7 @@
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41861.8525139583</constant>
+    <constant name="GM_build_date">41861.9114704051</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>

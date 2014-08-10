@@ -28,6 +28,30 @@
             <string>image_speed = 0;
 yspeed = 0;
 yspeedmax = 16;
+alarm[0] = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>scr_felldonuts();
 </string>
           </argument>
         </arguments>
@@ -54,19 +78,28 @@ yspeedmax = 16;
 yspeed = clamp(yspeed,0,yspeedmax);
 var xx = scr_getgridcellx(x);
 var yy = scr_getgridcelly(y+yspeed);
-if (ds_grid_get(obj_control.grid,xx,yy+1) == 0)
+if (ds_grid_get(obj_control.grid,xx,yy+1) == 0 or (y &lt; obj_control.grid_y))
 {
-    y += yspeed;
+    if not (instance_position(x,y+obj_control.donut_height+1,obj_donut_fall))
+    {
+        y += yspeed;
+    }
 }
 else
 {
     ds_grid_set(obj_control.grid,xx,yy,image_index);
+    scr_match(xx,yy);
     instance_destroy();
 }
 if (yy &gt;= obj_control.grid_height_cells-1)
 {
     ds_grid_set(obj_control.grid,xx,obj_control.grid_height_cells-1,image_index);
+    scr_match(xx,yy);
     instance_destroy();
+}
+if (instance_position(x,y+obj_control.donut_height+1,obj_donut_fall))
+{
+    y = (instance_position(x,y+obj_control.donut_height+1,obj_donut_fall).y)-obj_control.donut_height;
 }
 </string>
           </argument>
