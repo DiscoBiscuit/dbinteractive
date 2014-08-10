@@ -101,13 +101,26 @@ switch (switchdir)
         target[1] = sely;
         break;
 }
-if (point_distance(mx,my,mouse_x,mouse_y) &gt; 64)
+if (point_distance(mx,my,mouse_x,mouse_y) &gt; 64 and not (instance_exists(obj_donut_fall)) and not (instance_exists(obj_donut_switch))
+and target[0] &gt;= 0 and target[0] &lt; grid_width_cells and target[1] &gt;= 0 and target[1] &lt; grid_height_cells)
 {
     target[0] = clamp(target[0],0,grid_width_cells-1);
     target[1] = clamp(target[1],0,grid_height_cells-1);
     switchtemp = ds_grid_get(grid,target[0],target[1]);
-    ds_grid_set(grid,target[0],target[1],ds_grid_get(grid,selx,sely));
-    ds_grid_set(grid,selx,sely,switchtemp);
+    var xx = grid_x+(target[0]*donut_width);
+    var yy = grid_y+(target[1]*donut_height);
+    var xx2 = grid_x+(selx*donut_width);
+    var yy2 = grid_y+(sely*donut_height);
+    new2 = instance_create(xx2,yy2,obj_donut_switch);
+    new2.image_index = ds_grid_get(grid,selx,sely);
+    new2.goalx = xx;
+    new2.goaly = yy;
+    ds_grid_set(grid,selx,sely,0);
+    new = instance_create(xx,yy,obj_donut_switch);
+    new.image_index = ds_grid_get(grid,target[0],target[1]);
+    new.goalx = xx2;
+    new.goaly = yy2;
+    ds_grid_set(grid,target[0],target[1],0);
 }
 selx = -1;
 sely = -1;
