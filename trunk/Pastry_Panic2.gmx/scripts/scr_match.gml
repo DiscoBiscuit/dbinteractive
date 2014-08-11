@@ -30,12 +30,23 @@ if(count>=3)
         {
             if(ds_grid_get(obj_control.pull,i,j)>0 and ds_grid_get(obj_control.grid,i,j) != 0)
             {
-                var xx = obj_control.grid_x+(i*obj_control.donut_width);
-                var yy = obj_control.grid_y+(j*obj_control.donut_height);
-                new = instance_create(xx,yy,obj_donut_match);
-                new.image_index = ds_grid_get(obj_control.grid,i,j);
-                ds_grid_set(obj_control.grid,i,j,0)
-                obj_control.donutqueue[i] += 1;
+                if (obj_control.gamestart == 1)
+                {
+                    var xx = obj_control.grid_x+(i*obj_control.donut_width);
+                    var yy = obj_control.grid_y+(j*obj_control.donut_height);
+                    new = instance_create(xx,yy,obj_donut_match);
+                    new.image_index = ds_grid_get(obj_control.grid,i,j);
+                    ds_grid_set(obj_control.grid,i,j,0)
+                    obj_control.donutqueue[i] += 1;
+                }
+                else
+                {
+                    if (obj_control.startmatch == 0)
+                    {
+                        ds_grid_shuffle(obj_control.grid);
+                        obj_control.startmatch = 1;
+                    }
+                }
             };
         };
     };

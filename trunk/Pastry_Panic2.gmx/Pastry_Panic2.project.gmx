@@ -19,6 +19,9 @@
     <script>scripts\scr_findmatch.gml</script>
     <script>scripts\scr_match.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_main</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_donut_fall</object>
@@ -29,7 +32,7 @@
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41862.82966375</constant>
+    <constant name="GM_build_date">41862.9065976505</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>
