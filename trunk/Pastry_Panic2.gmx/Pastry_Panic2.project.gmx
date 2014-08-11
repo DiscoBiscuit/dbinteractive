@@ -23,12 +23,13 @@
     <object>objects\obj_control</object>
     <object>objects\obj_donut_fall</object>
     <object>objects\obj_donut_switch</object>
+    <object>objects\obj_donut_match</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41861.9114704051</constant>
+    <constant name="GM_build_date">41862.82966375</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>

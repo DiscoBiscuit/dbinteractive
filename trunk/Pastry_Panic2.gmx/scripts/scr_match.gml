@@ -30,11 +30,15 @@ if(count>=3)
         {
             if(ds_grid_get(obj_control.pull,i,j)>0 and ds_grid_get(obj_control.grid,i,j) != 0)
             {
+                var xx = obj_control.grid_x+(i*obj_control.donut_width);
+                var yy = obj_control.grid_y+(j*obj_control.donut_height);
+                new = instance_create(xx,yy,obj_donut_match);
+                new.image_index = ds_grid_get(obj_control.grid,i,j);
                 ds_grid_set(obj_control.grid,i,j,0)
-                obj_control.donutqueue[i] += 1;       
+                obj_control.donutqueue[i] += 1;
             };
         };
     };
+    scr_felldonuts();
 }
 ds_grid_clear(obj_control.pull,0)
-scr_felldonuts();

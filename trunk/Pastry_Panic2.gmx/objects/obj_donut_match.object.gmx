@@ -26,9 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>image_speed = 0;
-yspeed = 0;
-yspeedmax = 16;
-alarm[0] = 1;
+delay = 5;
+alarm[0] = delay;
+image_xscale = 1.125
+image_yscale = 1.125
 </string>
           </argument>
         </arguments>
@@ -51,7 +52,7 @@ alarm[0] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>scr_felldonuts();
+            <string>instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -74,37 +75,11 @@ alarm[0] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>yspeed += 0.75;
-yspeed = clamp(yspeed,0,yspeedmax);
-var xx = scr_getgridcellx(x);
-var yy = scr_getgridcelly(y+yspeed);
-if (ds_grid_get(obj_control.grid,xx,yy+1) == 0 or (y &lt; obj_control.grid_y))
+            <string>if (image_xscale &gt; 0.25)
 {
-    if not (instance_position(x,y+obj_control.donut_height+1,obj_donut_fall))
-    {
-        y += yspeed;
-    }
-}
-else
-{
-    ds_grid_set(obj_control.grid,xx,yy,image_index);
-    scr_match(xx,yy);
-    instance_destroy();
-}
-if (yy &gt;= obj_control.grid_height_cells-1)
-{
-    ds_grid_set(obj_control.grid,xx,obj_control.grid_height_cells-1,image_index);
-    scr_match(xx,yy);
-    instance_destroy();
-}
-if (instance_position(x,y+obj_control.donut_height+1,obj_donut_fall))
-{
-    y = (instance_position(x,y+obj_control.donut_height+1,obj_donut_fall).y)-obj_control.donut_height;
-}
-if (instance_position(x,y+obj_control.donut_height+1,obj_donut_match))
-{
-    y = (instance_position(x,y+obj_control.donut_height+1,obj_donut_match).y)-obj_control.donut_height;
-    yspeed = 0;
+    image_xscale -= 0.15;
+    image_yscale -= 0.15;
+    image_alpha -= 0.15;
 }
 </string>
           </argument>
@@ -128,7 +103,9 @@ if (instance_position(x,y+obj_control.donut_height+1,obj_donut_match))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>sprite_set_offset(spr_donut,obj_control.donut_width/2,obj_control.donut_height/2);
+draw_sprite_ext(sprite_index,image_index,x+obj_control.donut_width/2,y+obj_control.donut_height/2,image_xscale,image_yscale,image_angle,image_blend,image_alpha);
+sprite_set_offset(spr_donut,0,0);
 </string>
           </argument>
         </arguments>
