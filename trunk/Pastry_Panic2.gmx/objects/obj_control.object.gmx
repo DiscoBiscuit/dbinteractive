@@ -41,6 +41,8 @@ selx = -1;
 sely = -1;
 startmatch = 0;
 gamestart = 0;
+addscore = 0;
+score_perdonut = 5;
 //create grid
 grid = ds_grid_create(grid_width_cells,grid_height_cells);
 pull = ds_grid_create(grid_width_cells,grid_height_cells);
@@ -137,6 +139,33 @@ else
     }
 }
 alarm[0] = 15;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (addscore &gt; 0)
+{
+    score += 1;
+    addscore -= 1;
+}
 </string>
           </argument>
         </arguments>
@@ -306,6 +335,7 @@ if (gamestart == 0)
             <string>//board background
 var paleblue = make_color_rgb(150,200,255);
 var paleblue2 = make_color_rgb(125,175,220);
+draw_set_alpha(1);
 draw_set_color(paleblue);
 draw_rectangle(grid_x,grid_y,grid_x+grid_width,grid_y+grid_height,false);
 draw_set_color(paleblue2);
@@ -334,6 +364,13 @@ for (i=0;i&lt;grid_width_cells;i+=1)
         sprite_set_offset(spr_donut,0,0);
     }
 }
+var paleorange = make_color_rgb(255,150,50);
+var paleorange2 = make_color_rgb(205,100,0);
+draw_set_font(fnt_score);
+draw_set_halign(fa_center);
+draw_set_valign(fa_center);
+draw_set_color(paleorange);
+draw_text(room_width/2,room_height-64,score);
 </string>
           </argument>
         </arguments>

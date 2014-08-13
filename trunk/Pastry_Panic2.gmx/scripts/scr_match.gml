@@ -38,6 +38,8 @@ if(count>=3)
                     new.image_index = ds_grid_get(obj_control.grid,i,j);
                     ds_grid_set(obj_control.grid,i,j,0)
                     obj_control.donutqueue[i] += 1;
+                    nn = instance_create(xx,yy,obj_score_fx);
+                    nn.num = obj_control.score_perdonut;
                 }
                 else
                 {

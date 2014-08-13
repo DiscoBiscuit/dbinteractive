@@ -18,21 +18,25 @@
     <script>scripts\scr_felldonuts.gml</script>
     <script>scripts\scr_findmatch.gml</script>
     <script>scripts\scr_match.gml</script>
+    <script>scripts\scr_text_outline.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_main</font>
+    <font>fonts\fnt_score</font>
+    <font>fonts\fnt_score_effect</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_donut_fall</object>
     <object>objects\obj_donut_switch</object>
     <object>objects\obj_donut_match</object>
+    <object>objects\obj_score_fx</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41862.9065976505</constant>
+    <constant name="GM_build_date">41864.7397095718</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>
