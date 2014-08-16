@@ -169,7 +169,7 @@ alarm[0] = 15;
             <kind>1</kind>
             <string>if (addscore &lt; score)
 {
-    addscore = round((addscore * 9 + score) / 10);
+    addscore = (addscore * 9 + score) / 10;
 }
 </string>
           </argument>
@@ -378,7 +378,7 @@ var paleorange2 = make_color_rgb(205,100,0);
 draw_set_font(fnt_score);
 draw_set_halign(fa_center);
 draw_set_valign(fa_center);
-scr_text_outline(addscore,room_width/2,room_height-64,paleorange,paleorange2);
+scr_text_outline(round(addscore),room_width/2,room_height-64,paleorange,paleorange2);
 </string>
           </argument>
         </arguments>
