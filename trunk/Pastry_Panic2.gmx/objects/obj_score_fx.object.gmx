@@ -52,13 +52,13 @@ myspeed = -4;
             <kind>1</kind>
             <string>myspeed += 0.5;
 myspeed = clamp(myspeed,-maxspeed,maxspeed);
-if (point_distance(x,y,room_width/2-(obj_control.donut_width/2),room_height-64-(obj_control.donut_height/2)) &gt; maxspeed)
+if (point_distance(x,y,room_width/2-(donut_width/2),room_height-64-(donut_height/2)) &gt; maxspeed)
 {
-    move_towards_point(room_width/2-(obj_control.donut_width/2),room_height-64-(obj_control.donut_height/2),myspeed);
+    move_towards_point(room_width/2-(donut_width/2),room_height-64-(donut_height/2),myspeed);
 }
 else
 {
-    obj_control.addscore += num;
+    score += num;
     instance_destroy();
 }
 if (y &gt; room_height/128)
@@ -91,7 +91,7 @@ if (y &gt; room_height/128)
 draw_set_valign(fa_center);
 draw_set_font(fnt_score_effect);
 draw_set_alpha(image_alpha);
-scr_text_outline(num,x+(obj_control.donut_width)/2,y+(obj_control.donut_height)/2,c_white,c_gray)
+scr_text_outline(num,x+(donut_width)/2,y+(donut_height)/2,c_white,c_gray)
 </string>
           </argument>
         </arguments>

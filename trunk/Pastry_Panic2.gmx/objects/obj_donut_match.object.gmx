@@ -103,8 +103,8 @@ ysize = 1.125;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sprite_set_offset(spr_donut,obj_control.donut_width/2,obj_control.donut_height/2);
-draw_sprite_ext(sprite_index,image_index,x+obj_control.donut_width/2,y+obj_control.donut_height/2,xsize,ysize,image_angle,image_blend,image_alpha);
+            <string>sprite_set_offset(spr_donut,donut_width/2,donut_height/2);
+draw_sprite_ext(sprite_index,image_index,x+donut_width/2,y+donut_height/2,xsize,ysize,image_angle,image_blend,image_alpha);
 sprite_set_offset(spr_donut,0,0);
 </string>
           </argument>

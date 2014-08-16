@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>//init vars
+globalvar donut_width,donut_height,grid_width_cells,grid_height_cells,grid_width,grid_height,grid_x,grid_y,grid,pull,combo;
 donut_width = sprite_get_width(spr_donut);
 donut_height = sprite_get_height(spr_donut);
 grid_width_cells = 5;
@@ -43,6 +44,7 @@ startmatch = 0;
 gamestart = 0;
 addscore = 0;
 score_perdonut = 5;
+combo = 0;
 //create grid
 grid = ds_grid_create(grid_width_cells,grid_height_cells);
 pull = ds_grid_create(grid_width_cells,grid_height_cells);
@@ -67,6 +69,10 @@ for (k=0;k&lt;grid_width_cells;k+=1)
 }
 alarm[0] = 1;
 alarm[1] = 1;
+
+//audio volume is too loud!!
+audio_sound_gain(snd_swipe,0.05,0);
+audio_sound_gain(snd_match,0.5,0);
 </string>
           </argument>
         </arguments>
@@ -161,10 +167,9 @@ alarm[0] = 15;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (addscore &gt; 0)
+            <string>if (addscore &lt; score)
 {
-    score += 1;
-    addscore -= 1;
+    addscore = round((addscore * 9 + score) / 10);
 }
 </string>
           </argument>
@@ -236,6 +241,9 @@ and target[0] &gt;= 0 and target[0] &lt; grid_width_cells and target[1] &gt;= 0 
     new.goalx = xx2;
     new.goaly = yy2;
     ds_grid_set(grid,target[0],target[1],0);
+    audio_sound_pitch(snd_swipe,random_range(0.8,1.2));
+    audio_play_sound(snd_swipe,0,false);
+    combo = 0;
 }
 selx = -1;
 sely = -1;
@@ -364,13 +372,13 @@ for (i=0;i&lt;grid_width_cells;i+=1)
         sprite_set_offset(spr_donut,0,0);
     }
 }
+//draw the score
 var paleorange = make_color_rgb(255,150,50);
 var paleorange2 = make_color_rgb(205,100,0);
 draw_set_font(fnt_score);
 draw_set_halign(fa_center);
 draw_set_valign(fa_center);
-draw_set_color(paleorange);
-draw_text(room_width/2,room_height-64,score);
+scr_text_outline(addscore,room_width/2,room_height-64,paleorange,paleorange2);
 </string>
           </argument>
         </arguments>

@@ -1,3 +1,3 @@
 var mx;
-mx = argument0 - obj_control.grid_x;
-return floor(mx / obj_control.donut_width);
+mx = argument0 - grid_x;
+return floor(mx / donut_width);

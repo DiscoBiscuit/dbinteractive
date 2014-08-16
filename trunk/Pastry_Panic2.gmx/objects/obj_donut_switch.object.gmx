@@ -81,7 +81,7 @@ scr_felldonuts();
 }
 else
 {
-    ds_grid_set(obj_control.grid,scr_getgridcellx(goalx),scr_getgridcelly(goaly),image_index);
+    ds_grid_set(grid,scr_getgridcellx(goalx),scr_getgridcelly(goaly),image_index);
     instance_destroy();
 }
 </string>
