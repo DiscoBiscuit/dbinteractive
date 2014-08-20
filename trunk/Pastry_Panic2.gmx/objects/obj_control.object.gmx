@@ -57,6 +57,7 @@ for (i=0;i&lt;grid_width_cells;i+=1)
         ds_grid_set(grid,i,j,irandom_range(1,8));
         selsize[i,j] = 1;
         donutqueue[i] = 0;
+        sprinkles[i,j] = 0;
     }
 }
 //match pieces at beginning (won't work up there??)
@@ -141,6 +142,7 @@ else
         var yy = grid_y-donut_height;
         new = instance_create(xx,yy,obj_donut_fall);
         new.image_index = irandom_range(1,8);
+        new.sprinkle = choose(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1);
         donutqueue[i] -= 1;
     }
 }
@@ -235,11 +237,21 @@ and target[0] &gt;= 0 and target[0] &lt; grid_width_cells and target[1] &gt;= 0 
     new2.image_index = ds_grid_get(grid,selx,sely);
     new2.goalx = xx;
     new2.goaly = yy;
+    if (sprinkles[selx,sely])
+    {
+        new2.sprinkle = 1;
+        sprinkles[selx,sely] = 0;
+    }
     ds_grid_set(grid,selx,sely,0);
     new = instance_create(xx,yy,obj_donut_switch);
     new.image_index = ds_grid_get(grid,target[0],target[1]);
     new.goalx = xx2;
     new.goaly = yy2;
+    if (sprinkles[target[0],target[1]])
+    {
+        new.sprinkle = 1;
+        sprinkles[target[0],target[1]] = 0;
+    }
     ds_grid_set(grid,target[0],target[1],0);
     audio_sound_pitch(snd_swipe,random_range(0.8,1.2));
     audio_play_sound(snd_swipe,0,false);
@@ -370,6 +382,12 @@ for (i=0;i&lt;grid_width_cells;i+=1)
         sprite_set_offset(spr_donut,donut_width/2,donut_height/2);
         draw_sprite_ext(spr_donut,ds_grid_get(grid,i,j),grid_x+i*donut_width+(donut_width/2),grid_y+j*donut_height+(donut_height/2),selsize[i,j],selsize[i,j],image_angle,image_blend,image_alpha);
         sprite_set_offset(spr_donut,0,0);
+        if (sprinkles[i,j] == 1)
+        {
+            sprite_set_offset(spr_sprinkles,donut_width/2,donut_height/2);
+            draw_sprite_ext(spr_sprinkles,0,grid_x+i*donut_width+(donut_width/2),grid_y+j*donut_height+(donut_height/2),selsize[i,j],selsize[i,j],image_angle,image_blend,image_alpha);
+            sprite_set_offset(spr_sprinkles,0,0);
+        }
     }
 }
 //draw the score

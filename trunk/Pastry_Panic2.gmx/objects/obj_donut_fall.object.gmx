@@ -30,6 +30,7 @@ yspeed = 0;
 yspeedmax = 16;
 soundtimer = 0;
 alarm[0] = 1;
+sprinkle = 0;
 </string>
           </argument>
         </arguments>
@@ -117,12 +118,20 @@ else
 {
     ds_grid_set(grid,xx,yy,image_index);
     scr_match(xx,yy);
+    if (sprinkle)
+    {
+        obj_control.sprinkles[xx,yy] = 1;
+    }
     instance_destroy();
 }
 if (yy &gt;= grid_height_cells-1)
 {
     ds_grid_set(grid,xx,grid_height_cells-1,image_index);
     scr_match(xx,yy);
+    if (sprinkle)
+    {
+        obj_control.sprinkles[xx,yy] = 1;
+    }
     instance_destroy();
 }
 if (instance_position(x,y+donut_height+1,obj_donut_fall))
@@ -158,6 +167,10 @@ soundtimer += 1;
           <argument>
             <kind>1</kind>
             <string>draw_self();
+if (sprinkle)
+{
+    draw_sprite(spr_sprinkles,0,x,y);
+}
 </string>
           </argument>
         </arguments>

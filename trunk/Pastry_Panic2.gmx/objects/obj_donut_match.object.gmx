@@ -30,6 +30,14 @@ delay = 5;
 alarm[0] = delay;
 xsize = 1.125;
 ysize = 1.125;
+sprinkle = 0;
+var xx = scr_getgridcellx(x);
+var yy = scr_getgridcelly(y);
+if (obj_control.sprinkles[xx,yy])
+{
+    sprinkle = 1;
+    obj_control.sprinkles[xx,yy] = 0;
+}
 </string>
           </argument>
         </arguments>
@@ -52,7 +60,13 @@ ysize = 1.125;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy();
+            <string>var xx = scr_getgridcellx(x);
+var yy = scr_getgridcelly(y);
+if (sprinkle)
+{
+    obj_control.sprinkles[xx,yy] = 0;
+}
+instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -106,6 +120,12 @@ ysize = 1.125;
             <string>sprite_set_offset(spr_donut,donut_width/2,donut_height/2);
 draw_sprite_ext(sprite_index,image_index,x+donut_width/2,y+donut_height/2,xsize,ysize,image_angle,image_blend,image_alpha);
 sprite_set_offset(spr_donut,0,0);
+if (sprinkle)
+{
+    sprite_set_offset(spr_sprinkles,donut_width/2,donut_height/2);
+    draw_sprite_ext(spr_sprinkles,0,x+donut_width/2,y+donut_height/2,xsize,ysize,image_angle,image_blend,image_alpha);
+    sprite_set_offset(spr_sprinkles,0,0);
+}
 </string>
           </argument>
         </arguments>

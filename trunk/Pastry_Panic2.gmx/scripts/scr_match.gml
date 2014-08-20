@@ -42,12 +42,17 @@ if(count>=3)
                     }
                     var xx = grid_x+(i*donut_width);
                     var yy = grid_y+(j*donut_height);
+                    var bonus = 1;
+                    if (obj_control.sprinkles[i,j])
+                    {
+                        bonus = 2;
+                    }
                     new = instance_create(xx,yy,obj_donut_match);
                     new.image_index = ds_grid_get(grid,i,j);
                     ds_grid_set(grid,i,j,0)
                     obj_control.donutqueue[i] += 1;
                     nn = instance_create(xx,yy,obj_score_fx);
-                    nn.num = obj_control.score_perdonut+((combo-1)*5);
+                    nn.num = (obj_control.score_perdonut+((combo-1)*5))*bonus;
                 }
                 else
                 {

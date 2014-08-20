@@ -11,6 +11,7 @@
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_donut</sprite>
+    <sprite>sprites\spr_sprinkles</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_stripe</background>
@@ -40,7 +41,7 @@
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41867.9387438657</constant>
+    <constant name="GM_build_date">41871.0781944676</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>
