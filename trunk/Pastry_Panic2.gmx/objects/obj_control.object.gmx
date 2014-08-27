@@ -37,6 +37,7 @@ grid_x = 40;
 grid_y = 0;
 selsizemin = 0.9;
 switchmode = 0; //0 is normal, 1 is diagonal, 2 is anywhere
+validclick = false;
 background_hspeed[0] = 0.5;
 selx = -1;
 sely = -1;
@@ -195,7 +196,9 @@ alarm[0] = 15;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var switchdir,switchtemp,target;
+            <string>if(validclick==true){
+
+var switchdir,switchtemp,target;
 if (switchmode == 0)
 {
     switchdir = round(point_direction(mx,my,mouse_x,mouse_y)/90);
@@ -259,6 +262,8 @@ and target[0] &gt;= 0 and target[0] &lt; grid_width_cells and target[1] &gt;= 0 
 }
 selx = -1;
 sely = -1;
+
+validclick = false;}
 </string>
           </argument>
         </arguments>
@@ -293,6 +298,7 @@ and scr_getgridcelly(mouse_y) &gt;= 0 and scr_getgridcelly(mouse_y) &lt; grid_he
         sely = scr_getgridcelly(mouse_y);
     }
 }
+validclick = true;
 </string>
           </argument>
         </arguments>
@@ -405,17 +411,24 @@ scr_text_outline(round(addscore),room_width/2,room_height-64,paleorange,paleoran
     <event eventtype="9" enumb="27">
       <action>
         <libid>1</libid>
-        <id>332</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_end_game</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>scr_rmtransition(rm_mainmenu)
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>
