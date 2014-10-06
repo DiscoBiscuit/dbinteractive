@@ -11,3 +11,11 @@ else
     yspeed = 0;
 }
 y += yspeed;
+if (place_free(x,y+10))
+{
+    onground = false;
+}
+else
+{
+    onground = true;
+}

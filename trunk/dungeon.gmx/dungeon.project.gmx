@@ -16,6 +16,12 @@
       <sprite>sprites\spr_player_run</sprite>
       <sprite>sprites\spr_player_jump</sprite>
     </sprites>
+    <sprites name="player_new">
+      <sprite>sprites\spr_player_head</sprite>
+      <sprite>sprites\spr_player_torso</sprite>
+      <sprite>sprites\spr_player_hand</sprite>
+      <sprite>sprites\spr_player_foot</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -42,12 +48,14 @@
       <object>objects\obj_world</object>
       <object>objects\obj_slope</object>
     </objects>
+    <object>objects\obj_menu</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41899.3628613194</constant>
+    <constant name="GM_build_date">41918.0060524653</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>
