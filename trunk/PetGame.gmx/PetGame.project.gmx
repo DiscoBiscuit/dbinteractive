@@ -8,6 +8,18 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <objects name="objects">
+    <object>objects\obj_menu</object>
+    <object>objects\obj_control</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rm_main</room>
+    <room>rooms\rm_menu</room>
+  </rooms>
+  <constants number="2">
+    <constant name="GM_build_date">41923.9605204861</constant>
+    <constant name="GM_version">'1.0.0.0'</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>
