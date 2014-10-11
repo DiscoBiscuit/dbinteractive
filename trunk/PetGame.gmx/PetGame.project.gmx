@@ -5,12 +5,24 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_creature_mask</sprite>
+    <sprite>sprites\spr_ground_mask</sprite>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <scripts name="npc">
+      <script>scripts\scr_npc_init.gml</script>
+      <script>scripts\scr_npc_step.gml</script>
+      <script>scripts\scr_npc_control.gml</script>
+    </scripts>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_menu</object>
     <object>objects\obj_control</object>
+    <object>objects\obj_creature</object>
+    <object>objects\obj_ground</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
