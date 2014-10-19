@@ -81,7 +81,7 @@ y = lerp(y,obj_player.y,0.001)
             <string>
 radius = sqrt(area)/pi
 draw_set_color(color)
-draw_circle(x,y,radius*10,false)
+draw_circle(x/global.drawscale + room_width/2,y/dglobal.rawscale + room_height/2,radius*10/global.drawscale,false)
 </string>
           </argument>
         </arguments>

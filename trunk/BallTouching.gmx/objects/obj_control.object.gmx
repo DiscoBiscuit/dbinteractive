@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-100</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[0] = 120
+            <string>
+global.drawscale = 1
+
+alarm[0] = 120
+randomize()
 </string>
           </argument>
         </arguments>
@@ -50,7 +54,7 @@
             <kind>1</kind>
             <string>if(instance_number(obj_enemy)&lt;20)
 {
-instance_create(obj_player.x-view_wview/2+random(view_wview),obj_player.y-view_hview/2+random(view_hview),obj_enemy)
+instance_create(-view_wview/2+random(view_wview),-view_hview/2+random(view_hview),obj_enemy)
 }
 alarm[0] = 120
 </string>

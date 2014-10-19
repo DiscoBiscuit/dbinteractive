@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = room_width/2
-y = room_height/2
+            <string>x = 0
+y = 0
 color = choose(c_red,c_orange,c_yellow,c_green,c_blue,c_purple)
 area = 100
 dest_x = x
@@ -62,8 +62,19 @@ view_move = (view_move*19 + mouse_check_button(mb_left))/20
 move_towards_point(dest_x,dest_y,myspeed*10)
 view_x = lerp(view_x,lerp(x,dest_x,view_move*0.5),0.1)
 view_y = lerp(view_y,lerp(y,dest_y,view_move*0.5),0.1)
-view_xview = view_x - view_wview/2
-view_yview = view_y - view_hview/2
+view_xview = view_x - view_wview/2 + room_width/2
+view_yview = view_y - view_hview/2 + room_height/2
+
+if(instance_number(obj_enemy)&gt;0)
+{
+    with(obj_enemy)
+    {
+        x -= obj_player.x
+        y -= obj_player.y
+    }
+}
+x = 0
+y = 0
 
 near = instance_nearest(x,y,obj_enemy)
 r1 = sqrt(area)/pi
@@ -227,8 +238,8 @@ if(point_distance(x,y,near.x,near.y)&lt;(r1+r2)*10)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>dest_x = mouse_x
-dest_y = mouse_y
+            <string>dest_x = mouse_x-room_width/2
+dest_y = mouse_y-room_height/2
 </string>
           </argument>
         </arguments>
@@ -254,7 +265,7 @@ dest_y = mouse_y
             <string>
 radius = sqrt(area)/pi
 draw_set_color(color)
-draw_circle(x,y,radius*10,false)
+draw_circle(room_width/2,room_width/2,radius*10/global.drawscale,false)
 </string>
           </argument>
         </arguments>
