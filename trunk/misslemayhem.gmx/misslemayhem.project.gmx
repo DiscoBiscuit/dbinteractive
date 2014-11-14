@@ -11,17 +11,21 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\rotate.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_turret</object>
     <object>objects\obj_ball</object>
     <object>objects\obj_enemy</object>
+    <object>objects\obj_world</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41939.128425787</constant>
+    <constant name="GM_build_date">41957.0261593171</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>
