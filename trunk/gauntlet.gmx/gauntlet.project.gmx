@@ -10,6 +10,7 @@
     <sprite>sprites\spr_knight_walk</sprite>
     <sprite>sprites\spr_world</sprite>
     <sprite>sprites\spr_player_mask</sprite>
+    <sprite>sprites\spr_floor</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -17,10 +18,15 @@
     <object>objects\obj_control</object>
     <object>objects\obj_player</object>
     <object>objects\obj_world</object>
+    <object>objects\obj_floor</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_debug</room>
   </rooms>
+  <constants number="2">
+    <constant name="GM_build_date">41961.9587259028</constant>
+    <constant name="GM_version">'1.0.0.0'</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

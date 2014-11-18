@@ -62,7 +62,97 @@ alarm[0] = 6;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Walk animation timer</string>
+            <string>//Movement
+var moveUp,moveDown,moveLeft,moveRight;
+moveUp = keyboard_check(ord('W'));
+moveDown = keyboard_check(ord('S'));
+moveLeft = keyboard_check(ord('A'));
+moveRight = keyboard_check(ord('D'));
+moveUpLeft = moveUp and moveLeft;
+moveUpRight = moveUp and moveRight;
+moveDownLeft = moveDown and moveLeft;
+moveDownRight = moveDown and moveRight;
+myspeed = point_distance(0,0,xspeed,yspeed);
+if (moveUpLeft)
+{
+    xspeed -= accel;
+    yspeed -= accel;
+}
+else if (moveUpRight)
+{
+    xspeed += accel;
+    yspeed -= accel;
+}
+else if (moveDownLeft)
+{
+    xspeed -= accel;
+    yspeed += accel;
+}
+else if (moveDownRight)
+{
+    xspeed += accel;
+    yspeed += accel;
+}
+else if (moveUp)
+{
+    yspeed -= accel;
+}
+else if (moveDown)
+{
+    yspeed += accel;
+}
+else if (moveLeft)
+{
+    xspeed -= accel;
+}
+else if (moveRight)
+{
+    xspeed += accel;
+}
+else
+{
+    if (myspeed &lt; 1)
+    {
+        xspeed = 0;
+        yspeed = 0;
+    }
+}
+if not (moveUpLeft or moveUpRight or moveDownLeft or moveDownRight)
+{
+    xspeed = (xspeed*(fric-1))/fric;
+    yspeed = (yspeed*(fric-1))/fric;
+}
+else
+{
+    xspeed = (xspeed*((fric-3)-1))/(fric-3);
+    yspeed = (yspeed*((fric-3)-1))/(fric-3);
+}
+var originx,originy;
+originx = x+sprite_width/2
+originy = y+sprite_height/2
+if (collision_point(originx+xspeed,originy,obj_floor,0,0))
+{
+    x += clamp(xspeed,-xspeedmax,xspeedmax);
+}
+if (collision_point(originx,originy+yspeed,obj_floor,0,0))
+{
+    y += clamp(yspeed,-yspeedmax,yspeedmax);
+}
+
+//Sprite
+depth = -y-32;
+image_speed = 0;
+if (myspeed &gt; 1)
+{
+    mydir = point_direction(0,0,xspeed,yspeed);
+    sprite_index = spr_knight_walk;
+    image_index = (floor(mydir+22)/45 mod 8) + (8 * walkframe);
+}
+else
+{
+    sprite_index = spr_knight_stand;
+}
+</string>
           </argument>
         </arguments>
       </action>
@@ -181,11 +271,14 @@ else
     xspeed = (xspeed*((fric-3)-1))/(fric-3);
     yspeed = (yspeed*((fric-3)-1))/(fric-3);
 }
-if (place_free(x+xspeed,y))
+var originx,originy;
+originx = x+sprite_width/2;
+originy = y+sprite_height/1.25;
+if (collision_point(originx+xspeed,originy,obj_floor,0,0))
 {
     x += clamp(xspeed,-xspeedmax,xspeedmax);
 }
-if (place_free(x,y+yspeed))
+if (collision_point(originx,originy+yspeed,obj_floor,0,0))
 {
     y += clamp(yspeed,-yspeedmax,yspeedmax);
 }
