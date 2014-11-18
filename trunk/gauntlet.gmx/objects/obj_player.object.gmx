@@ -36,8 +36,6 @@ myspeed = 0;
 mydir = 0;
 
 //Sprite
-image_xscale = 2;
-image_yscale = 2;
 walkframe = 0;
 alarm[0] = 6;
 </string>
@@ -272,13 +270,23 @@ else
     yspeed = (yspeed*((fric-3)-1))/(fric-3);
 }
 var originx,originy;
-originx = x+sprite_width/2;
-originy = y+sprite_height/1.25;
-if (collision_point(originx+xspeed,originy,obj_floor,0,0))
+originx = x+42;
+originy = y+52;
+var corner1,corner2,corner3,corner4;
+corner1 = position_meeting(originx+xspeed-16,originy-16,obj_floor);
+corner2 = position_meeting(originx+xspeed+16,originy-16,obj_floor);
+corner3 = position_meeting(originx+xspeed+16,originy+16,obj_floor);
+corner4 = position_meeting(originx+xspeed-16,originy+16,obj_floor);
+var corner11,corner22,corner33,corner44;
+corner11 = position_meeting(originx-16,originy+yspeed-16,obj_floor);
+corner22 = position_meeting(originx+16,originy+yspeed-16,obj_floor);
+corner33 = position_meeting(originx+16,originy+yspeed+16,obj_floor);
+corner44 = position_meeting(originx-16,originy+yspeed+16,obj_floor);
+if (corner1 and corner2 and corner3 and corner4)
 {
     x += clamp(xspeed,-xspeedmax,xspeedmax);
 }
-if (collision_point(originx,originy+yspeed,obj_floor,0,0))
+if (corner11 and corner22 and corner33 and corner44)
 {
     y += clamp(yspeed,-yspeedmax,yspeedmax);
 }
