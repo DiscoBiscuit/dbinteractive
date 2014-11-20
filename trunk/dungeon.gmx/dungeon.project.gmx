@@ -6,56 +6,31 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_player</sprite>
-    <sprites name="world">
-      <sprite>sprites\spr_block</sprite>
-      <sprite>sprites\spr_slope</sprite>
+    <sprites name="tdn">
+      <sprite>sprites\spr_floor_tdn</sprite>
+      <sprite>sprites\spr_player_tdn</sprite>
     </sprites>
-    <sprites name="player">
-      <sprite>sprites\spr_player_idle</sprite>
-      <sprite>sprites\spr_player_run</sprite>
-      <sprite>sprites\spr_player_jump</sprite>
-    </sprites>
-    <sprites name="player_new">
-      <sprite>sprites\spr_player_head</sprite>
-      <sprite>sprites\spr_player_torso</sprite>
-      <sprite>sprites\spr_player_hand</sprite>
-      <sprite>sprites\spr_player_foot</sprite>
+    <sprites name="iso">
+      <sprite>sprites\spr_floor</sprite>
+      <sprite>sprites\spr_player</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <scripts name="player">
-      <script>scripts\scr_initplayer.gml</script>
-      <script>scripts\scr_playertick.gml</script>
-      <script>scripts\scr_playercontrol.gml</script>
-      <script>scripts\scr_animcontrol.gml</script>
-      <script>scripts\scr_updatecamera.gml</script>
-    </scripts>
+    <script>scripts\scr_iso_init.gml</script>
+    <script>scripts\scr_draw_iso.gml</script>
   </scripts>
-  <fonts name="fonts">
-    <font>fonts\fnt_menu</font>
-    <font>fonts\fnt_debug</font>
-    <font>fonts\fnt_chat</font>
-  </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
-    <objects name="player">
-      <object>objects\obj_player</object>
-    </objects>
-    <objects name="world">
-      <object>objects\obj_world</object>
-      <object>objects\obj_slope</object>
-    </objects>
-    <object>objects\obj_menu</object>
+    <object>objects\obj_floor</object>
+    <object>objects\obj_player</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_menu</room>
-    <room>rooms\rm_main</room>
+    <room>rooms\rm_debug</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41918.0060524653</constant>
+    <constant name="GM_build_date">41963.9728063194</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>

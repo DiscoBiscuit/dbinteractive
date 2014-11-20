@@ -3,8 +3,8 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-99999</depth>
-  <persistent>-1</persistent>
+  <depth>0</depth>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Controls
-globalvar moveleft,moveright,jump;
+            <string>globalvar topdown;
+topdown = true;
 </string>
           </argument>
         </arguments>
@@ -49,15 +49,29 @@ globalvar moveleft,moveright,jump;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>moveleft = ord('A');
-moveright = ord('D');
-jump = vk_space;
+            <string>//move camera for debugging
+if (keyboard_check(ord('W')))
+{
+    view_yview -= 8;
+}
+if (keyboard_check(ord('A')))
+{
+    view_xview -= 8;
+}
+if (keyboard_check(ord('S')))
+{
+    view_yview += 8;
+}
+if (keyboard_check(ord('D')))
+{
+    view_xview += 8;
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="27">
+    <event eventtype="9" enumb="112">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -74,10 +88,26 @@ jump = vk_space;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>game_end();
+            <string>topdown = !topdown;
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
+      <action>
+        <libid>1</libid>
+        <id>332</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_end_game</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </events>
