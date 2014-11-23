@@ -6,31 +6,25 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprites name="tdn">
-      <sprite>sprites\spr_floor_tdn</sprite>
-      <sprite>sprites\spr_player_tdn</sprite>
-    </sprites>
-    <sprites name="iso">
-      <sprite>sprites\spr_floor</sprite>
-      <sprite>sprites\spr_player</sprite>
-    </sprites>
+    <sprite>sprites\spr_laser_mask</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
-  <scripts name="scripts">
-    <script>scripts\scr_iso_init.gml</script>
-    <script>scripts\scr_draw_iso.gml</script>
-  </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_menu</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
-    <object>objects\obj_floor</object>
-    <object>objects\obj_player</object>
+    <object>objects\obj_menu</object>
+    <object>objects\obj_laser</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_debug</room>
+    <room>rooms\rm_game_laser</room>
+    <room>rooms\rm_menu</room>
+    <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41964.0046518519</constant>
+    <constant name="GM_build_date">41966.2433913194</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>
