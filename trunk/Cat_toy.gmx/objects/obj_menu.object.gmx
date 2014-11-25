@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>menu = ds_list_create();
-ds_list_add(menu,"Start");
+ds_list_add(menu,"Laser Pointer");
 menu_height = 64;
 menu_font = fnt_menu;
 menu_color = c_white;
@@ -88,7 +88,7 @@ for (i=0;i&lt;ds_list_size(menu);i+=1)
             <string>switch (menu_sel)
 {
     case 0:
-        room_goto(rm_main);
+        room_goto(rm_game_laser);
         break;
 }
 </string>

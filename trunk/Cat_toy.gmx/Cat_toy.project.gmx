@@ -7,6 +7,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_laser_mask</sprite>
+    <sprite>sprites\spr_home</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -19,12 +20,11 @@
     <object>objects\obj_laser</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_game_laser</room>
     <room>rooms\rm_menu</room>
-    <room>rooms\rm_main</room>
+    <room>rooms\rm_game_laser</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41966.2433913194</constant>
+    <constant name="GM_build_date">41968.255739919</constant>
     <constant name="GM_version">'1.0.0.0'</constant>
   </constants>
   <help>
