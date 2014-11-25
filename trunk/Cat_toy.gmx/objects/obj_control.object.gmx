@@ -82,15 +82,15 @@ if (homepressed = 0)
 }
 if (homepressed)
 {
-    if (mouse_x &lt; view_xview + view_wview/2 + 32 and mouse_x &gt; view_xview + view_wview/2 - 32
-    and mouse_y &lt; view_yview + view_hview-480 + 32 and mouse_y &gt; view_yview + view_hview-480 - 32)
+    if (mouse_x &lt; view_xview + view_wview/2 + 96 and mouse_x &gt; view_xview + view_wview/2 - 96
+    and mouse_y &lt; view_yview + view_hview-480 + 96 and mouse_y &gt; view_yview + view_hview-480 - 96)
     {
         overhome = 1;
     }
-}
-else
-{
-    overhome = 0;
+    else
+    {
+        overhome = 0;
+    }
 }
 if (mouse_check_button_released(mb_left) and overhome)
 {
