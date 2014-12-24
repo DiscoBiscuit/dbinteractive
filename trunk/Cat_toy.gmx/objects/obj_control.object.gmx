@@ -82,8 +82,7 @@ if (homepressed = 0)
 }
 if (homepressed)
 {
-    if (mouse_x &lt; view_xview + view_wview/2 + 96 and mouse_x &gt; view_xview + view_wview/2 - 96
-    and mouse_y &lt; view_yview + view_hview-480 + 96 and mouse_y &gt; view_yview + view_hview-480 - 96)
+    if (mouse_y &lt; view_yview + view_hview-480)
     {
         overhome = 1;
     }

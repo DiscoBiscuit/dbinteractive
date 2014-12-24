@@ -24,8 +24,8 @@
     <room>rooms\rm_game_laser</room>
   </rooms>
   <constants number="2">
-    <constant name="GM_build_date">41968.2636398495</constant>
-    <constant name="GM_version">'1.0.0.0'</constant>
+    <constant name="GM_build_date">41969.0805091204</constant>
+    <constant name="GM_version">'1.0.0'</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
