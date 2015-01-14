@@ -38,11 +38,8 @@
     <object>objects\obj_donut_switch</object>
     <object>objects\obj_donut_match</object>
     <object>objects\obj_score_fx</object>
-    <object>objects\obj_button</object>
-    <object>objects\obj_rmtransition</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\rm_mainmenu</room>
     <room>rooms\rm_main</room>
   </rooms>
   <constants number="2">
