@@ -72,6 +72,7 @@
             <kind>1</kind>
             <string>if (parent != -1)
 {
+    draw_set_color(make_color_rgb(150,100,0));
     draw_line_width(x,y,parent.x,parent.y,3);
 }
 physics_draw_debug();

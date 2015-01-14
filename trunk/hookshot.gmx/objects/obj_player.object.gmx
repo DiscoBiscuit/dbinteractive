@@ -32,6 +32,7 @@ hookshot = false;
 
 offset_y = 0;
 rope_host = self;
+/*
 next_rope = instance_create(x,y+offset_y,obj_rope);
 
 attach = physics_joint_distance_create(rope_host,next_rope,rope_host.x,rope_host.y,next_rope.x,next_rope.y,false);
@@ -41,6 +42,7 @@ with (next_rope)
 {
     parent = other.id;
 }
+
 
 repeat 10
 {
@@ -56,6 +58,7 @@ repeat 10
         parent = other.last_rope;
     }
 }
+*/
 </string>
           </argument>
         </arguments>
@@ -82,7 +85,7 @@ repeat 10
 moveleft = ord('A');
 moveright = ord('D');
 jump = vk_space;
-onground = collision_rectangle(bbox_left+16,bbox_bottom,bbox_right-16,bbox_bottom+1,obj_collision_block,false,true);
+onground = collision_rectangle(x-25,bbox_bottom,x+19,bbox_bottom,obj_collision_block,false,true);
 if keyboard_check(moveleft) or keyboard_check(moveright)
 {
     if onground
@@ -153,6 +156,37 @@ if keyboard_check_pressed(moveright)
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if not hookshot
+{
+    with instance_create(x,y,obj_hook)
+    {
+        motion_set(point_direction(x,y,mouse_x,mouse_y),32)
+        image_angle = direction;
+    }
+    hookshot = true;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="0">
       <action>
         <libid>1</libid>
@@ -172,6 +206,40 @@ if keyboard_check_pressed(moveright)
             <kind>1</kind>
             <string>phy_position_x = xstart;
 phy_position_y = ystart;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+if mouse_check_button(mb_left)
+{
+    var basex,basey;
+    basex = lengthdir_x(48,point_direction(x,y,mouse_x,mouse_y));
+    basey = lengthdir_y(48,point_direction(x,y,mouse_x,mouse_y));
+    basex2 = lengthdir_x(96,point_direction(x,y,mouse_x,mouse_y));
+    basey2 = lengthdir_y(96,point_direction(x,y,mouse_x,mouse_y));
+    draw_set_color(c_gray);
+    draw_line_width(x + basex,y + basey,x + basex2,y + basey2,1);
+}
+
 </string>
           </argument>
         </arguments>
@@ -208,7 +276,7 @@ phy_position_y = ystart;
   <PhysicsShapePoints>
     <point>8,0</point>
     <point>52,0</point>
-    <point>52,88</point>
-    <point>8,88</point>
+    <point>52,90</point>
+    <point>8,90</point>
   </PhysicsShapePoints>
 </object>
