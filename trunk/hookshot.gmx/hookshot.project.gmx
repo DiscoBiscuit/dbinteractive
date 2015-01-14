@@ -6,12 +6,14 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_collision_block</sprite>
-    <sprite>sprites\spr_collision_slope</sprite>
     <sprites name="player">
       <sprite>sprites\spr_player_stand</sprite>
       <sprite>sprites\spr_player_walk</sprite>
       <sprite>sprites\spr_player_jump</sprite>
+      <sprite>sprites\spr_rope</sprite>
+    </sprites>
+    <sprites name="system">
+      <sprite>sprites\spr_collision_block</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -20,8 +22,13 @@
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
-    <object>objects\obj_collision_block</object>
-    <object>objects\obj_player</object>
+    <objects name="sytem">
+      <object>objects\obj_collision_block</object>
+    </objects>
+    <objects name="player">
+      <object>objects\obj_player</object>
+      <object>objects\obj_rope</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_debug</room>
