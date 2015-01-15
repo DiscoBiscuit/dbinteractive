@@ -87,10 +87,12 @@ if not hooked
 attach = physics_joint_weld_create(self,other,x,y,phy_rotation,10,1,false);
 hooked = true;
 obj_player.hooked = true;
+obj_player.roperetractnum = 0;
 //create rope
 var number = point_distance(x,y,obj_player.x,obj_player.y)/70;
 var count = 0;
 next_rope = instance_create(x,y,obj_rope);
+ds_list_add(ropearray,next_rope.id);
 attachrope = physics_joint_distance_create(self,next_rope,self.x,self.y,next_rope.x,next_rope.y,false);
 with next_rope
 {
@@ -104,6 +106,7 @@ repeat number
     len = point_distance(x,y,obj_player.x,obj_player.y);
     dir = point_direction(x,y,obj_player.x,obj_player.y);
     next_rope = instance_create(x+lengthdir_x((len/number)*count,dir),y+lengthdir_y((len/number)*count,dir),obj_rope);
+    ds_list_add(ropearray,next_rope.id);
     var dir2 = point_direction(last_rope.x,last_rope.y,next_rope.x,next_rope.y);
     next_rope.phy_rotation = -dir2+90;
     next_rope.parent = last_rope
