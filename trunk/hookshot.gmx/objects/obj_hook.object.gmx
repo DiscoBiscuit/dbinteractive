@@ -61,6 +61,7 @@ if not hooked
         instance_destroy();
     }
 }
+
 </string>
           </argument>
         </arguments>
@@ -84,6 +85,7 @@ if not hooked
           <argument>
             <kind>1</kind>
             <string>///create rope physics
+var dist = point_distance(self.x,self.y,other.x,other.y);
 attach = physics_joint_weld_create(self,other,x,y,phy_rotation,10,1,false);
 hooked = true;
 obj_player.hooked = true;
@@ -107,9 +109,12 @@ repeat number
     dir = point_direction(x,y,obj_player.x,obj_player.y);
     next_rope = instance_create(x+lengthdir_x((len/number)*count,dir),y+lengthdir_y((len/number)*count,dir),obj_rope);
     ds_list_add(ropearray,next_rope.id);
-    var dir2 = point_direction(last_rope.x,last_rope.y,next_rope.x,next_rope.y);
-    next_rope.phy_rotation = -dir2+90;
-    next_rope.parent = last_rope
+    with next_rope
+    {
+        parent = obj_hook.last_rope
+        var dir2 = point_direction(x,y,parent.x,parent.y);
+        phy_rotation = -dir2+90;
+    }
     link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
 }
 attachtoplayer = physics_joint_distance_create(obj_player,next_rope,obj_player.x,obj_player.y-32,next_rope.x,next_rope.y,false);

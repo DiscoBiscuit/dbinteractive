@@ -33,64 +33,6 @@ xspeedmax = 6;
 jumppower = 6;
 onground = false;
 hooked = false;
-alarm[0] = 30;
-roperetractnum = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//retract hookshot
-if keyboard_check(ord('W')) and hooked and instance_number(obj_rope) &gt;= 3
-{
-
-    with ds_list_find_value(ropearray,roperetractnum)
-    {
-        instance_destroy();
-    }
-    with ds_list_find_value(ropearray,roperetractnum+1)
-    {
-        phy_position_x = obj_hook.x;
-        phy_position_y = obj_hook.y;
-        attach = physics_joint_distance_create(self,obj_hook,obj_hook.x,obj_hook.y,obj_hook.x,obj_hook.y,false)
-    }
-    roperetractnum += 1;
-}
-//extend hookshot
-if keyboard_check(ord('S')) and hooked and instance_number(obj_rope) &lt;= 10
-{
-    with obj_hook
-    {
-        physics_joint_delete(attachtoplayer);
-        last_rope = next_rope
-        next_rope = instance_create(obj_player.x,obj_player.y,obj_rope);
-        ds_list_add(ropearray,next_rope.id);
-        var dir2 = point_direction(last_rope.x,last_rope.y,next_rope.x,next_rope.y);
-        next_rope.phy_rotation = -dir2+90;
-        next_rope.parent = last_rope
-        link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
-        attachtoplayer = physics_joint_distance_create(obj_player,next_rope,obj_player.x,obj_player.y-32,next_rope.x,next_rope.y,false);
-    }
-}
-alarm[0] = 30;
-
 </string>
           </argument>
         </arguments>
@@ -115,7 +57,7 @@ alarm[0] = 30;
             <kind>1</kind>
             <string>///player movement
 //check if on ground
-onground = place_meeting(x,y,obj_collision_mask);
+onground = collision_rectangle(x-31,bbox_bottom,x+31,bbox_bottom,obj_collision_mask,false,true);
 //move left or right
 var movingleft,movingright;
 movingleft = keyboard_check(moveleft);
@@ -152,9 +94,8 @@ phy_speed_x = clamp(phy_speed_x,-xspeedmax,xspeedmax);
 //jump
 if keyboard_check_pressed(jump) and onground
 {
-    physics_apply_impulse(x,y,0,-jumppower);
+    physics_apply_impulse(x,y,lengthdir_x(-jumppower,-phy_rotation-90),lengthdir_y(-jumppower,-phy_rotation-90));
 }
-
 </string>
           </argument>
         </arguments>
@@ -346,9 +287,9 @@ phy_position_y = ystart;
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>0,0</point>
-    <point>66,0</point>
-    <point>66,88</point>
-    <point>0,88</point>
+    <point>2,0</point>
+    <point>64,0</point>
+    <point>64,88</point>
+    <point>2,88</point>
   </PhysicsShapePoints>
 </object>
