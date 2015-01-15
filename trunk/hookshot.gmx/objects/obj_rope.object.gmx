@@ -75,7 +75,7 @@
     draw_set_color(c_dkgray);
     draw_line_width(x,y,parent.x,parent.y,4);
 }
-//physics_draw_debug();
+physics_draw_debug();
 </string>
           </argument>
         </arguments>

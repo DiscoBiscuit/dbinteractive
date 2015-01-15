@@ -157,7 +157,7 @@ attachtoplayer = physics_joint_distance_create(obj_player,next_rope,obj_player.x
     draw_line_width(x,y,obj_player.x,obj_player.y,4);
 }
 draw_self();
-if hooked
+if hooked and instance_exists(next_rope)
 {
     draw_line_width(next_rope.x,next_rope.y,obj_player.x,obj_player.y,4);
 }

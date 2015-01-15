@@ -73,7 +73,24 @@ if keyboard_check(ord('W')) and hooked and instance_number(obj_rope) &gt;= 3
     }
     roperetractnum += 1;
 }
+//extend hookshot
+if keyboard_check(ord('S')) and hooked and instance_number(obj_rope) &lt;= 10
+{
+    with obj_hook
+    {
+        physics_joint_delete(attachtoplayer);
+        last_rope = next_rope
+        next_rope = instance_create(obj_player.x,obj_player.y,obj_rope);
+        ds_list_add(ropearray,next_rope.id);
+        var dir2 = point_direction(last_rope.x,last_rope.y,next_rope.x,next_rope.y);
+        next_rope.phy_rotation = -dir2+90;
+        next_rope.parent = last_rope
+        link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
+        attachtoplayer = physics_joint_distance_create(obj_player,next_rope,obj_player.x,obj_player.y-32,next_rope.x,next_rope.y,false);
+    }
+}
 alarm[0] = 30;
+
 </string>
           </argument>
         </arguments>
