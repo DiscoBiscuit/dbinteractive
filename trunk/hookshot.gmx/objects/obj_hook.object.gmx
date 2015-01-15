@@ -50,33 +50,20 @@ phy_fixed_rotation = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>phy_rotation = -point_direction(phy_position_x,phy_position_y,phy_position_x+phy_speed_x,phy_position_y+phy_speed_y);
+            <string>if hookhost == noone
+{
+    phy_rotation = -point_direction(phy_position_x,phy_position_y,phy_position_x+phy_speed_x,phy_position_y+phy_speed_y);
+}
+if (point_distance(phy_position_x,phy_position_y,obj_player.phy_position_x,obj_player.phy_position_y) &gt; 720)
+{
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="4" ename="obj_collision_block">
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>do this</string>
-          </argument>
-        </arguments>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -101,7 +88,8 @@ with obj_player
     next_rope = instance_create(x,y+offset_y,obj_rope);
 
     attach = physics_joint_distance_create(rope_host,next_rope,rope_host.x,rope_host.y,next_rope.x,next_rope.y,false);
-    physics_joint_set_value(attach,phy_joint_damping_ratio,5);
+    //attach = physics_joint_rope_create(rope_host,next_rope,rope_host.x,rope_host.y,next_rope.x,next_rope.y,8,false);
+    physics_joint_set_value(attach,phy_joint_damping_ratio,1);
     physics_joint_set_value(attach,phy_joint_frequency,10);
     with (next_rope)
     {
@@ -109,13 +97,14 @@ with obj_player
     }
     
     
-    repeat point_distance(x,y,obj_hook.x,obj_hook.y)/30
+    repeat point_distance(x,y,obj_hook.x,obj_hook.y)/40
     {
         offset_y += 1;
         last_rope = next_rope;
-        next_rope = instance_create(x,y+offset_y,obj_rope);
+        next_rope = instance_create(x + lengthdir_x(point_distance(x,y,obj_hook.x,obj_hook.y)/20,point_direction(x,y,obj_hook.x,obj_hook.y)),y + lengthdir_y((point_distance(x,y,obj_hook.x,obj_hook.y)/20)*offset_y,point_direction(x,y,obj_hook.x,obj_hook.y)),obj_rope);
         
-        link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
+        //link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
+        link = physics_joint_rope_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,8,false);
         physics_joint_set_value(link,phy_joint_damping_ratio,1);
         physics_joint_set_value(link,phy_joint_frequency,10);
         with next_rope
@@ -123,9 +112,37 @@ with obj_player
             parent = other.last_rope;
         }
     }
-    last_rope.phy_position_x = obj_hook.x;
-    last_rope.phy_position_y = obj_hook.y;
-    attach2 = physics_joint_weld_create(obj_hook,last_rope,obj_hook.x,obj_hook.y,obj_hook.phy_rotation,0,0,false);
+    next_rope.phy_position_x = obj_hook.x;
+    next_rope.phy_position_y = obj_hook.y;
+    attach2 = physics_joint_weld_create(obj_hook,next_rope,obj_hook.x,obj_hook.y,obj_hook.phy_rotation,10,1,false);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+if hookhost == noone
+{
+    draw_set_color(make_color_rgb(125,85,0));
+    draw_line_width(x,y,obj_player.x,obj_player.y,3);
 }
 </string>
           </argument>
@@ -135,7 +152,7 @@ with obj_player
   </events>
   <PhysicsObject>-1</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
-  <PhysicsObjectShape>0</PhysicsObjectShape>
+  <PhysicsObjectShape>1</PhysicsObjectShape>
   <PhysicsObjectDensity>0.00100000004749745</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
@@ -145,7 +162,9 @@ with obj_player
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>8,16</point>
-    <point>12,16</point>
+    <point>0,4</point>
+    <point>8,4</point>
+    <point>8,28</point>
+    <point>0,28</point>
   </PhysicsShapePoints>
 </object>
