@@ -104,7 +104,7 @@ with obj_player
         next_rope = instance_create(x + lengthdir_x(point_distance(x,y,obj_hook.x,obj_hook.y)/20,point_direction(x,y,obj_hook.x,obj_hook.y)),y + lengthdir_y((point_distance(x,y,obj_hook.x,obj_hook.y)/20)*offset_y,point_direction(x,y,obj_hook.x,obj_hook.y)),obj_rope);
         
         //link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
-        link = physics_joint_rope_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,8,false);
+        link = physics_joint_rope_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,32,false);
         physics_joint_set_value(link,phy_joint_damping_ratio,1);
         physics_joint_set_value(link,phy_joint_frequency,10);
         with next_rope
@@ -114,7 +114,7 @@ with obj_player
     }
     next_rope.phy_position_x = obj_hook.x;
     next_rope.phy_position_y = obj_hook.y;
-    attach2 = physics_joint_weld_create(obj_hook,next_rope,obj_hook.x,obj_hook.y,obj_hook.phy_rotation,10,1,false);
+    attach2 = physics_joint_weld_create(obj_hook,next_rope,obj_hook.x,obj_hook.y,obj_hook.phy_rotation,0,0,false);
 }
 </string>
           </argument>
@@ -139,7 +139,7 @@ with obj_player
           <argument>
             <kind>1</kind>
             <string>draw_self();
-if hookhost == noone
+if hookhost == noone and instance_exists(obj_hook)
 {
     draw_set_color(make_color_rgb(125,85,0));
     draw_line_width(x,y,obj_player.x,obj_player.y,3);
