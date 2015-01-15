@@ -25,10 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>xspeedmax = 6;
+            <string>scr_setcontrols();
 phy_fixed_rotation = true;
+xspeedmax = 6;
+jumppower = 6;
 onground = false;
-hookshot = false;
+hooked = false;
 </string>
           </argument>
         </arguments>
@@ -51,46 +53,68 @@ hookshot = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var moveleft,moveright,jump;
-moveleft = ord('A');
-moveright = ord('D');
-jump = vk_space;
-onground = collision_rectangle(x-25,bbox_bottom,x+19,bbox_bottom,obj_collision_block,false,true);
-if keyboard_check(moveleft) or keyboard_check(moveright)
+            <string>///player movement
+//check if on ground
+onground = place_meeting(x,y,obj_collision_mask);
+//move left or right
+var movingleft,movingright;
+movingleft = keyboard_check(moveleft);
+movingright = keyboard_check(moveright);
+if movingleft or movingright
 {
     if onground
     {
-        physics_apply_force(x,y,700 * (keyboard_check(moveright) - keyboard_check(moveleft)),0);
+        physics_apply_force(x,y,(movingright-movingleft) * 10,0);
+        phy_fixed_rotation = true;
     }
     else
     {
-        if not place_meeting(x,y,obj_collision_block)
+        if hooked
         {
-            physics_apply_force(x,y,250 * (keyboard_check(moveright) - keyboard_check(moveleft)),0);
+            xspeedmax = 8;
+            phy_fixed_rotation = false;
+            var dir,dist,fx,fy;
+            dir = point_direction(x,y,obj_hook.x,obj_hook.y);
+            dist = (keyboard_check(moveright) - keyboard_check(moveleft)) * (3+(phy_speed));
+            fx = lengthdir_x(dist,dir-90+60*sign(dist));
+            fy = lengthdir_y(dist,dir-90+60*sign(dist));
+            physics_apply_force(x,y,fx,fy);
+        }
+        else
+        {
+            physics_apply_force(x,y,(movingright-movingleft) * 5,0);
+            xspeedmax = 6;
+            phy_fixed_rotation = true;
         }
     }
 }
 phy_speed_x = clamp(phy_speed_x,-xspeedmax,xspeedmax);
-if onground
-{
-    if (phy_speed_x == 0)
-    {
-        sprite_index = spr_player_stand;
-    }
-    else
-    {
-        sprite_index = spr_player_walk;
-        image_speed = phy_speed_x / 10;
-    }
-}
-else
-{
-    sprite_index = spr_player_jump;
-}
+//jump
 if keyboard_check_pressed(jump) and onground
 {
-    physics_apply_impulse(x,y,0,-250);
+    physics_apply_impulse(x,y,0,-jumppower);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///animation
 if keyboard_check_pressed(moveleft)
 {
     image_xscale = -1;
@@ -99,19 +123,23 @@ if keyboard_check_pressed(moveright)
 {
     image_xscale = 1;
 }
-if hookshot and instance_exists(obj_hook) and not onground
+if not onground
 {
-    if (obj_hook.hookhost != noone)
+    sprite_index = spr_player_jump;
+}
+else
+{
+    if phy_speed_x != 0
     {
-        phy_fixed_rotation = false;
+        sprite_index = spr_player_walk;
+        image_speed = phy_speed_x / 12;
+    }
+    else
+    {
+        sprite_index = spr_player_stand;
     }
 }
-if onground or not hookshot
-{
-    phy_fixed_rotation = true;
-}
-
-if phy_fixed_rotation == true and phy_rotation != 0
+if phy_fixed_rotation = true and phy_rotation != 0
 {
     phy_rotation = scr_rotate(phy_rotation,0,8);
 }
@@ -120,7 +148,7 @@ if phy_fixed_rotation == true and phy_rotation != 0
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_collision_block">
+    <event eventtype="4" ename="obj_collision_mask">
       <action>
         <libid>1</libid>
         <id>605</id>
@@ -159,16 +187,18 @@ if phy_fixed_rotation == true and phy_rotation != 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with obj_rope
+            <string>if instance_exists(obj_hook)
 {
-    instance_destroy();
+    with obj_rope
+    {
+        instance_destroy();
+    }
+    with obj_hook
+    {
+        instance_destroy();
+    }
+    hooked = false;
 }
-with obj_hook
-{
-    instance_destroy();
-}
-hookshot = false;
-offset_y = 0;
 </string>
           </argument>
         </arguments>
@@ -191,15 +221,10 @@ offset_y = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if not hookshot
+            <string>if not instance_exists(obj_hook)
 {
-    with instance_create(x,y,obj_hook)
-    {
-        var mousedir = point_direction(x,y,mouse_x,mouse_y);
-        phy_speed_x = lengthdir_x(2000,mousedir);
-        phy_speed_y = lengthdir_y(2000,mousedir);
-    }
-    hookshot = true;
+    var dir = point_direction(x,y,mouse_x,mouse_y);
+    instance_create(x+lengthdir_x(48,dir),y+lengthdir_y(48,dir),obj_hook);
 }
 </string>
           </argument>
@@ -230,45 +255,6 @@ phy_position_y = ystart;
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_self();
-var basex,basey;
-basex = lengthdir_x(48,point_direction(x,y,mouse_x,mouse_y));
-basey = lengthdir_y(48,point_direction(x,y,mouse_x,mouse_y));
-basex2 = lengthdir_x(96,point_direction(x,y,mouse_x,mouse_y));
-basey2 = lengthdir_y(96,point_direction(x,y,mouse_x,mouse_y));
-draw_set_color(c_gray);
-draw_line_width(x + basex,y + basey,x + basex2,y + basey2,1);
-if hookshot and instance_exists(obj_hook)
-{
-    if (obj_hook.hookhost != noone)
-    {
-        draw_set_color(make_color_rgb(125,85,0));
-        draw_line_width(x,y,obj_hook.x,obj_hook.y,3);
-    }
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="9" enumb="27">
       <action>
         <libid>1</libid>
@@ -289,18 +275,18 @@ if hookshot and instance_exists(obj_hook)
   <PhysicsObject>-1</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>1</PhysicsObjectShape>
-  <PhysicsObjectDensity>0.100000001490116</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>0</PhysicsObjectRestitution>
+  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
+  <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>1</PhysicsObjectLinearDamping>
-  <PhysicsObjectAngularDamping>1</PhysicsObjectAngularDamping>
-  <PhysicsObjectFriction>0.25</PhysicsObjectFriction>
+  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
+  <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
+  <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>8,0</point>
-    <point>52,0</point>
-    <point>52,90</point>
-    <point>8,90</point>
+    <point>0,0</point>
+    <point>66,0</point>
+    <point>66,88</point>
+    <point>0,88</point>
   </PhysicsShapePoints>
 </object>
