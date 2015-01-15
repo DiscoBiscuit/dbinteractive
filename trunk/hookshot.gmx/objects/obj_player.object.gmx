@@ -29,36 +29,6 @@
 phy_fixed_rotation = true;
 onground = false;
 hookshot = false;
-
-offset_y = 0;
-rope_host = self;
-/*
-next_rope = instance_create(x,y+offset_y,obj_rope);
-
-attach = physics_joint_distance_create(rope_host,next_rope,rope_host.x,rope_host.y,next_rope.x,next_rope.y,false);
-physics_joint_set_value(attach,phy_joint_damping_ratio,1);
-physics_joint_set_value(attach,phy_joint_frequency,10);
-with (next_rope)
-{
-    parent = other.id;
-}
-
-
-repeat 10
-{
-    offset_y += 1;
-    last_rope = next_rope;
-    next_rope = instance_create(x,y+offset_y,obj_rope);
-    
-    link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
-    physics_joint_set_value(link,phy_joint_damping_ratio,1);
-    physics_joint_set_value(link,phy_joint_frequency,10);
-    with next_rope
-    {
-        parent = other.last_rope;
-    }
-}
-*/
 </string>
           </argument>
         </arguments>
@@ -290,7 +260,7 @@ if hookshot and instance_exists(obj_hook)
     if (obj_hook.hookhost != noone)
     {
         draw_set_color(make_color_rgb(125,85,0));
-        draw_line_width(next_rope.x,next_rope.y,obj_hook.x,obj_hook.y,3);
+        draw_line_width(x,y,obj_hook.x,obj_hook.y,3);
     }
 }
 
