@@ -293,6 +293,7 @@ if hookshot and instance_exists(obj_hook)
         draw_line_width(next_rope.x,next_rope.y,obj_hook.x,obj_hook.y,3);
     }
 }
+
 </string>
           </argument>
         </arguments>

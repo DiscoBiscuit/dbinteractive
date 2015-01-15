@@ -85,9 +85,9 @@ physics_joint_weld_create(self,hookhost,x,y,0,10,1,false);
 
 with obj_player
 {
-    next_rope = instance_create(x,y+offset_y,obj_rope);
+    next_rope = instance_create(x,y-48,obj_rope);
 
-    attach = physics_joint_distance_create(rope_host,next_rope,rope_host.x,rope_host.y-64,next_rope.x,next_rope.y,false);
+    attach = physics_joint_distance_create(rope_host,next_rope,rope_host.x,rope_host.y-48,next_rope.x,next_rope.y,false);
     //attach = physics_joint_rope_create(rope_host,next_rope,rope_host.x,rope_host.y,next_rope.x,next_rope.y,8,false);
     physics_joint_set_value(attach,phy_joint_damping_ratio,1);
     physics_joint_set_value(attach,phy_joint_frequency,10);
@@ -96,15 +96,18 @@ with obj_player
         parent = other.id;
     }
     
-    
-    repeat point_distance(x,y,obj_hook.x,obj_hook.y)/40
+    var number = point_distance(x,y,obj_hook.x,obj_hook.y)/30
+    repeat number
     {
         offset_y += 1;
         last_rope = next_rope;
-        next_rope = instance_create(x + lengthdir_x(point_distance(x,y,obj_hook.x,obj_hook.y)/20,point_direction(x,y,obj_hook.x,obj_hook.y)),y + lengthdir_y((point_distance(x,y,obj_hook.x,obj_hook.y)/20)*offset_y,point_direction(x,y,obj_hook.x,obj_hook.y)),obj_rope);
+        var len,dir;
+        len = point_distance(x,y,obj_hook.x,obj_hook.y);
+        dir = point_direction(x,y,obj_hook.x,obj_hook.y);
+        next_rope = instance_create(x + lengthdir_x((len/number)*offset_y,dir),y + lengthdir_y((len/number)*offset_y,dir),obj_rope);
         
         //link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
-        link = physics_joint_rope_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,32,false);
+        link = physics_joint_rope_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,24,false);
         physics_joint_set_value(link,phy_joint_damping_ratio,1);
         physics_joint_set_value(link,phy_joint_frequency,10);
         with next_rope
@@ -114,7 +117,7 @@ with obj_player
     }
     next_rope.phy_position_x = obj_hook.x;
     next_rope.phy_position_y = obj_hook.y;
-    attach2 = physics_joint_weld_create(obj_hook,next_rope,obj_hook.x,obj_hook.y,obj_hook.phy_rotation,0,0,false);
+    attach2 = physics_joint_weld_create(obj_hook,next_rope,obj_hook.x,obj_hook.y,obj_hook.phy_rotation,0,1,false);
 }
 </string>
           </argument>
