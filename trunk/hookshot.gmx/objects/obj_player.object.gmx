@@ -129,6 +129,22 @@ if keyboard_check_pressed(moveright)
 {
     image_xscale = 1;
 }
+if hookshot and instance_exists(obj_hook) and not onground
+{
+    if (obj_hook.hookhost != noone)
+    {
+        phy_fixed_rotation = false;
+    }
+}
+if onground or not hookshot
+{
+    phy_fixed_rotation = true;
+}
+
+if phy_fixed_rotation == true and phy_rotation != 0
+{
+    phy_rotation = scr_rotate(phy_rotation,0,8);
+}
 </string>
           </argument>
         </arguments>
@@ -306,7 +322,7 @@ if hookshot and instance_exists(obj_hook)
   <PhysicsObjectRestitution>0</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
   <PhysicsObjectLinearDamping>1</PhysicsObjectLinearDamping>
-  <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
+  <PhysicsObjectAngularDamping>1</PhysicsObjectAngularDamping>
   <PhysicsObjectFriction>0.25</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>

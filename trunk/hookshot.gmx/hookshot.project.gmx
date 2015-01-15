@@ -22,6 +22,9 @@
     <background>background\bg_tileset</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_rotate.gml</script>
+  </scripts>
   <objects name="objects">
     <objects name="system">
       <object>objects\obj_collision_block</object>

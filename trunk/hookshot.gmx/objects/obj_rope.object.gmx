@@ -75,7 +75,6 @@
     draw_set_color(make_color_rgb(125,85,0));
     draw_line_width(x,y,parent.x,parent.y,3);
 }
-physics_draw_debug();
 </string>
           </argument>
         </arguments>

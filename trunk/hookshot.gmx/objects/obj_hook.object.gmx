@@ -87,7 +87,7 @@ with obj_player
 {
     next_rope = instance_create(x,y+offset_y,obj_rope);
 
-    attach = physics_joint_distance_create(rope_host,next_rope,rope_host.x,rope_host.y,next_rope.x,next_rope.y,false);
+    attach = physics_joint_distance_create(rope_host,next_rope,rope_host.x,rope_host.y-64,next_rope.x,next_rope.y,false);
     //attach = physics_joint_rope_create(rope_host,next_rope,rope_host.x,rope_host.y,next_rope.x,next_rope.y,8,false);
     physics_joint_set_value(attach,phy_joint_damping_ratio,1);
     physics_joint_set_value(attach,phy_joint_frequency,10);
