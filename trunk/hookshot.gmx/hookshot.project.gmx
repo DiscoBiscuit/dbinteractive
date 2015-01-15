@@ -23,7 +23,7 @@
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
-    <objects name="sytem">
+    <objects name="system">
       <object>objects\obj_collision_block</object>
     </objects>
     <objects name="player">
