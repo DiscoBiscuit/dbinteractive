@@ -23,21 +23,37 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_setcontrols.gml</script>
-    <script>scripts\scr_rotate.gml</script>
-    <script>scripts\draw_bezier.gml</script>
+    <scripts name="util">
+      <script>scripts\scr_rotate.gml</script>
+      <script>scripts\draw_bezier.gml</script>
+      <script>scripts\scr_setcontrols.gml</script>
+    </scripts>
+    <scripts name="net">
+      <script>scripts\client_receivedpacket.gml</script>
+      <script>scripts\server_receivedpacket.gml</script>
+      <script>scripts\send_to_all.gml</script>
+    </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_button</font>
+  </fonts>
   <objects name="objects">
+    <object>objects\obj_menu</object>
     <objects name="player">
       <object>objects\obj_player</object>
+      <object>objects\obj_hook</object>
+      <object>objects\obj_rope</object>
     </objects>
     <objects name="system">
       <object>objects\obj_collision_mask</object>
     </objects>
-    <object>objects\obj_hook</object>
-    <object>objects\obj_rope</object>
+    <objects name="net">
+      <object>objects\obj_server</object>
+      <object>objects\obj_client</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_debug</room>
   </rooms>
   <help>
