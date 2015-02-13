@@ -50,6 +50,7 @@
     <objects name="net">
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
+      <object>objects\obj_player_dummy</object>
     </objects>
   </objects>
   <rooms name="rooms">

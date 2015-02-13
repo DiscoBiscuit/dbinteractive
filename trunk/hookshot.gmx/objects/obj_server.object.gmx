@@ -36,6 +36,32 @@ alignment = 1;
 Buffer = buffer_create(size,buffertype,alignment);
 socketlist = ds_list_create();
 Server = network_create_server(type,port,maxclients);
+updaterate = room_speed/10;
+alarm[0] = updaterate;
+globalvar sendsocket;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[0] = updaterate;
 </string>
           </argument>
         </arguments>
@@ -70,12 +96,24 @@ switch(type_event)
         network_send_packet(socket,Buffer,buffer_tell(Buffer));
         //add the socket to the list of connected sockets
         ds_list_add(socketlist,socket);
+        //create dummy player
+        nn = instance_create(130,770,obj_player_dummy)
+        nn.mysocket = socket
         break;
     case network_type_disconnect: 
         var socket = ds_map_find_value(async_load,"socket");
         var findsocket = ds_list_find_index(socketlist,socket);
         //remove the disconnected socket from the list
         ds_list_delete(socketlist,findsocket);
+        //remove dummy player
+        sendsocket = socket;
+        with (obj_player_dummy)
+        {
+            if mysocket == sendsocket
+            {
+                instance_destroy();
+            }
+        }
         break; 
     case network_type_data: 
         var buffer = ds_map_find_value(async_load,"buffer"); 

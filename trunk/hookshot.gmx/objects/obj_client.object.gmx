@@ -41,6 +41,42 @@ username = environment_get_variable('USERNAME');
 isConnected = network_connect(Socket,ip,port);
 alarm[0] = room_speed; //ask for ping every second
 alarm[1] = room_speed*5 //timeout alarm
+updaterate = room_speed/10;
+alarm[2] = updaterate;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Send data
+var data = ds_map_create();
+ds_map_add(data,"socket",Socket);
+ds_map_add(data,"x",obj_player.x);
+ds_map_add(data,"y",obj_player.y);
+ds_map_add(data,"xspeed",obj_player.phy_speed_x);
+ds_map_add(data,"yspeed",obj_player.phy_speed_y);
+var datastring = ds_map_write(data);
+buffer_seek(buffer,buffer_seek_start,0);
+buffer_write(buffer,buffer_u8,2);
+buffer_write(buffer,buffer_string,datastring);
+alarm[2] = updaterate;
 </string>
           </argument>
         </arguments>
@@ -63,7 +99,8 @@ alarm[1] = room_speed*5 //timeout alarm
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>show_message("Connection to server timed out");
+            <string>///Timeout
+show_message("Connection to server timed out");
 game_end();
 </string>
           </argument>
@@ -87,7 +124,8 @@ game_end();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Send the time to the server to get ping back
+            <string>///Ping
+//Send the time to the server to get ping back
 buffer_seek(buffer,buffer_seek_start,0);
 buffer_write(buffer,buffer_u8,1);
 buffer_write(buffer,buffer_u32,current_time);
