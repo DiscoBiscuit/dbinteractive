@@ -19,5 +19,6 @@ for(j=0;j<height;j++)
         {
             grid[i,j]= 5-min(5,floor( sqrt(irandom(36)) ))
         }
+        active[i,j] = false
     }
 }
