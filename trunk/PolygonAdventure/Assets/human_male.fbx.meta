@@ -99,7 +99,7 @@ ModelImporter:
     armStretch: .0500000007
     legStretch: .0500000007
     feetSpacing: 0
-    rootMotionBoneName: joint1
+    rootMotionBoneName: Regroup00
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   additionalBone: 0
