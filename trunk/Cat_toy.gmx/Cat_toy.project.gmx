@@ -8,8 +8,14 @@
   <sprites name="sprites">
     <sprite>sprites\spr_laser_mask</sprite>
     <sprite>sprites\spr_home</sprite>
+    <sprite>sprites\spr_finger</sprite>
+    <sprite>sprites\spr_menu_laser</sprite>
+    <sprite>sprites\spr_menu_finger</sprite>
+    <sprite>sprites\spr_blanket</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_cloth</background>
+  </backgrounds>
   <paths name="paths"/>
   <fonts name="fonts">
     <font>fonts\fnt_menu</font>
@@ -18,10 +24,12 @@
     <object>objects\obj_control</object>
     <object>objects\obj_menu</object>
     <object>objects\obj_laser</object>
+    <object>objects\obj_finger</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
     <room>rooms\rm_game_laser</room>
+    <room>rooms\rm_game_finger</room>
   </rooms>
   <constants number="2">
     <constant name="GM_build_date">41969.0805091204</constant>

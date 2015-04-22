@@ -6,22 +6,11 @@
   <vsnap>32</vsnap>
   <hsnap>32</hsnap>
   <isometric>0</isometric>
-  <speed>600</speed>
+  <speed>60</speed>
   <persistent>0</persistent>
   <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>with instance_create(14,512,obj_menu)
-{
-    sprite_index = spr_menu_laser;
-    x += sprite_width/2;
-    y += sprite_height/2;
-}
-with instance_create(554,512,obj_menu)
-{
-    sprite_index = spr_menu_finger;
-    x += sprite_width/2;
-    y += sprite_height/2;
-}</code>
+  <code>instance_create(room_width/2,825,obj_finger);</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -61,9 +50,7 @@ with instance_create(554,512,obj_menu)
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
-  <instances>
-    <instance objName="obj_control" x="32" y="0" name="inst_A8C9AD24" locked="-1" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-  </instances>
+  <instances/>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
