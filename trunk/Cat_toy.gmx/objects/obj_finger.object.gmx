@@ -28,6 +28,9 @@
             <string>image_xscale = 3;
 image_yscale = 3;
 behavior = 0; // 0 is poke out, 1 is swipe across
+wiggle = 0;
+wiggleamount = 5;
+wigglewave = 0;
 pokedistance = 128; // distance to poke out
 alarm[0] = 60;
 </string>
@@ -57,11 +60,13 @@ alarm[0] = 60;
     if pokedistance &gt; 0
     {
         pokedistance = 0;
+        wiggle = 0;
         alarm[0] = random_range(60,300);
     }
     else
     {
         pokedistance = random_range(64,300);
+        wiggle = choose(0,0,0,1);
         alarm[0] = random_range(30,180);
     }
 }
@@ -97,6 +102,16 @@ alarm[0] = 60;
     if y &gt; (ystart + pokedistance)
     {
         y -= spd + 1;
+    }
+    if wiggle == 1
+    {
+        wigglewave += 0.25;
+        image_angle = sin(wigglewave);
+    }
+    else
+    {
+        image_angle = image_angle/1.1;
+        wigglewave = 0;
     }
 }
 </string>
