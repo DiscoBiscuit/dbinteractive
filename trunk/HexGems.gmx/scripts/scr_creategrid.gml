@@ -1,6 +1,7 @@
-var hmod,dx,dy,chance;
-
-randomize()
+with(obj_hex)
+{
+    instance_destroy()
+}
 
 for(j=0;j<height;j++)
 {
@@ -11,14 +12,10 @@ for(j=0;j<height;j++)
         dy = yoff + j*hexh
         
         chance = max(0,640-point_distance(room_width/2,room_height/2,dx,dy))
-        if(sqrt(irandom(640))>(chance/16)*min(1,irandom(10)))
+        if(sqrt(irandom(640)) < (chance/16)*min(1,irandom(10)))
         {
-            grid[i,j]=-1
+            new = instance_create(dx,dy,obj_hex)
+            new.gem = 5-min(5,floor( sqrt(irandom(36)) ))
         }
-        else
-        {
-            grid[i,j]= 5-min(5,floor( sqrt(irandom(36)) ))
-        }
-        active[i,j] = false
     }
 }
