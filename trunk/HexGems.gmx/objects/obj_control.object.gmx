@@ -47,9 +47,9 @@ scr_creategrid()
 linegem = 0
 breakline = ds_list_create()
 
-sound_volume(snd_line,0.5)
-sound_volume(snd_upgrade,0.5)
-sound_volume(snd_new,0.5)
+sound_volume(snd_line,0.3)
+sound_volume(snd_upgrade,0.3)
+sound_volume(snd_new,0.3)
 </string>
           </argument>
         </arguments>
@@ -82,7 +82,7 @@ if(size&gt;2)
         hex = ds_list_find_value(breakline,i)
         hex.gem = 0
     }
-    sound_play(snd_line)
+    sound_play(snd_upgrade)
     score += power(size,linegem)*size
 }
 ds_list_clear(breakline)
