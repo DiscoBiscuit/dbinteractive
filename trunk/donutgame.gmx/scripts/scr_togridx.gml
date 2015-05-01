@@ -1,1 +1,0 @@
-return round((argument0+67.5)/135)-1;
