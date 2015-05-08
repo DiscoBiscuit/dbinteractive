@@ -33,9 +33,9 @@ with instance_create(x,y,obj_camera)
 //Starting vars
 xspeed = 0;
 yspeed = 0;
-accel = 0.5;
-xspeedmax = 8;
-yspeedmax = 8;
+accel = 0.75;
+xspeedmax = 10;
+yspeedmax = 10;
 angle = 0;
 rotatespeed = 16;
 </string>
@@ -83,9 +83,17 @@ if place_free(x+xspeed,y)
 {
     x += xspeed;
 }
+else
+{
+    xspeed = 0;
+}
 if place_free(x,y+yspeed)
 {
     y += yspeed;
+}
+else
+{
+    yawaspeed = 0;
 }
 xspeed = (xspeed*9)/10;
 yspeed = (yspeed*9)/10;
