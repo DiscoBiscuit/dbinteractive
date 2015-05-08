@@ -123,7 +123,11 @@ angle += median(-16, dif, 16);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,angle,image_blend,image_alpha);
+            <string>//draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,angle,image_blend,image_alpha);
+
+draw_sprite_ext(spr_player_arms,image_index,x,y,2,2,angle-30,image_blend,image_alpha);
+draw_sprite_ext(spr_player_body,image_index,x,y,2,2,angle-30,image_blend,image_alpha);
+draw_sprite_ext(spr_player_head,image_index,x,y,2,2,angle,image_blend,image_alpha);
 </string>
           </argument>
         </arguments>
