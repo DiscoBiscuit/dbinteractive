@@ -39,7 +39,6 @@ yspeedmax = 10;
 angle = 0;
 angle2 = 0;
 rotatespeed = 16;
-sinv = 0;
 </string>
           </argument>
         </arguments>
@@ -128,12 +127,8 @@ angle2 = clamp(angle2,angle-45,angle+45);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var spd = (sqrt(sqr(xspeed) + sqr(yspeed)));
-sinv += spd;
-var sinex = lengthdir_x(sin(sinv/25)*2,angle);
-var siney = lengthdir_y(sin(sinv/25)*2,angle);
-draw_sprite_ext(spr_player_arms,image_index,x+sinex,y+lengthdir_y(siney,angle),3,3,angle-30,image_blend,image_alpha);
-draw_sprite_ext(spr_rifle,image_index,(x+lengthdir_x(30,angle-90))+sinex,(y+lengthdir_y(30,angle-90))+siney,3,3,angle,image_blend,image_alpha);
+            <string>draw_sprite_ext(spr_player_arms,image_index,x,y,3,3,angle-30,image_blend,image_alpha);
+draw_sprite_ext(spr_rifle,image_index,x+lengthdir_x(30,angle-90),y+lengthdir_y(30,angle-90),3,3,angle,image_blend,image_alpha);
 draw_sprite_ext(spr_player_body,image_index,x,y,3,3,angle-30,image_blend,image_alpha);
 draw_sprite_ext(spr_player_head,image_index,x,y,3,3,angle2,image_blend,image_alpha);
 </string>
