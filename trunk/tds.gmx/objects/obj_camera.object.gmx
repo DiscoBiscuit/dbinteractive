@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>//Move towards target
-x = (x*9+target.x)/10
-y = (y*9+target.y)/10
+x = (x*9+((target.x*0.75)+mouse_x*0.25))/10
+y = (y*9+((target.y*0.75)+mouse_y*0.25))/10
 </string>
           </argument>
         </arguments>
