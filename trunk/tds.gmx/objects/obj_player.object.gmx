@@ -150,8 +150,10 @@ angle2 = clamp(angle2,angle-45,angle+45);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(spr_player_arms,image_index,x,y,drawscl,drawscl,angle-30,image_blend,image_alpha);
-draw_sprite_ext(spr_rifle,image_index,x+lengthdir_x(20,angle-90),y+lengthdir_y(20,angle-90),2,2,angle,image_blend,image_alpha);
+            <string>draw_sprite_ext(spr_player_body,image_index,x-16,y+16,drawscl,drawscl,angle-30,c_black,image_alpha/4);
+
+draw_sprite_ext(spr_player_arms,image_index,x,y,drawscl,drawscl,angle-30,image_blend,image_alpha);
+draw_sprite_ext(spr_rifle,image_index,x+lengthdir_x(10*drawscl,angle-90),y+lengthdir_y(10*drawscl,angle-90),drawscl,drawscl,angle,image_blend,image_alpha);
 draw_sprite_ext(spr_player_body,image_index,x,y,drawscl,drawscl,angle-30,image_blend,image_alpha);
 draw_sprite_ext(spr_player_head,image_index,x,y,drawscl,drawscl,angle2,image_blend,image_alpha);
 
