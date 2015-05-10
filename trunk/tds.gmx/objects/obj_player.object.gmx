@@ -34,11 +34,14 @@ with instance_create(x,y,obj_camera)
 xspeed = 0;
 yspeed = 0;
 accel = 0.75;
-xspeedmax = 10;
-yspeedmax = 10;
+speedmax = 8;
+xmove = false;
+ymove = false;
 angle = 0;
 angle2 = 0;
 rotatespeed = 16;
+
+drawscl = 2;
 </string>
           </argument>
         </arguments>
@@ -62,42 +65,62 @@ rotatespeed = 16;
           <argument>
             <kind>1</kind>
             <string>///Movement
+xmove = false;
+ymove = false
 if (keyboard_check(ord('W')))
 {
     yspeed -= accel;
+    ymove = true;
 }
 if (keyboard_check(ord('A')))
 {
     xspeed -= accel;
+    xmove = true;
 }
 if (keyboard_check(ord('S')))
 {
     yspeed += accel;
+    ymove = true;
 }
 if (keyboard_check(ord('D')))
 {
     xspeed += accel;
+    xmove = true;
 }
-xspeed = clamp(xspeed,-xspeedmax,xspeedmax);
-yspeed = clamp(yspeed,-yspeedmax,yspeedmax);
-if place_free(x+xspeed,y)
+xspeed = clamp(xspeed,-speedmax*1.41,speedmax*1.41);
+yspeed = clamp(yspeed,-speedmax*1.41,speedmax*1.41);
+
+var dir,dist,nx,ny;
+dir = point_direction(0,0,xspeed,yspeed)
+dist = min(speedmax,max(abs(xspeed),abs(yspeed)))
+nx = x+lengthdir_x(dist,dir)
+ny = y+lengthdir_y(dist,dir)
+
+if place_free(nx,y)
 {
-    x += xspeed;
+    x = nx;
 }
 else
 {
     xspeed = 0;
 }
-if place_free(x,y+yspeed)
+if place_free(x,ny)
 {
-    y += yspeed;
+    y = ny;
 }
 else
 {
     yspeed = 0;
 }
-xspeed = (xspeed*9)/10;
-yspeed = (yspeed*9)/10;
+
+if(xmove==false)
+{
+    xspeed = xspeed*0.9;
+}
+if(ymove==false)
+{
+    yspeed = yspeed*0.9;
+}
 
 //Rotation
 var dif = angle_difference(point_direction(x,y,mouse_x,mouse_y),angle);
@@ -127,10 +150,12 @@ angle2 = clamp(angle2,angle-45,angle+45);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(spr_player_arms,image_index,x,y,3,3,angle-30,image_blend,image_alpha);
-draw_sprite_ext(spr_rifle,image_index,x+lengthdir_x(30,angle-90),y+lengthdir_y(30,angle-90),3,3,angle,image_blend,image_alpha);
-draw_sprite_ext(spr_player_body,image_index,x,y,3,3,angle-30,image_blend,image_alpha);
-draw_sprite_ext(spr_player_head,image_index,x,y,3,3,angle2,image_blend,image_alpha);
+            <string>draw_sprite_ext(spr_player_arms,image_index,x,y,drawscl,drawscl,angle-30,image_blend,image_alpha);
+draw_sprite_ext(spr_rifle,image_index,x+lengthdir_x(20,angle-90),y+lengthdir_y(20,angle-90),2,2,angle,image_blend,image_alpha);
+draw_sprite_ext(spr_player_body,image_index,x,y,drawscl,drawscl,angle-30,image_blend,image_alpha);
+draw_sprite_ext(spr_player_head,image_index,x,y,drawscl,drawscl,angle2,image_blend,image_alpha);
+
+draw_text(view_xview,view_yview,point_distance(xprevious,yprevious,x,y))
 </string>
           </argument>
         </arguments>
