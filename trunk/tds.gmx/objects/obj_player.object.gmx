@@ -115,11 +115,11 @@ else
 
 if(xmove==false)
 {
-    xspeed = xspeed*0.9;
+    xspeed = xspeed*0.8;
 }
 if(ymove==false)
 {
-    yspeed = yspeed*0.9;
+    yspeed = yspeed*0.8;
 }
 
 //Rotation

@@ -25,7 +25,20 @@
     <background>background\bg_grid</background>
   </backgrounds>
   <paths name="paths"/>
-  <scripts name="scripts"/>
+  <scripts name="scripts">
+    <scripts name="util">
+      <script>scripts\string_explode.gml</script>
+      <script>scripts\script_by_name.gml</script>
+      <script>scripts\script_execute_string.gml</script>
+    </scripts>
+    <scripts name="console">
+      <script>scripts\console_init.gml</script>
+      <script>scripts\console_draw.gml</script>
+      <script>scripts\print.gml</script>
+    </scripts>
+    <script>scripts\test_args.gml</script>
+  </scripts>
+  <shaders name="shaders"/>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_camera</object>
