@@ -26,9 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>menu = 0; //0 is main, 1 is host, 2 is join
-scr_print("Press L to start a local game.");
-scr_print("Press H to host a game.");
-scr_print("Press J to join a game.");
 </string>
           </argument>
         </arguments>

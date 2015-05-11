@@ -25,9 +25,7 @@
     <background>background\bg_grid</background>
   </backgrounds>
   <paths name="paths"/>
-  <scripts name="scripts">
-    <script>scripts\scr_print.gml</script>
-  </scripts>
+  <scripts name="scripts"/>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_camera</object>

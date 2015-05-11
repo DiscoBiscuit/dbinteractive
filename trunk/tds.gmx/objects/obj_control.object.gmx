@@ -25,43 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.log = ds_queue_create();
-global.steam_api = false;
+            <string>global.steam_api = false;
 if steam_initialised()
 {
     if steam_stats_ready() &amp;&amp; steam_is_overlay_enabled()
     {
         global.steamapi = true;
     }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_set_color(c_white);
-var listsize = ds_queue_size(global.log);
-for (i = 0;i &lt; listsize;i += 1)
-{
-    var str = ds_queue_head(global.log);
-    draw_text(0,256-(16*(i)),str);
 }
 </string>
           </argument>
