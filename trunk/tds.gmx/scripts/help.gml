@@ -1,0 +1,12 @@
+print("Type the name of the script you want to execute");
+print("followed by up to 8 arguments seperated by spaces.");
+print("Use '' to specify a string, such as: test_args 'two words'");
+print("which will only show up as a single string argument.");
+print("You can even run scripts as if they were run inside an instance.");
+print("Use the pick command to print the ID of the instance under your mouse");
+print("or use pick <name> to print the ID of the first instance of that object.");
+print("Using the 'pick' command stores the last instance id picked.");
+print("Use i instead of an instance id to use the stored id. Examples:");
+print("with_instance 100002 'instance_move 64 64'");
+print("with_instance i 'instance_move -64 10.5'");
+print("You can run any script with any argument.");

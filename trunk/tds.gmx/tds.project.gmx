@@ -36,6 +36,7 @@
     <scripts name="console">
       <script>scripts\console_init.gml</script>
       <script>scripts\console_draw.gml</script>
+      <script>scripts\console_input.gml</script>
       <script>scripts\print.gml</script>
     </scripts>
     <scripts name="debug">
