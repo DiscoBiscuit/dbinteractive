@@ -27,6 +27,9 @@
             <kind>1</kind>
             <string>
 console_init()
+print("Press Enter to type commands");
+print("Try using 'test_args 1 2 3'");
+
 global.steam_api = false;
 if steam_initialised()
 {
