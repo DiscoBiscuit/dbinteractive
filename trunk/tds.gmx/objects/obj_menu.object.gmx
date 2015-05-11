@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,14 +25,43 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.log = ds_queue_create();
-global.steam_api = false;
-if steam_initialised()
+            <string>menu = 0; //0 is main, 1 is host, 2 is join
+scr_print("Press L to start a local game.");
+scr_print("Press H to host a game.");
+scr_print("Press J to join a game.");
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if keyboard_check_released(ord('L'))
 {
-    if steam_stats_ready() &amp;&amp; steam_is_overlay_enabled()
-    {
-        global.steamapi = true;
-    }
+    room_goto(rm_debug);
+}
+if keyboard_check_released(ord('H'))
+{
+    room_goto(rm_debug);
+}
+if keyboard_check_released(ord('J'))
+{
+    room_goto(rm_debug);
 }
 </string>
           </argument>
@@ -56,32 +85,9 @@ if steam_initialised()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_white);
-var listsize = ds_queue_size(global.log);
-for (i = 0;i &lt; listsize;i += 1)
-{
-    var str = ds_queue_head(global.log);
-    draw_text(0,256-(16*(i)),str);
-}
-</string>
+            <string></string>
           </argument>
         </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="27">
-      <action>
-        <libid>1</libid>
-        <id>332</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_end_game</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
   </events>

@@ -25,13 +25,18 @@
     <background>background\bg_grid</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_print.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_player</object>
     <object>objects\obj_world</object>
+    <object>objects\obj_menu</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_debug</room>
   </rooms>
   <help>
