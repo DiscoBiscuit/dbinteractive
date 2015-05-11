@@ -34,6 +34,16 @@ if(consoletype==true)
             keyboard_string = clipboard_get_text();
         }
     }
+    if(keyboard_check_pressed(vk_up))
+    {
+        consolelookline = min(consolelookline+1,ds_list_size(console_hist)-1);
+        keyboard_string = ds_list_find_value(console_hist,consolelookline);
+    }
+    if(keyboard_check_pressed(vk_down))
+    {
+        consolelookline = max(consolelookline-1,0);
+        keyboard_string = ds_list_find_value(console_hist,consolelookline);
+    }
 }
 draw_set_alpha(1);
 consolealpha = max(0,consolealpha-0.02);
