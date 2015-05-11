@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>//Move towards target
-x = lerp(x, lerp(target.x,mouse_x,0.25) , 0.1*timescale);
-y = lerp(y, lerp(target.y,mouse_y,0.25) , 0.1*timescale);
+x = lerp(x, lerp(target.x,mouse_x,0.25) , 0.2*timescale);
+y = lerp(y, lerp(target.y,mouse_y,0.25) , 0.2*timescale);
 </string>
           </argument>
         </arguments>

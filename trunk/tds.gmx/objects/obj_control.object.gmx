@@ -30,7 +30,7 @@ console_init()
 print("Press Enter to type commands. Type help for more info");
 
 globalvar timescale;
-timescale = 0.1;
+timescale = 1;
 global.steam_api = false;
 if steam_initialised()
 {
