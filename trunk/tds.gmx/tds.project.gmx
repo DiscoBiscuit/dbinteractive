@@ -29,14 +29,22 @@
     <scripts name="util">
       <script>scripts\string_explode.gml</script>
       <script>scripts\script_by_name.gml</script>
+      <script>scripts\object_by_name.gml</script>
       <script>scripts\script_execute_string.gml</script>
+      <script>scripts\parse.gml</script>
     </scripts>
     <scripts name="console">
       <script>scripts\console_init.gml</script>
       <script>scripts\console_draw.gml</script>
       <script>scripts\print.gml</script>
     </scripts>
-    <script>scripts\test_args.gml</script>
+    <scripts name="debug">
+      <script>scripts\test_args.gml</script>
+      <script>scripts\instance_move.gml</script>
+      <script>scripts\with_instance.gml</script>
+      <script>scripts\pick.gml</script>
+      <script>scripts\help.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders"/>
   <objects name="objects">

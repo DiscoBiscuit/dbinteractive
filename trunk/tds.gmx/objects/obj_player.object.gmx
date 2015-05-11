@@ -69,22 +69,22 @@ xmove = false;
 ymove = false
 if (keyboard_check(ord('W')))
 {
-    yspeed -= accel;
+    yspeed -= accel*timescale;
     ymove = true;
 }
 if (keyboard_check(ord('A')))
 {
-    xspeed -= accel;
+    xspeed -= accel*timescale;
     xmove = true;
 }
 if (keyboard_check(ord('S')))
 {
-    yspeed += accel;
+    yspeed += accel*timescale;
     ymove = true;
 }
 if (keyboard_check(ord('D')))
 {
-    xspeed += accel;
+    xspeed += accel*timescale;
     xmove = true;
 }
 xspeed = clamp(xspeed,-speedmax*1.41,speedmax*1.41);
@@ -93,8 +93,8 @@ yspeed = clamp(yspeed,-speedmax*1.41,speedmax*1.41);
 var dir,dist,nx,ny;
 dir = point_direction(0,0,xspeed,yspeed)
 dist = min(speedmax,max(abs(xspeed),abs(yspeed)))
-nx = x+lengthdir_x(dist,dir)
-ny = y+lengthdir_y(dist,dir)
+nx = x+lengthdir_x(dist*timescale,dir)
+ny = y+lengthdir_y(dist*timescale,dir)
 
 if place_free(nx,y)
 {
@@ -115,18 +115,18 @@ else
 
 if(xmove==false)
 {
-    xspeed = xspeed*0.8;
+    xspeed = xspeed*(1-0.2*timescale);
 }
 if(ymove==false)
 {
-    yspeed = yspeed*0.8;
+    yspeed = yspeed*(1-0.2*timescale);
 }
 
 //Rotation
 var dif = angle_difference(point_direction(x,y,mouse_x,mouse_y),angle);
 var dif2 = angle_difference(point_direction(x,y,mouse_x,mouse_y),angle2);
-angle += median(-12,dif,12);
-angle2 += median(-17,dif2,17);
+angle += median(-12,dif,12)*timescale;
+angle2 += median(-17,dif2,17)*timescale;
 angle2 = clamp(angle2,angle-45,angle+45);
 </string>
           </argument>

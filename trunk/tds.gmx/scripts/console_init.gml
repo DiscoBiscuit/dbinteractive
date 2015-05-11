@@ -1,4 +1,6 @@
 console = ds_list_create()
 consoletype = false;
 consolealpha = 0;
-print("-Console Init-");
+consolewidth = 384;
+consoleinstance = noone;
+print("-Console Init-",0);
