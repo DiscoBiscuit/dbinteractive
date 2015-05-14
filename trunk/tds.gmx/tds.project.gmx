@@ -17,24 +17,26 @@
     <sprites name="weapons">
       <sprite>sprites\spr_rifle</sprite>
     </sprites>
+    <sprites name="enemies">
+      <sprite>sprites\spr_drone_body</sprite>
+      <sprite>sprites\spr_drone_mandible</sprite>
+      <sprite>sprites\spr_drone_leg</sprite>
+    </sprites>
+    <sprites name="effects">
+      <sprite>sprites\spr_splat</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grid</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <scripts name="util">
-      <script>scripts\string_explode.gml</script>
-      <script>scripts\script_by_name.gml</script>
-      <script>scripts\object_by_name.gml</script>
-      <script>scripts\script_execute_string.gml</script>
-      <script>scripts\parse.gml</script>
-    </scripts>
-    <scripts name="console">
-      <script>scripts\console_init.gml</script>
-      <script>scripts\console_draw.gml</script>
-      <script>scripts\console_input.gml</script>
-      <script>scripts\print.gml</script>
+    <scripts name="net">
+      <script>scripts\client_receivedpacket.gml</script>
+      <script>scripts\server_receivedpacket.gml</script>
+      <scripts name="debug">
+        <script>scripts\host.gml</script>
+      </scripts>
     </scripts>
     <scripts name="debug">
       <script>scripts\test_args.gml</script>
@@ -43,12 +45,23 @@
       <script>scripts\pick.gml</script>
       <script>scripts\help.gml</script>
     </scripts>
-    <scripts name="net">
-      <script>scripts\client_receivedpacket.gml</script>
-      <script>scripts\server_receivedpacket.gml</script>
-      <scripts name="debug">
-        <script>scripts\host.gml</script>
-      </scripts>
+    <scripts name="util">
+      <script>scripts\string_explode.gml</script>
+      <script>scripts\script_by_name.gml</script>
+      <script>scripts\object_by_name.gml</script>
+      <script>scripts\script_execute_string.gml</script>
+      <script>scripts\parse.gml</script>
+      <script>scripts\plane_x.gml</script>
+      <script>scripts\plane_y.gml</script>
+      <script>scripts\sinx.gml</script>
+      <script>scripts\cosx.gml</script>
+      <script>scripts\cycle.gml</script>
+    </scripts>
+    <scripts name="console">
+      <script>scripts\console_init.gml</script>
+      <script>scripts\console_draw.gml</script>
+      <script>scripts\console_input.gml</script>
+      <script>scripts\print.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -57,9 +70,13 @@
     <object>objects\obj_player</object>
     <object>objects\obj_world</object>
     <object>objects\obj_menu</object>
+    <object>objects\eff_splat</object>
     <objects name="net">
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
+    </objects>
+    <objects name="enemies">
+      <object>objects\obj_enemy_drone</object>
     </objects>
   </objects>
   <rooms name="rooms">
