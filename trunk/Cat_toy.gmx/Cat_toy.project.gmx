@@ -12,9 +12,12 @@
     <sprite>sprites\spr_menu_laser</sprite>
     <sprite>sprites\spr_menu_finger</sprite>
     <sprite>sprites\spr_blanket</sprite>
+    <sprite>sprites\spr_menu</sprite>
+    <sprite>sprites\spr_menu_gradient</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_cloth</background>
+    <background>background\bg_pawprint</background>
   </backgrounds>
   <paths name="paths"/>
   <fonts name="fonts">
@@ -22,9 +25,9 @@
   </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
-    <object>objects\obj_menu</object>
     <object>objects\obj_laser</object>
     <object>objects\obj_finger</object>
+    <object>objects\obj_menu</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>

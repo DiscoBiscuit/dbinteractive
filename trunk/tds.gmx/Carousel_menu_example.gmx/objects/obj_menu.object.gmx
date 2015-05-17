@@ -25,17 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>background_vspeed[0] = 0.1;
-background_hspeed[0] = -0.1;
+            <string>/*set variables, don't change this part */
+selected=0;
+rot=0;
+item=0;
 
-selected = 0;
-rot = 0;
-item = 0;
-menu_x = room_width/2;
-menu_y = 0;
-menu_width = 1920;
-menu_height = 1920;
-mx = 0;
+/*set the position of the menu, change to whatever you want */
+menu_x=room_width/2;
+menu_y=room_height/2;
+
+/*set the size of the menu, again change to whatever you want */
+menu_width=500;
+menu_height=50;
 </string>
           </argument>
         </arguments>
@@ -58,81 +59,15 @@ mx = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>selected += keyboard_check_pressed(vk_left)-keyboard_check_pressed(vk_right);
-rot -= angle_difference(rot,selected*(360/image_number))/(0.2*room_speed);
-item =- selected mod image_number;
-if (item) &lt; 0
-{
-    item += image_number;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if point_distance(mx,0,mouse_x,0) &gt; 64
-{
-    if mx-mouse_x &gt; 0
-    {
-        selected -= 1;
-    }
-    else
-    {
-        selected += 1;
-    }
-}
-if point_distance(mx,0,mouse_x,0) &lt; 8
-{
-    switch (item) 
-    {
-        case 0:
-            room_goto(rm_game_laser);
-            break;
-        case 1:
-            room_goto(rm_game_finger);
-            break;
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="53">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>mx = mouse_x;
+            <string>/*change the selection based on the left and right arrow keys */
+selected+=keyboard_check_pressed(vk_left)-keyboard_check_pressed(vk_right);
+
+/*rotate towards the selection */
+rot-=angle_difference(rot,selected*(360/image_number))/(0.2*room_speed);
+
+/*sets the variable item to the image_index of the current selected item */
+item=-selected mod image_number;
+if (item)&lt;0 item+=image_number;
 </string>
           </argument>
         </arguments>
@@ -155,38 +90,74 @@ if point_distance(mx,0,mouse_x,0) &lt; 8
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var pr, i;
+            <string>/*set variables */
+var pr, i;
 i=0;
-draw_sprite_ext(spr_menu_gradient,0,0,room_height/2,1080,1,0,c_white,1);
 
+/*create a priority queue */
 pr=ds_priority_create();
 
-repeat (image_number) 
-{
-    ds_priority_add(pr,i,lengthdir_y(1,(rot-90)+i*(360/image_number)));
-    i+=1;
+/*add the menu items to it */
+repeat (image_number) {
+ds_priority_add(pr,i,lengthdir_y(1,(rot-90)+i*(360/image_number)));
+i+=1;}
+
+/*draw the menu */
+repeat (image_number) {
+i=ds_priority_delete_min(pr);
+draw_sprite_ext(sprite_index,i,menu_x+lengthdir_x(menu_width/2,(rot-90)+i*(360/image_number)),menu_y+lengthdir_y(menu_height/2,(rot-90)+i*(360/image_number)),1+lengthdir_y(menu_height/2,(rot-90)+i*(360/image_number))/(menu_height*2),1+lengthdir_y(menu_height/2,(rot-90)+i*(360/image_number))/(menu_height*2),0,c_white,1);
 }
 
-repeat (image_number) 
-{
-    i=ds_priority_delete_min(pr);
-    draw_sprite_ext(sprite_index,i,menu_x+lengthdir_x(menu_width/2,(rot-90)+i*(360/image_number)),menu_y+lengthdir_y(menu_height/2,(rot-90)+i*(360/image_number)),1+lengthdir_y(menu_height/2,(rot-90)+i*(360/image_number))/(menu_height*2),1+lengthdir_y(menu_height/2,(rot-90)+i*(360/image_number))/(menu_height*2),0,c_white,1);
-}
-
+/*remove the priority queue */
 ds_priority_destroy(pr);
 
-/*
+/*draws text based on what item you have selected. */
 var text;
-switch (item)
-{
-    case 0: 
-        text="Play" 
-        break;
-}
+switch (item) {
+    case 0: text="Play" break;
+    case 1: text="Help" break;
+    case 2: text="Quit" break;
+    case 3: text="Omg" break;
+    case 4: text="ZOMBIES!!!" break;
+    case 5: text="Ultra secret cheat button!!#Press it to complete the game!" break;
+    case 6: text="More zombies.." break;
+    case 7: text="Even more zombies..." break;
+    case 8: text="Lots of zombies!" break;
+    case 9: text="Zillions of zombies!!" break;
+    default: text=""
+    }
 
 draw_set_halign(fa_center);
 draw_text(320,320,text);
-*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*do something based on what the user selected. in this example only help and quit does something.(and the "secret" cheat button) */
+switch (item) {
+    case 1: break;
+    case 2: game_end() break;
+    case 5: show_message("ZOMG U PRESSED DA SUPER SECRET CHEAT BUTTON U WON DA GAME OMG OMG OMG") break;
+    }
+/*the value of the variable item is always equal to the image_index of the currently selected option. */
 </string>
           </argument>
         </arguments>
@@ -205,7 +176,7 @@ draw_text(320,320,text);
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>256,256</point>
-    <point>256,256</point>
+    <point>17,17</point>
+    <point>17,17</point>
   </PhysicsShapePoints>
 </object>
