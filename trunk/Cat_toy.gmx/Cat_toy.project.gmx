@@ -18,6 +18,7 @@
   <backgrounds name="background">
     <background>background\bg_cloth</background>
     <background>background\bg_pawprint</background>
+    <background>background\bg_mouse</background>
   </backgrounds>
   <paths name="paths"/>
   <fonts name="fonts">
@@ -32,6 +33,7 @@
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
     <room>rooms\rm_game_laser</room>
+    <room>rooms\rm_game_mouse</room>
     <room>rooms\rm_game_finger</room>
   </rooms>
   <constants number="2">

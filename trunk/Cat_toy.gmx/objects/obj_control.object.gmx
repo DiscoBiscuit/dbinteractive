@@ -53,8 +53,8 @@ overhome = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (mouse_x &lt; view_xview + view_wview/2 + 32 and mouse_x &gt; view_xview + view_wview/2 - 32
-and mouse_y &lt; view_yview + view_hview-64 + 32 and mouse_y &gt; view_yview + view_hview-64 - 32
+            <string>if (mouse_x &lt; view_xview + view_wview/2 + 96 and mouse_x &gt; view_xview + view_wview/2 - 96
+and mouse_y &lt; view_yview + view_hview-64 + 96 and mouse_y &gt; view_yview + view_hview-64 - 96
 and mouse_check_button(mb_left))
 {
     homepressed = 1;
