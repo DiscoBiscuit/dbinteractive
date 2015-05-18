@@ -3,11 +3,14 @@ var adj;
 for(d=0;d<6;d+=1)
 {
     adj = get_adjacent(d)
-    if(adj.gem == gem)
+    if(instance_exists(adj))
     {
-        if(adj.counted==0)
+        if(adj.gem == gem)
         {
-            adj.counted = 3
+            if(adj.counted==0)
+            {
+                adj.counted = 3
+            }
         }
     }
 }

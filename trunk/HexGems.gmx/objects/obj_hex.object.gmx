@@ -25,13 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_xscale = 0.25
-image_yscale = 0.25
+            <string>image_xscale = 0.4
+image_yscale = 0.4
 gem = 0
 active = false
-linedraw = false
 clickme = false
 counted = 0
+status = 1
+lookout = 0
 </string>
           </argument>
         </arguments>
@@ -55,7 +56,7 @@ counted = 0
           <argument>
             <kind>1</kind>
             <string>
-if(clickme = true)
+if(clickme = true and status&gt;0)
 {
 
     var adj,upgrade;
@@ -65,12 +66,61 @@ if(clickme = true)
     {
         check_should_active(true)
         gem += 1
+        lookout = irandom(6)
         sound_play(snd_upgrade)
-        score += power(2,gem)*count
         upgrade = true
         
         with(obj_hex)
         {
+            if(status&gt;0)
+            {
+                status = 1
+            }
+        }
+        
+        with(obj_hex)
+        {
+            if(status&gt;0)
+            {
+                if(gem==2)
+                {
+                    clean(id)
+                }
+                if(gem==3)
+                {
+                    clean(id)
+                    adj = get_adjacent(lookout)
+                    if(instance_exists(adj))
+                    {
+                        clean(adj)
+                    }
+                }
+                if(gem==4)
+                {
+                    clean(id)
+                    for(d=0;d&lt;3;d+=1)
+                    {
+                        adj = get_adjacent(lookout+d)
+                        if(instance_exists(adj))
+                        {
+                            clean(adj)
+                        }
+                    }
+                }
+                if(gem==5)
+                {
+                    clean(id)
+                    for(d=0;d&lt;6;d+=1)
+                    {
+                        adj = get_adjacent(d)
+                        if(instance_exists(adj))
+                        {
+                            clean(adj)
+                        }
+                    }
+                }
+            }
+        
             if(active==true)
             {
                 check_should_active(false)
@@ -81,6 +131,7 @@ if(clickme = true)
     if(gem==0)
     {
         gem = 1
+        spread()
         sound_play(snd_new)
         upgrade = true
     }
@@ -119,63 +170,6 @@ clickme = false
           <argument>
             <kind>1</kind>
             <string>clickme = true
-
-linegem = gem
-linedraw = true
-ds_list_add(breakline,id)
-if(active==false and count&gt;0)
-{
-    with(obj_hex)
-    {
-        counted = 0
-        image_blend = c_white
-        active = false
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(linedraw==false)
-{
-    if(gem = linegem)
-    {
-        var lasthex;
-        lasthex = ds_list_find_value(breakline,ds_list_size(breakline)-1)
-        if(point_distance(x,y,lasthex.x,lasthex.y)&lt;72)
-        {
-            linedraw = true
-            ds_list_add(breakline,id)
-            if(active==false and count&gt;0)
-            {
-                with(obj_hex)
-                {
-                    counted = 0
-                    image_blend = c_white
-                    active = false
-                }
-            }
-        }
-    }
-}
 </string>
           </argument>
         </arguments>
@@ -198,14 +192,14 @@ if(active==false and count&gt;0)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
+            <string>draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 if(gem&gt;0)
 {
-    draw_sprite_ext(spr_gem,0,x,y,0.4,0.4,0,gemcol[gem],1)
+    draw_sprite_ext(spr_gem,0,x,y,0.6,0.6,0,gemcol[gem],1)
     
     if(active==true)
     {
-        draw_sprite_ext(spr_halo,0,x,y,1,1,current_time/10,c_white,0.2+sin(current_time/100)*0.3)
+        draw_sprite_ext(spr_halo,0,x,y,1.5,1.5,current_time/10,c_white,0.2+sin(current_time/100)*0.3)
     }
 }
 </string>

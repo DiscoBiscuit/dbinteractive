@@ -21,6 +21,9 @@
     <script>scripts\get_adjacent.gml</script>
     <script>scripts\check_near.gml</script>
     <script>scripts\check_should_active.gml</script>
+    <script>scripts\infect.gml</script>
+    <script>scripts\clean.gml</script>
+    <script>scripts\spread.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>

@@ -27,12 +27,12 @@
             <kind>1</kind>
             <string>xoff = 80
 yoff = 80
-hexw = 64
-hexh = 56
-width = 14
-height = 12
+hexw = 96
+hexh = 84
+width = 9
+height = 8
 
-globalvar gemcol,breakline,linegem,count,activehex;
+globalvar gemcol,count,activehex;
 count = 0
 activehex = 0
 
@@ -42,55 +42,18 @@ gemcol[3] = merge_color(c_blue,c_white,0.5)
 gemcol[4] = merge_color(c_red,c_white,0.5)
 gemcol[5] = c_white
 
-scr_creategrid()
+hexes_clean = ds_list_create()
+hexes_infected = ds_list_create()
 
-linegem = 0
-breakline = ds_list_create()
+spread_delay = 5
+next_spread = spread_delay
+
+randomize()
+scr_creategrid()
 
 sound_volume(snd_line,0.3)
 sound_volume(snd_upgrade,0.3)
 sound_volume(snd_new,0.3)
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>var size,hex;
-size = ds_list_size(breakline)
-
-if(size&gt;2)
-{
-    for(i=0;i&lt;size;i+=1)
-    {
-        hex = ds_list_find_value(breakline,i)
-        hex.gem = 0
-    }
-    sound_play(snd_upgrade)
-    score += power(size,linegem)*size
-}
-ds_list_clear(breakline)
-linegem = 0
-with(obj_hex)
-{
-    linedraw = false
-}
 </string>
           </argument>
         </arguments>
@@ -113,28 +76,7 @@ with(obj_hex)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var size,hex,phex;
-size = ds_list_size(breakline)
-
-if(size&gt;1)
-{
-    draw_set_alpha(0.5)
-    hex = ds_list_find_value(breakline,0)
-    draw_circle_color(hex.x,hex.y,10,c_white,c_white,false)
-    draw_circle_color(hex.x,hex.y,7,c_white,c_white,false)
-    for(i=1;i&lt;size;i+=1)
-    {
-        hex = ds_list_find_value(breakline,i)
-        phex = ds_list_find_value(breakline,i-1)
-        
-        draw_line_width_color(hex.x,hex.y,phex.x,phex.y,6,c_white,c_white)
-        draw_line_width_color(hex.x,hex.y,phex.x,phex.y,3,c_white,c_white)
-        draw_circle_color(hex.x,hex.y,10,c_white,c_white,false)
-        draw_circle_color(hex.x,hex.y,7,c_white,c_white,false)
-    }
-    draw_set_alpha(1)
-}
-draw_text(16,0,score)
+            <string>draw_text(0,0,next_spread)
 </string>
           </argument>
         </arguments>
