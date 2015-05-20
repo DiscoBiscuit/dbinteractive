@@ -77,6 +77,9 @@ sound_volume(snd_new,0.3)
           <argument>
             <kind>1</kind>
             <string>draw_text(0,0,next_spread)
+draw_set_blend_mode(bm_subtract);
+draw_circle_colour(room_width/2,room_height/2,room_width/1.5,c_black,c_dkgray,false);
+draw_set_blend_mode(bm_normal);
 </string>
           </argument>
         </arguments>

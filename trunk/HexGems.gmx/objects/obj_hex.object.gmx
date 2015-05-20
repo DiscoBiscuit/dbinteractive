@@ -33,6 +33,58 @@ clickme = false
 counted = 0
 status = 1
 lookout = 0
+size = 1;
+sizestep = choose(0,1);
+sizelimit = 0.1;
+sizespd = 0.005;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if sizestep == 0
+{
+    if size &lt; 1 + sizelimit
+    {
+        size += sizespd;
+    }
+    else
+    {
+        sizespd = random_range(0.0005,0.001);
+        sizelimit = random_range(0.05,0.1);
+        sizestep = 1;
+    }
+}
+if sizestep == 1
+{
+    if size &gt;= 1 - sizelimit
+    {
+        size -= sizespd;
+    }
+    else
+    {
+        sizespd = random_range(0.0005,0.001);
+        sizelimit = random_range(0.05,0.1);
+        sizestep = 0;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -190,10 +242,24 @@ clickme = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
+            <string>if status == 0
+{
+    image_xscale = 0.4*size;
+    image_yscale = 0.4*size;
+}
+draw_sprite_ext(sprite_index,status,x+4,y+4,image_xscale,image_yscale,image_angle,c_ltgray,image_alpha/2);
+if status == 2
+{
+    draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,c_ltgray,image_alpha*0.75);
+    draw_sprite_ext(sprite_index,status,x,y,image_xscale*0.9,image_yscale*0.9,image_angle,image_blend,image_alpha)
+}
+else
+{
+    draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
+}
 if(gem&gt;0)
 {
-    draw_sprite_ext(spr_gem,gem-1,x,y,0.6,0.6,lookout*60,c_white,1)
+    draw_sprite_ext(spr_gem,gem-1,x,y,0.6,0.6,lookout*60,c_white,0.25)
     
     if(active==true)
     {
