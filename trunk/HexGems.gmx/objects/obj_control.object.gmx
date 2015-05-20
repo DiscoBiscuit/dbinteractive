@@ -45,7 +45,7 @@ gemcol[5] = c_white
 hexes_clean = ds_list_create()
 hexes_infected = ds_list_create()
 
-spread_delay = 5
+spread_delay = 4
 next_spread = spread_delay
 
 randomize()

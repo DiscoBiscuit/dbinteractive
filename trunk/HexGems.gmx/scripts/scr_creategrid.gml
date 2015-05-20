@@ -15,7 +15,7 @@ for(j=0;j<height;j++)
         dy = yoff + j*hexh
         
         chance = max(0,640-point_distance(room_width/2,room_height/2,dx,dy))
-        if(sqrt(irandom(640)) < (chance/16)*min(1,irandom(10)))
+        //if(sqrt(irandom(640)) < (chance/16)*min(1,irandom(10)))
         {
             new = instance_create(dx,dy,obj_hex)
             new.gem = 3-min(3,floor( sqrt(irandom(36)) ))

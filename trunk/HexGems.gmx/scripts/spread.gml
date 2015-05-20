@@ -3,12 +3,12 @@ with(obj_control)
     var checklist,spreaded,adj,off;
     spreaded = false
     next_spread -= 1
-    with(obj_hex)
-    {
-        lookout += 0.33
-    }
     if(next_spread==0)
     {
+        with(obj_hex)
+        {
+            lookout += 1
+        }
         next_spread = spread_delay
         checklist = ds_list_create()
         ds_list_copy(checklist,hexes_infected)
