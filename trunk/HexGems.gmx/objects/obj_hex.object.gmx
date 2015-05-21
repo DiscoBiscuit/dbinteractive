@@ -252,18 +252,8 @@ else
     image_xscale = 0.4;
     image_yscale = 0.4;
 }
-var sine = 255 - abs(sin(current_time/1024)*50);
-draw_text(0,100,sine);
 draw_sprite_ext(sprite_index,status,x+4,y+4,image_xscale,image_yscale,image_angle,c_ltgray,image_alpha/2);
-if status == 2
-{
-    draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,make_color_rgb(sine,sine,sine),image_alpha*0.75);
-    draw_sprite_ext(sprite_index,status,x,y,image_xscale*0.9,image_yscale*0.9,image_angle,image_blend,image_alpha)
-}
-else
-{
-    draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
-}
+draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 if(gem&gt;0)
 {
     draw_sprite_ext(spr_gem,gem-1,x,y,0.6,0.6,lookout*60,c_white,0.25)
