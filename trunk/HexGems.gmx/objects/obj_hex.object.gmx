@@ -34,9 +34,6 @@ counted = 0
 status = 1
 lookout = 0
 size = 1;
-sizestep = choose(0,1);
-sizelimit = 0.1;
-sizespd = 0.005;
 </string>
           </argument>
         </arguments>
@@ -59,32 +56,7 @@ sizespd = 0.005;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sizestep == 0
-{
-    if size &lt; 1 + sizelimit
-    {
-        size += sizespd;
-    }
-    else
-    {
-        sizespd = random_range(0.0005,0.001);
-        sizelimit = random_range(0.05,0.1);
-        sizestep = 1;
-    }
-}
-if sizestep == 1
-{
-    if size &gt;= 1 - sizelimit
-    {
-        size -= sizespd;
-    }
-    else
-    {
-        sizespd = random_range(0.0005,0.001);
-        sizelimit = random_range(0.05,0.1);
-        sizestep = 0;
-    }
-}
+            <string>size = 1 + (sin(current_time/512)/32)
 </string>
           </argument>
         </arguments>
