@@ -25,12 +25,20 @@
     <script>scripts\clean.gml</script>
     <script>scripts\spread.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\font0</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_hex</object>
     <object>objects\obj_gembreak</object>
+    <objects name="menu">
+      <object>objects\obj_menu</object>
+      <object>objects\obj_playbutton</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_game</room>
   </rooms>
   <help>

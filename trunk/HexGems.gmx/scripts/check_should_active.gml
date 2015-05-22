@@ -24,9 +24,14 @@ if(gem>0)
     
     if(argument0==false)
     {
+        lost = true
         with(obj_hex)
         {
             active = false
+            if(gem==0 and status>0)
+            {
+                lost = false
+            }
             if(counted>0)
             {
                 count += 1
@@ -35,6 +40,7 @@ if(gem>0)
         if(count>2)
         {
             active = true
+            lost = false
             with(obj_hex)
             {
                 if(counted>0)

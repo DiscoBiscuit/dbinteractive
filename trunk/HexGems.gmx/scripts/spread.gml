@@ -2,7 +2,6 @@ with(obj_control)
 {
     var checklist,spreaded,adj,off;
     spreaded = false
-    next_spread -= 1
     if(next_spread==0)
     {
         with(obj_hex)
@@ -36,4 +35,5 @@ with(obj_control)
         }
         ds_list_destroy(checklist)
     }
+    next_spread -= 1
 }

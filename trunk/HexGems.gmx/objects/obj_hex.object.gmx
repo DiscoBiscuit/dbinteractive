@@ -25,8 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_xscale = 0.4
-image_yscale = 0.4
+            <string>scale = obj_control.hexw/(sprite_get_height(spr_hex)*sin(degtorad(60))+24)
+image_xscale = scale
+image_yscale = scale
 gem = 0
 active = false
 clickme = false
@@ -90,6 +91,10 @@ if(clickme = true and status&gt;0)
     {
         check_should_active(true)
         gem += 1
+        if(lost==false)
+        {
+            spread()
+        }
         lookout = irandom(6)
         sound_play(snd_upgrade)
         upgrade = true
@@ -102,7 +107,10 @@ if(clickme = true and status&gt;0)
     if(gem==0)
     {
         gem = 1
-        spread()
+        if(lost==false)
+        {
+            spread()
+        }
         sound_play(snd_new)
         upgrade = true
     }
@@ -216,23 +224,23 @@ clickme = false
             <kind>1</kind>
             <string>if status == 0
 {
-    image_xscale = 0.4*size;
-    image_yscale = 0.4*size;
+    image_xscale = scale*size;
+    image_yscale = scale*size;
 }
 else
 {
-    image_xscale = 0.4;
-    image_yscale = 0.4;
+    image_xscale = scale;
+    image_yscale = scale;
 }
-draw_sprite_ext(sprite_index,status,x+4,y+4,image_xscale,image_yscale,image_angle,c_ltgray,image_alpha/2);
+draw_sprite_ext(sprite_index,status,x+scale*10,y+scale*10,image_xscale,image_yscale,image_angle,c_ltgray,image_alpha/2);
 draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 if(gem&gt;0)
 {
-    draw_sprite_ext(spr_gem,gem-1,x,y,0.6,0.6,lookout*60,c_white,0.25)
+    draw_sprite_ext(spr_gem,gem-1,x,y,scale*1.5,scale*1.5,lookout*60,c_white,0.25)
     
     if(active==true)
     {
-        draw_sprite_ext(spr_halo,0,x,y,1.5,1.5,current_time/10,c_white,0.2+sin(current_time/100)*0.3)
+        draw_sprite_ext(spr_halo,0,x,y,scale*3,scale*3,current_time/10,c_white,0.2+sin(current_time/100)*0.3)
     }
 }
 </string>
