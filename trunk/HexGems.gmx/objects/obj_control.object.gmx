@@ -35,13 +35,14 @@ yoff = room_height/2-(hexh*height)/2.4
 globalvar count,activehex,lost,blue;
 count = 0
 activehex = 0
-lost = false
+lost = 0
 blue = make_color_rgb(159,205,241);
+blue2 = make_color_rgb(141,182,214);
 
 hexes_clean = ds_list_create()
 hexes_infected = ds_list_create()
 
-spread_delay = 4
+spread_delay = 6
 next_spread = spread_delay-1
 spreadmeter = 1
 
@@ -54,6 +55,81 @@ sound_volume(snd_new,0.3)
 
 image_index = 1
 image_speed = 0
+
+overview = 0
+overview_smooth = 0
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>overview = 1
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(lost!=0 and overview_smooth&gt;0.99)
+{
+    room_goto(rm_menu)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="54">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>overview = !overview
 </string>
           </argument>
         </arguments>
@@ -86,8 +162,31 @@ var diff;
 diff = (room_height-y/2-24)-(y+128+8)
 spreadmeter = (spreadmeter*4 + ((next_spread)/(spread_delay-1)) )/5
 draw_rectangle(x-24,y+128+8 + diff*spreadmeter,x-112+24,room_height-y/2 -24,false)
+
+//Game End Overview
+overview_smooth = (overview_smooth*4 + overview)/5
+
+draw_set_color(c_white)
+draw_set_alpha(0+overview_smooth*0.75)
+draw_rectangle(0,0,room_width,room_height,false)
+draw_set_alpha(1)
+draw_set_color(blue2)
+draw_roundrect_ext(lerp(x-72,512-16,overview_smooth),lerp(y-72,384-16,overview_smooth),lerp(x+72,room_width-512+16,overview_smooth),lerp(y+72,room_height-384+16,overview_smooth),64,64,false)
+draw_set_color(blue)
+draw_roundrect_ext(lerp(x-72,512,overview_smooth),lerp(y-72,384,overview_smooth),lerp(x+72,room_width-512,overview_smooth),lerp(y+72,room_height-384,overview_smooth),64,64,false)
 draw_set_color(c_black)
-draw_text(x,y,score)
+draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+64,overview_smooth),score)
+draw_set_alpha(max(0,-1+overview_smooth*2))
+if(lost==1)
+{
+    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-64,overview_smooth),"LOSER")
+}
+if(lost==-1)
+{
+    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-64,overview_smooth),"WINNER")
+}
+draw_set_alpha(1)
+
 draw_set_blend_mode(bm_subtract);
 draw_circle_colour(room_width/2,room_height/2,room_width/1.5,c_black,c_dkgray,false);
 draw_set_blend_mode(bm_normal);
@@ -115,6 +214,29 @@ draw_set_blend_mode(bm_normal);
             <kind>1</kind>
             <string>scr_creategrid()
 score = 0
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="18">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>clean(collision_point(mouse_x,mouse_y,obj_hex,true,false))
 </string>
           </argument>
         </arguments>

@@ -175,7 +175,17 @@ if(clickme = true and status&gt;0)
                 }
             }
         }
+    if(lost==1)
+    {
+        obj_control.alarm[0] = 120
+    }
+    if(ds_list_size(obj_control.hexes_infected)==0)
+    {
+        lost = -1
+        obj_control.alarm[0] = 120
+    }
 }
+
 clickme = false
 </string>
           </argument>
@@ -199,7 +209,10 @@ clickme = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>clickme = true
+            <string>if(lost==0)
+{
+    clickme = true
+}
 </string>
           </argument>
         </arguments>
