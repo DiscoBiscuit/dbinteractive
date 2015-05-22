@@ -36,7 +36,12 @@
     <object>objects\obj_gembreak</object>
     <objects name="menu">
       <object>objects\obj_menu</object>
-      <object>objects\obj_playbutton</object>
+      <object>objects\button_new</object>
+      <object>objects\button_continue</object>
+      <object>objects\button_hiscores</object>
+      <object>objects\button_options</object>
+      <object>objects\button_tutorial</object>
+      <object>objects\button_exit</object>
     </objects>
   </objects>
   <rooms name="rooms">

@@ -253,7 +253,7 @@ if(gem&gt;0)
     
     if(active==true)
     {
-        draw_sprite_ext(spr_halo,0,x,y,scale*3,scale*3,current_time/10,c_white,0.2+sin(current_time/100)*0.3)
+        draw_sprite_ext(spr_halo,0,x,y,scale*4,scale*4,current_time/10,c_white,0.2+sin(current_time/100)*0.3)
     }
 }
 </string>

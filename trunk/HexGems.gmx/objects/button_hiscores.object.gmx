@@ -73,7 +73,10 @@ image_speed = 0
           <argument>
             <kind>1</kind>
             <string>draw_self()
-draw_text(x,y,"PLAY")
+var str,scl;
+str = "SCORES"
+scl = 256/string_width(str)
+draw_text_transformed(x,y,str,scl,scl,0)
 </string>
           </argument>
         </arguments>
