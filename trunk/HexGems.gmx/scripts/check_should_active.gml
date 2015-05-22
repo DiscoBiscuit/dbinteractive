@@ -45,7 +45,7 @@ if(gem>0)
             {
                 if(counted>0)
                 {
-                    image_blend = c_green
+                    image_blend = c_teal
                 }
             }
         }
