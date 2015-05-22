@@ -14,7 +14,9 @@
     <sprite>sprites\spr_gem</sprite>
     <sprite>sprites\spr_halo</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_menu</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_creategrid.gml</script>
