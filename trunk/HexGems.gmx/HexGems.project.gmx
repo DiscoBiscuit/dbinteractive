@@ -13,6 +13,7 @@
     <sprite>sprites\spr_hex</sprite>
     <sprite>sprites\spr_gem</sprite>
     <sprite>sprites\spr_halo</sprite>
+    <sprite>sprites\spr_button</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_menu</background>
@@ -39,16 +40,17 @@
       <object>objects\obj_options</object>
       <object>objects\buttons</object>
       <object>objects\button_new</object>
+      <object>objects\button_new_done</object>
       <object>objects\button_continue</object>
       <object>objects\button_hiscores</object>
       <object>objects\button_options</object>
+      <object>objects\button_options_done</object>
       <object>objects\button_tutorial</object>
       <object>objects\button_exit</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
-    <room>rooms\rm_options</room>
     <room>rooms\rm_game</room>
   </rooms>
   <help>

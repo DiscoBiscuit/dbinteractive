@@ -28,6 +28,9 @@
             <string>image_index = 1
 image_speed = 0
 lock = false
+popup = 0
+popup_smooth = 0
+donebutton = noone
 </string>
           </argument>
         </arguments>
@@ -52,7 +55,14 @@ lock = false
             <kind>1</kind>
             <string>if(lock==false)
 {
-    room_goto(rm_options)
+    if(popup_smooth&lt;0.01)
+    {
+        popup = 1
+        buttons.lock = true
+        buttons.depth = 0
+        depth = -1
+        donebutton = instance_create(x,y,button_options_done);
+    }
 }
 </string>
           </argument>
@@ -76,11 +86,40 @@ lock = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
-var str,scl;
+            <string>var str,scl;
+
+popup_smooth = (popup_smooth*4 + popup)/5
+
+draw_self()
+
+if(popup_smooth&gt;0.01)
+{
+    draw_set_color(c_white)
+    draw_set_alpha(0+popup_smooth*0.75)
+    draw_rectangle(0,0,room_width,room_height,false)
+    draw_set_alpha(1)
+    
+    draw_set_color(blue2)
+    draw_roundrect_ext(lerp(x-72,128-16,popup_smooth),lerp(y-72,128-16,popup_smooth),lerp(x+72,room_width-128+16,popup_smooth),lerp(y+72,room_height-128+16,popup_smooth),64,64,false)
+    draw_set_color(blue)
+    draw_roundrect_ext(lerp(x-72,128,popup_smooth),lerp(y-72,128,popup_smooth),lerp(x+72,room_width-128,popup_smooth),lerp(y+72,room_height-128,popup_smooth),64,64,false)
+    draw_set_color(c_black)
+    
+    donebutton.image_alpha = max(0,-2+popup_smooth*3)
+    donebutton.x = lerp(x,room_width/2,popup_smooth)
+    donebutton.y = lerp(y,room_height-256,popup_smooth)
+}
+else
+{
+    with(donebutton)
+    {
+        instance_destroy()
+    }
+}
+
 str = "OPTIONS"
 scl = 256/string_width(str)
-draw_text_transformed(x,y,str,scl,scl,0)
+draw_text_transformed(lerp(x,room_width/2,popup_smooth),lerp(y,128+string_height(str)/2,popup_smooth),str,scl,scl,0)
 </string>
           </argument>
         </arguments>
