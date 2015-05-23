@@ -36,6 +36,8 @@
     <object>objects\obj_gembreak</object>
     <objects name="menu">
       <object>objects\obj_menu</object>
+      <object>objects\obj_options</object>
+      <object>objects\buttons</object>
       <object>objects\button_new</object>
       <object>objects\button_continue</object>
       <object>objects\button_hiscores</object>
@@ -46,6 +48,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
+    <room>rooms\rm_options</room>
     <room>rooms\rm_game</room>
   </rooms>
   <help>

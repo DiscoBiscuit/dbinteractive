@@ -28,6 +28,10 @@
             <string>draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 draw_set_font(font0)
+
+globalvar blue,blue2;
+blue = make_color_rgb(159,205,241);
+blue2 = make_color_rgb(141,182,214);
 </string>
           </argument>
         </arguments>

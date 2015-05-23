@@ -32,7 +32,7 @@ hexh = hexw*sin(degtorad(60))
 xoff = room_width/2-(hexw*width)/2.6
 yoff = room_height/2-(hexh*height)/2.4
 
-globalvar count,activehex,lost,blue;
+globalvar count,activehex,lost,blue,blue2;
 count = 0
 activehex = 0
 lost = 0
