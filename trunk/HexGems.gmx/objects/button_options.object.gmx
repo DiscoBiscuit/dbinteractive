@@ -31,6 +31,8 @@ lock = false
 popup = 0
 popup_smooth = 0
 donebutton = noone
+sfxslider = noone
+musicslider = noone
 </string>
           </argument>
         </arguments>
@@ -61,7 +63,19 @@ donebutton = noone
         buttons.lock = true
         buttons.depth = 0
         depth = -1
-        donebutton = instance_create(x,y,button_options_done);
+        donebutton = instance_create(room_width/2,room_height-256,button_options_done);
+        
+        sfxslider = instance_create(room_width/2,room_height/2-128,button_slider);
+        sfxslider.val = vol_sfx
+        sfxslider.sprite = spr_sfxicon
+        sfxslider.image = 0
+        sfxslider.x = sfxslider.x-sfxslider.width/2+sfxslider.width*sfxslider.val
+        
+        musicslider = instance_create(room_width/2,room_height/2+128,button_slider);
+        musicslider.val = vol_music
+        musicslider.sprite = spr_sfxicon
+        musicslider.image = 1
+        musicslider.x = musicslider.x-musicslider.width/2+musicslider.width*musicslider.val
     }
 }
 </string>
@@ -105,13 +119,14 @@ if(popup_smooth&gt;0.01)
     draw_roundrect_ext(lerp(x-72,128,popup_smooth),lerp(y-72,128,popup_smooth),lerp(x+72,room_width-128,popup_smooth),lerp(y+72,room_height-128,popup_smooth),64,64,false)
     draw_set_color(c_black)
     
-    donebutton.image_alpha = max(0,-2+popup_smooth*3)
-    donebutton.x = lerp(x,room_width/2,popup_smooth)
-    donebutton.y = lerp(y,room_height-256,popup_smooth)
+    if(popup_smooth&lt;0.99)
+    {
+        menu_options.image_alpha = max(0,-2+popup_smooth*3)
+    }
 }
 else
 {
-    with(donebutton)
+    with(menu_options)
     {
         instance_destroy()
     }

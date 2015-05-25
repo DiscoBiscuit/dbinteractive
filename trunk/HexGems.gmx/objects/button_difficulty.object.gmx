@@ -8,6 +8,30 @@
   <parentName>menu_new</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>image_xscale = 0.9
+image_yscale = image_xscale
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="6" enumb="7">
       <action>
         <libid>1</libid>
@@ -25,41 +49,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>buttons.lock = false
-ini_open("settings.ini")
-ini_write_real("game","difficulty",game_diff)
-ini_write_real("game","number",game_num)
-ini_close()
-room_goto(rm_game)
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_self()
-var str,scl;
-str = "PLAY"
-scl = 200/string_width(str)
-draw_set_alpha(image_alpha)
-draw_text_transformed(x,y,str,scl,scl,0)
-draw_set_alpha(1)
+            <string>button_difficulty.image_blend = c_white
+image_blend = c_yellow
+game_diff = val
 </string>
           </argument>
         </arguments>
@@ -78,7 +70,7 @@ draw_set_alpha(1)
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>128,64</point>
+    <point>128,128</point>
     <point>128,128</point>
   </PhysicsShapePoints>
 </object>

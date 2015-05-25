@@ -28,7 +28,7 @@ for(j=0;j<height;j++)
     }
 }
 
-while(ds_list_size(hexes_infected)<3)
+while(ds_list_size(hexes_infected)<game_num)
 {
     ds_list_shuffle(hexes_clean)
     with(ds_list_find_value(hexes_clean,0))

@@ -32,32 +32,62 @@ hexh = hexw*sin(degtorad(60))
 xoff = room_width/2-(hexw*width)/2.6
 yoff = room_height/2-(hexh*height)/2.4
 
-globalvar count,activehex,lost,blue,blue2;
+globalvar count,activehex,lost;
 count = 0
 activehex = 0
 lost = 0
-blue = make_color_rgb(159,205,241);
-blue2 = make_color_rgb(141,182,214);
 
 hexes_clean = ds_list_create()
 hexes_infected = ds_list_create()
 
-spread_delay = 6
+spread_delay = game_diff
 next_spread = spread_delay-1
 spreadmeter = 1
 
 randomize()
 scr_creategrid()
 
-sound_volume(snd_line,0.3)
-sound_volume(snd_upgrade,0.3)
-sound_volume(snd_new,0.3)
-
 image_index = 1
 image_speed = 0
 
 overview = 0
 overview_smooth = 0
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+hexes_infected = ds_list_create()
+hexes_clean = ds_list_create()
+with(obj_hex)
+{
+    if(status==0)
+    {
+        ds_list_add(obj_control.hexes_infected,id)
+    }
+    else
+    {
+        ds_list_add(obj_control.hexes_clean,id)
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -163,10 +193,6 @@ if(lost==-1)
     draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-64,overview_smooth),"WINNER")
 }
 draw_set_alpha(1)
-
-draw_set_blend_mode(bm_subtract);
-draw_circle_colour(room_width/2,room_height/2,room_width/1.5,c_black,c_dkgray,false);
-draw_set_blend_mode(bm_normal);
 </string>
           </argument>
         </arguments>
@@ -213,7 +239,8 @@ score = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>game_save("save.dat")
+            <string>alarm[10] = 1
+game_save("save.dat")
 room_goto(rm_menu)
 </string>
           </argument>
@@ -237,7 +264,8 @@ room_goto(rm_menu)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>game_save("save.dat")
+            <string>alarm[10] = 1
+game_save("save.dat")
 room_goto(rm_menu)
 </string>
           </argument>
