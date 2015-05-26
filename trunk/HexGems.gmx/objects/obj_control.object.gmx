@@ -111,32 +111,7 @@ with(obj_hex)
           <argument>
             <kind>1</kind>
             <string>overview = 1
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if(lost!=0 and overview_smooth&gt;0.99)
-{
-    room_goto(rm_menu)
-}
+keyboard_string = game_name
 </string>
           </argument>
         </arguments>
@@ -178,45 +153,26 @@ draw_set_alpha(0+overview_smooth*0.75)
 draw_rectangle(0,0,room_width,room_height,false)
 draw_set_alpha(1)
 draw_set_color(blue2)
-draw_roundrect_ext(lerp(x-72,512-16,overview_smooth),lerp(y-72,384-16,overview_smooth),lerp(x+72,room_width-512+16,overview_smooth),lerp(y+72,room_height-384+16,overview_smooth),64,64,false)
+draw_roundrect_ext(lerp(x-72,384-16,overview_smooth),lerp(y-72,256-16,overview_smooth),lerp(x+72,room_width-384+16,overview_smooth),lerp(y+72,room_height-256+16,overview_smooth),64,64,false)
 draw_set_color(blue)
-draw_roundrect_ext(lerp(x-72,512,overview_smooth),lerp(y-72,384,overview_smooth),lerp(x+72,room_width-512,overview_smooth),lerp(y+72,room_height-384,overview_smooth),64,64,false)
+draw_roundrect_ext(lerp(x-72,384,overview_smooth),lerp(y-72,256,overview_smooth),lerp(x+72,room_width-384,overview_smooth),lerp(y+72,room_height-256,overview_smooth),64,64,false)
 draw_set_color(c_black)
-draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+64,overview_smooth),score)
+draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2,overview_smooth),score)
 draw_set_alpha(max(0,-1+overview_smooth*2))
+if(sin(current_time/100)&lt;0)
+draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+128,overview_smooth),keyboard_string+"|")
+else
+draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+128,overview_smooth),keyboard_string)
+draw_line_width(lerp(x,room_width/2-512,overview_smooth),lerp(y,room_height/2+192,overview_smooth),lerp(x,room_width/2+512,overview_smooth),lerp(y,room_height/2+192,overview_smooth),8)
 if(lost==1)
 {
-    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-64,overview_smooth),"LOSER")
+    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-128,overview_smooth),"LOSER")
 }
 if(lost==-1)
 {
-    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-64,overview_smooth),"WINNER")
+    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-128,overview_smooth),"WINNER")
 }
 draw_set_alpha(1)
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="32">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>scr_creategrid()
-score = 0
 </string>
           </argument>
         </arguments>
@@ -239,9 +195,65 @@ score = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[10] = 1
-game_save("save.dat")
-room_goto(rm_menu)
+            <string>if(lost==false)
+{
+    alarm[10] = 1
+    game_save("save.dat")
+    room_goto(rm_menu)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="18">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>clean(collision_point(mouse_x,mouse_y,obj_hex,false,false))
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(lost!=0 and overview_smooth&gt;0.99)
+{
+    room_goto(rm_menu)
+    highscore_add(keyboard_string,score)
+    ini_open("settings.ini")
+    ini_write_string("game","name",keyboard_string)
+    ini_close()
+}
 </string>
           </argument>
         </arguments>
@@ -264,9 +276,12 @@ room_goto(rm_menu)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[10] = 1
-game_save("save.dat")
-room_goto(rm_menu)
+            <string>if(lost==false)
+{
+    alarm[10] = 1
+    game_save("save.dat")
+    room_goto(rm_menu)
+}
 </string>
           </argument>
         </arguments>

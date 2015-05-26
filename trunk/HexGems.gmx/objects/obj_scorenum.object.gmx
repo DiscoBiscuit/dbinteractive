@@ -3,8 +3,8 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1000</depth>
-  <persistent>-1</persistent>
+  <depth>-15</depth>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,26 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar blue,blue2,vol_sfx,vol_music,game_diff,game_num,game_name;
-blue = make_color_rgb(159,205,241);
-blue2 = make_color_rgb(141,182,214);
-
-draw_set_halign(fa_center)
-draw_set_valign(fa_middle)
-draw_set_font(font0)
-
-ini_open("settings.ini")
-vol_sfx = ini_read_real("options","sfx",0.5)
-vol_music = ini_read_real("options","music",0.5)
-game_diff = ini_read_real("game","difficulty",6)
-game_num = ini_read_real("game","number",3)
-game_name = ini_read_string("game","name","Player")
-ini_close()
-
-sound_volume(snd_upgrade,vol_sfx)
-sound_volume(snd_new,vol_sfx)
-
-
+            <string>perc = 1
 </string>
           </argument>
         </arguments>
@@ -67,9 +48,16 @@ sound_volume(snd_new,vol_sfx)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_blend_mode(bm_subtract);
-draw_circle_colour(room_width/2,room_height/2,room_width/1.5,c_black,c_dkgray,false);
-draw_set_blend_mode(bm_normal);
+            <string>perc /= 1.05
+
+draw_set_alpha(min(1,perc*4)*0.75)
+draw_text_transformed(lerp(obj_control.x,x,perc),lerp(obj_control.y,y,perc),val,0.5,0.5,0)
+draw_set_alpha(1)
+if(perc&lt;=0.1)
+{
+    instance_destroy()
+    score+=val
+}
 </string>
           </argument>
         </arguments>

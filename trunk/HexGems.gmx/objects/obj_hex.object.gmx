@@ -91,16 +91,24 @@ if(clickme = true and status&gt;0)
     {
         check_should_active(true)
         gem += 1
-        if(lost==false)
-        {
-            spread()
-        }
+        if(gem==2)
+            addscore(50)
+        if(gem==3)
+            addscore(100)
+        if(gem==4)
+            addscore(250)
+        if(gem==5)
+            addscore(500)
         lookout = irandom(6)
         sound_play(snd_upgrade)
         upgrade = true
         if(active==true)
         {
             check_should_active(false)
+        }
+        if(lost==false)
+        {
+            spread()
         }
     }
     
@@ -110,6 +118,7 @@ if(clickme = true and status&gt;0)
         if(lost==false)
         {
             spread()
+            addscore(10)
         }
         sound_play(snd_new)
         upgrade = true
@@ -125,56 +134,63 @@ if(clickme = true and status&gt;0)
     }
     
     with(obj_hex)
+    {
+        if(status&gt;0)
         {
-            if(status&gt;0)
-            {
-                status = 1
-            }
+            status = 1
         }
+    }
         
-        with(obj_hex)
+    with(obj_hex)
+    {
+        if(status&gt;0)
         {
-            if(status&gt;0)
+            if(gem==2)
             {
-                if(gem==2)
+                clean(id)
+            }
+            if(gem==3)
+            {
+                clean(id)
+                adj = get_adjacent(lookout)
+                if(instance_exists(adj))
                 {
-                    clean(id)
+                    if(adj.status==0)
+                    addscore(20,adj.x,adj.y)
+                    clean(adj)
                 }
-                if(gem==3)
+            }
+            if(gem==4)
+            {
+                clean(id)
+                for(d=0;d&lt;3;d+=1)
                 {
-                    clean(id)
-                    adj = get_adjacent(lookout)
+                    adj = get_adjacent(lookout+d)
                     if(instance_exists(adj))
                     {
+                        if(adj.status==0)
+                        addscore(35,adj.x,adj.y)
                         clean(adj)
                     }
                 }
-                if(gem==4)
+            }
+            if(gem==5)
+            {
+                clean(id)
+                for(d=0;d&lt;6;d+=1)
                 {
-                    clean(id)
-                    for(d=0;d&lt;3;d+=1)
+                    adj = get_adjacent(d)
+                    if(instance_exists(adj))
                     {
-                        adj = get_adjacent(lookout+d)
-                        if(instance_exists(adj))
-                        {
-                            clean(adj)
-                        }
-                    }
-                }
-                if(gem==5)
-                {
-                    clean(id)
-                    for(d=0;d&lt;6;d+=1)
-                    {
-                        adj = get_adjacent(d)
-                        if(instance_exists(adj))
-                        {
-                            clean(adj)
-                        }
+                        if(adj.status==0)
+                        addscore(50,adj.x,adj.y)
+                        clean(adj)
                     }
                 }
             }
         }
+    }
+    
     if(lost==1)
     {
         obj_control.alarm[0] = 120
