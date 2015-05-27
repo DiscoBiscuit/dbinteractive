@@ -52,6 +52,8 @@ image_speed = 0
 
 overview = 0
 overview_smooth = 0
+
+name = "none";
 </string>
           </argument>
         </arguments>
@@ -111,14 +113,18 @@ with(obj_hex)
           <argument>
             <kind>1</kind>
             <string>overview = 1
+
 if(os_type==os_windows)
 {
     keyboard_string = game_name
 }
 else
 {
-    keyboard_string = get_string("High Score Name:",game_name)
+
+    name = get_string_async("High Score Name:",game_name)
 }
+
+
 </string>
           </argument>
         </arguments>
@@ -148,6 +154,39 @@ else
     ini_open("settings.ini")
     ini_write_string("game","name",keyboard_string)
     ini_close()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="63">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var i_d = ds_map_find_value(async_load, "id");
+if i_d == name
+{
+    if ds_map_find_value(async_load, "status")
+    {
+        if ds_map_find_value(async_load, "result") != ""
+        {
+            keyboard_string = ds_map_find_value(async_load, "result");
+        }
+    }
 }
 </string>
           </argument>
