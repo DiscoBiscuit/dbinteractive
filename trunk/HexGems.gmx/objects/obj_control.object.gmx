@@ -255,7 +255,7 @@ draw_set_color(blue2)
 draw_roundrect_ext(lerp(x-72,384-16,overview_smooth),lerp(y-72,256-16,overview_smooth),lerp(x+72,room_width-384+16,overview_smooth),lerp(y+72,room_height-256+16,overview_smooth),64,64,false)
 draw_set_color(blue)
 draw_roundrect_ext(lerp(x-72,384,overview_smooth),lerp(y-72,256,overview_smooth),lerp(x+72,room_width-384,overview_smooth),lerp(y+72,room_height-256,overview_smooth),64,64,false)
-draw_set_color(c_black)
+draw_set_color(blue3)
 
 var str,scl;
 str = string(score)

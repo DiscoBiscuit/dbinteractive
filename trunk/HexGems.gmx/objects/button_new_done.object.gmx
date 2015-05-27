@@ -31,6 +31,7 @@ ini_write_real("game","difficulty",game_diff)
 ini_write_real("game","number",game_num)
 ini_close()
 room_goto(rm_game)
+score = 0
 </string>
           </argument>
         </arguments>

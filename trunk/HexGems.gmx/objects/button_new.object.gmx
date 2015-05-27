@@ -144,7 +144,7 @@ if(popup_smooth&gt;0)
     draw_roundrect_ext(lerp(x-72,128-16,popup_smooth),lerp(y-72,128-16,popup_smooth),lerp(x+72,room_width-128+16,popup_smooth),lerp(y+72,room_height-128+16,popup_smooth),64,64,false)
     draw_set_color(blue)
     draw_roundrect_ext(lerp(x-72,128,popup_smooth),lerp(y-72,128,popup_smooth),lerp(x+72,room_width-128,popup_smooth),lerp(y+72,room_height-128,popup_smooth),64,64,false)
-    draw_set_color(c_black)
+    draw_set_color(blue3)
     
     menu_new.image_alpha = max(0,-2+popup_smooth*3)
     

@@ -25,9 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar blue,blue2,vol_sfx,vol_music,game_diff,game_num,game_name;
+            <string>globalvar blue,blue2,blue3,vol_sfx,vol_music,game_diff,game_num,game_name;
 blue = make_color_rgb(159,205,241);
 blue2 = make_color_rgb(141,182,214);
+blue3 = make_color_rgb(40,80,200)
 
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
@@ -43,6 +44,8 @@ ini_close()
 
 sound_volume(snd_upgrade,vol_sfx)
 sound_volume(snd_new,vol_sfx)
+
+draw_set_color(blue3)
 
 
 </string>
