@@ -36,6 +36,7 @@
   <objects name="objects">
     <object>objects\obj_persistent</object>
     <object>objects\obj_control</object>
+    <object>objects\obj_pausebutton</object>
     <object>objects\obj_hex</object>
     <object>objects\obj_gembreak</object>
     <object>objects\obj_scorenum</object>

@@ -160,6 +160,29 @@ else
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="54">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>clean(collision_point(mouse_x,mouse_y,obj_hex,false,false))
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="63">
       <action>
         <libid>1</libid>
@@ -212,14 +235,14 @@ if i_d == name
             <kind>1</kind>
             <string>draw_self()
 draw_set_color(blue)
-draw_rectangle(x,y,x-112,room_height-y/2,false)
+draw_rectangle(x,y,x-112,room_height-y*2,false)
 draw_set_color(c_white)
-draw_rectangle(x-16,y+128,x-112+16,room_height-y/2 -16,false)
+draw_rectangle(x-16,y+128,x-112+16,room_height-y*2 -16,false)
 draw_set_color(c_purple)
 var diff;
-diff = (room_height-y/2-24)-(y+128+8)
+diff = (room_height-y*2-24)-(y+128+8)
 spreadmeter = (spreadmeter*4 + ((next_spread)/(spread_delay-1)) )/5
-draw_rectangle(x-24,y+128+8 + diff*spreadmeter,x-112+24,room_height-y/2 -24,false)
+draw_rectangle(x-24,y+128+8 + diff*spreadmeter,x-112+24,room_height-y*2 -24,false)
 
 //Game End Overview
 overview_smooth = (overview_smooth*4 + overview)/5
@@ -233,7 +256,14 @@ draw_roundrect_ext(lerp(x-72,384-16,overview_smooth),lerp(y-72,256-16,overview_s
 draw_set_color(blue)
 draw_roundrect_ext(lerp(x-72,384,overview_smooth),lerp(y-72,256,overview_smooth),lerp(x+72,room_width-384,overview_smooth),lerp(y+72,room_height-256,overview_smooth),64,64,false)
 draw_set_color(c_black)
-draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2,overview_smooth),score)
+
+var str,scl;
+str = string(score)
+scl = lerp(min(1,215/string_width(str)),1,overview_smooth)
+draw_set_alpha(image_alpha)
+draw_text_transformed(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2,overview_smooth),str,scl,scl,0)
+draw_set_alpha(1)
+
 draw_set_alpha(max(0,-1+overview_smooth*2))
 if(sin(current_time/100)&lt;0)
 draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+128,overview_smooth),keyboard_string+"|")
@@ -277,29 +307,6 @@ draw_set_alpha(1)
     game_save("save.dat")
     room_goto(rm_menu)
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="18">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>clean(collision_point(mouse_x,mouse_y,obj_hex,false,false))
 </string>
           </argument>
         </arguments>
