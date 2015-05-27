@@ -111,7 +111,44 @@ with(obj_hex)
           <argument>
             <kind>1</kind>
             <string>overview = 1
-keyboard_string = game_name
+if(os_type==os_windows)
+{
+    keyboard_string = game_name
+}
+else
+{
+    keyboard_string = get_string("High Score Name:",game_name)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(os_type!=os_windows and lost!=0 and overview_smooth&gt;0.99)
+{
+    room_goto(rm_menu)
+    highscore_add(keyboard_string,score)
+    ini_open("settings.ini")
+    ini_write_string("game","name",keyboard_string)
+    ini_close()
+}
 </string>
           </argument>
         </arguments>
@@ -246,7 +283,7 @@ draw_set_alpha(1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(lost!=0 and overview_smooth&gt;0.99)
+            <string>if(os_type==os_windows and lost!=0 and overview_smooth&gt;0.99)
 {
     room_goto(rm_menu)
     highscore_add(keyboard_string,score)
