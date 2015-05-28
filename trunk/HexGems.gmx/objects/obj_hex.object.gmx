@@ -131,7 +131,7 @@ if(clickme = true and status&gt;0)
         upgrade = true
     }
     
-    if(upgrade==true)
+    if(upgrade==true and gem&lt;5)
     {
         check_should_active(false)
     }
@@ -201,11 +201,13 @@ if(clickme = true and status&gt;0)
     if(lost==1)
     {
         obj_control.alarm[0] = 120
+        sound_play(snd_lose)
     }
     if(ds_list_size(obj_control.hexes_infected)==0)
     {
         lost = -1
         obj_control.alarm[0] = 120
+        sound_play(snd_win)
     }
 }
 

@@ -32,10 +32,11 @@ hexh = hexw*sin(degtorad(60))
 xoff = room_width/2-(hexw*width)/2.6
 yoff = room_height/2-(hexh*height)/2.4
 
-globalvar count,activehex,lost;
+globalvar count,activehex,lost,spreadturns;
 count = 0
 activehex = 0
 lost = 0
+spreadturns = 0
 
 hexes_clean = ds_list_create()
 hexes_infected = ds_list_create()
@@ -241,13 +242,19 @@ draw_set_color(c_white)
 draw_rectangle(x-16,y+128,x-112+16,room_height-y*2 -16,false)
 var purp = make_color_rgb(168,137,206);
 draw_set_color(purp)
-var diff;
+var diff,str,scl;
 diff = (room_height-y*2-24)-(y+128+8)
 spreadmeter = (spreadmeter*4 + ((next_spread)/(spread_delay-1)) )/5
 draw_rectangle(x-24,y+128+8 + diff*spreadmeter,x-112+24,room_height-y*2 -24,false)
 
 //Game End Overview
 overview_smooth = (overview_smooth*4 + overview)/5
+
+draw_set_color(c_black)
+draw_set_alpha(0.5)
+str = string(spreadturns)
+scl = min(0.56,64/string_width(str))
+draw_text_transformed(x-56,y+384,str,scl,scl,0)
 
 draw_set_color(c_white)
 draw_set_alpha(0+overview_smooth*0.75)
@@ -259,15 +266,16 @@ draw_set_color(blue)
 draw_roundrect_ext(lerp(x-72,384,overview_smooth),lerp(y-72,256,overview_smooth),lerp(x+72,room_width-384,overview_smooth),lerp(y+72,room_height-256,overview_smooth),64,64,false)
 draw_set_color(blue3)
 
-var str,scl;
 draw_set_color(c_black)
 draw_set_alpha(0.5)
+
 str = string(score)
 scl = lerp(min(1,215/string_width(str)),1,overview_smooth)
 draw_text_transformed(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2,overview_smooth),str,scl,scl,0)
+
 draw_set_alpha(1)
 
-draw_set_alpha(max(0,-1+overview_smooth*2))
+draw_set_alpha(max(0,-1+overview_smooth*1.5))
 
 keyboard_string = string_copy(keyboard_string,1,12)
 

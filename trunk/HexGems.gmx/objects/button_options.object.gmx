@@ -63,6 +63,12 @@ musicslider = noone
         buttons.lock = true
         buttons.depth = 0
         depth = -1
+        
+        with(menu_options)
+        {
+            instance_destroy()
+        }
+        
         donebutton = instance_create(room_width/2,room_height-256,button_options_done);
         
         sfxslider = instance_create(room_width/2,room_height/2-128,button_slider);

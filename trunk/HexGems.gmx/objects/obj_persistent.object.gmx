@@ -44,6 +44,8 @@ ini_close()
 
 sound_volume(snd_upgrade,vol_sfx)
 sound_volume(snd_new,vol_sfx)
+sound_volume(snd_win,vol_sfx)
+sound_volume(snd_lose,vol_sfx)
 
 draw_set_color(blue3)
 

@@ -70,6 +70,12 @@ num_button[5] = noone
         buttons.lock = true
         buttons.depth = 0
         depth = -1
+        
+        with(menu_new)
+        {
+            instance_destroy()
+        }
+        
         donebutton = instance_create(room_width/2+144,room_height-256,button_new_done);
         backbutton = instance_create(room_width/2-144,room_height-256,button_new_back);
         

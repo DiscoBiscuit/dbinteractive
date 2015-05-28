@@ -4,6 +4,7 @@ with(obj_control)
     spreaded = false
     if(next_spread==0)
     {
+        spreadturns += 1
         with(obj_hex)
         {
             if(gem==3 or gem==4)
