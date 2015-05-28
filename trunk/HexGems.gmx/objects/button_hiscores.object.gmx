@@ -111,7 +111,8 @@ popup_smooth = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>popup_smooth = (popup_smooth*4 + popup)/5
+            <string>event_inherited()
+popup_smooth = (popup_smooth*4 + popup)/5
 
 draw_self()
 

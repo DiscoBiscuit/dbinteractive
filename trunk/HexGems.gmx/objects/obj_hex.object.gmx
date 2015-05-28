@@ -34,6 +34,7 @@ clickme = false
 counted = 0
 status = 1
 lookout = 0
+lookout_smooth = 0
 size = 1
 pulse = random_range(0,100);
 </string>
@@ -105,6 +106,7 @@ if(clickme = true and status&gt;0)
         if(gem==5)
             addscore(500)
         lookout = irandom(6)
+        lookout_smooth = lookout
         sound_play(snd_upgrade)
         upgrade = true
         if(active==true)
@@ -270,7 +272,8 @@ draw_sprite_ext(sprite_index,status,x+scale*10,y+scale*10,image_xscale,image_ysc
 draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 if(gem&gt;0)
 {
-        draw_sprite_ext(spr_gem,gem-1,x,y,scale*1.5,scale*1.5,lookout*60,c_white,0.25)
+    lookout_smooth = (lookout_smooth*4 + lookout)/5
+    draw_sprite_ext(spr_gem,gem-1,x,y,scale*1.65,scale*1.65,lookout_smooth*60,c_white,0.25)
     
     if(active==true)
     {

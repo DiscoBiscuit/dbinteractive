@@ -31,6 +31,7 @@ lock = false
 popup = 0
 popup_smooth = 0
 donebutton = noone
+backbutton = noone
 diff_button[8] = noone
 diff_button[6] = noone
 diff_button[4] = noone
@@ -69,7 +70,8 @@ num_button[5] = noone
         buttons.lock = true
         buttons.depth = 0
         depth = -1
-        donebutton = instance_create(room_width/2,room_height-256,button_new_done);
+        donebutton = instance_create(room_width/2+144,room_height-256,button_new_done);
+        backbutton = instance_create(room_width/2-144,room_height-256,button_new_back);
         
         diff_button[8] = instance_create(room_width/2-256,room_height/2-72,button_difficulty);
         diff_button[8].val = 8
@@ -127,7 +129,8 @@ num_button[5] = noone
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var str,scl;
+            <string>event_inherited()
+var str,scl;
 
 popup_smooth = (popup_smooth*4 + popup)/5
 
@@ -148,7 +151,7 @@ if(popup_smooth&gt;0)
     
     menu_new.image_alpha = max(0,-2+popup_smooth*3)
     
-    draw_set_alpha(0.5)
+    draw_set_alpha(menu_new.image_alpha/2)
     
     str = "DIFFICULTY"
     scl = 200/string_width(str)

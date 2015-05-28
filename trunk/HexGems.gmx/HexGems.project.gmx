@@ -48,6 +48,7 @@
       <object>objects\button_difficulty</object>
       <object>objects\button_number</object>
       <object>objects\button_new_done</object>
+      <object>objects\button_new_back</object>
       <object>objects\button_continue</object>
       <object>objects\button_hiscores</object>
       <object>objects\button_options</object>

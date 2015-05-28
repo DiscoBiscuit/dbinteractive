@@ -6,7 +6,15 @@ with(obj_control)
     {
         with(obj_hex)
         {
-            lookout += 1
+            if(gem==3 or gem==4)
+            {
+                lookout += 1
+                if(lookout == 6)
+                {
+                    lookout = 0
+                    lookout_smooth = -1
+                }
+            }
         }
         next_spread = spread_delay
         checklist = ds_list_create()

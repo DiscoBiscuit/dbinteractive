@@ -76,11 +76,14 @@ lock = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
+            <string>event_inherited()
+draw_self()
+draw_set_alpha(0.5)
 var str,scl;
 str = "EXIT"
 scl = 200/string_width(str)
 draw_text_transformed(x,y,str,scl,scl,0)
+draw_set_alpha(1)
 </string>
           </argument>
         </arguments>

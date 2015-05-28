@@ -111,7 +111,8 @@ popup_smooth = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var str,scl;
+            <string>event_inherited()
+var str,scl;
 
 popup_smooth = (popup_smooth*4 + popup)/5
 
@@ -132,7 +133,7 @@ if(popup_smooth&gt;0)
     
     str = "Clear the board of infected hexes (purple)#Click hexes to place empty runes#Place 3 or more runes together#Click shining runes to upgrade them#Consumes nearby runes of the same type#Placing or Upgrading causes infection meter to fill#When full, one random infected hex will spread#Upgraded runes cleanse adjacent hexes (yellow)#Single and Triple runes rotate when infection spreads"
     draw_set_alpha(max(0,-2+popup_smooth*3)/1.5)
-    draw_text_transformed(lerp(x,room_width/2,popup_smooth),lerp(y,room_height/2+64,popup_smooth),str,0.5,0.5,0)
+    draw_text_ext_transformed(lerp(x,room_width/2,popup_smooth),lerp(y,room_height/2+64,popup_smooth),str,128,-1,0.5,0.5,0)
     draw_set_alpha(1)
 }
 draw_set_color(c_black)

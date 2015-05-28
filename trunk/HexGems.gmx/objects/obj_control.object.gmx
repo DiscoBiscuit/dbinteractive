@@ -149,11 +149,12 @@ else
             <kind>1</kind>
             <string>if(os_type!=os_windows and lost!=0 and overview_smooth&gt;0.99)
 {
-    room_goto(rm_menu)
     highscore_add(keyboard_string,score)
+    game_name = keyboard_string
     ini_open("settings.ini")
     ini_write_string("game","name",keyboard_string)
     ini_close()
+    room_goto(rm_menu)
 }
 </string>
           </argument>
@@ -267,6 +268,9 @@ draw_text_transformed(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2,
 draw_set_alpha(1)
 
 draw_set_alpha(max(0,-1+overview_smooth*2))
+
+keyboard_string = string_copy(keyboard_string,1,12)
+
 if(sin(current_time/100)&lt;0)
 draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+128,overview_smooth),keyboard_string+"|")
 else
@@ -333,11 +337,12 @@ draw_set_alpha(1)
             <kind>1</kind>
             <string>if(os_type==os_windows and lost!=0 and overview_smooth&gt;0.99)
 {
-    room_goto(rm_menu)
     highscore_add(keyboard_string,score)
+    game_name = keyboard_string
     ini_open("settings.ini")
     ini_write_string("game","name",keyboard_string)
     ini_close()
+    room_goto(rm_menu)
 }
 </string>
           </argument>

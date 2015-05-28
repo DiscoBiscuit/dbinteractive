@@ -100,7 +100,8 @@ musicslider = noone
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var str,scl;
+            <string>event_inherited()
+var str,scl;
 
 popup_smooth = (popup_smooth*4 + popup)/5
 
