@@ -34,7 +34,8 @@ clickme = false
 counted = 0
 status = 1
 lookout = 0
-size = 1;
+size = 1
+pulse = random_range(0,100);
 </string>
           </argument>
         </arguments>
@@ -57,7 +58,11 @@ size = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>size = 1 + (sin(current_time/512)/32)
+            <string>size = 1 + (sin(pulse/32)/32)
+if status == 0
+{
+    pulse += 1
+}
 </string>
           </argument>
         </arguments>

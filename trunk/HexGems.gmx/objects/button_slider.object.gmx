@@ -127,7 +127,8 @@ width = 512
           <argument>
             <kind>1</kind>
             <string>
-draw_set_alpha(image_alpha)
+draw_set_alpha(button_options.popup_smooth/2)
+draw_set_color(c_black)
 draw_line_width(xcenter-width/2,y,xcenter+width/2,y,6)
 draw_line_width(xcenter-width/2,y+48,xcenter-width/2,y-48,6)
 draw_line_width(xcenter+width/2,y+48,xcenter+width/2,y-48,6)
@@ -135,9 +136,9 @@ for(i=0.1;i&lt;1;i+=0.1)
 {
     draw_line_width(xcenter-width/2 + width*i,y+32,xcenter-width/2 + width*i,y-32,4)
 }
+draw_set_alpha(button_options.popup_smooth)
 draw_sprite(sprite,image,xcenter-width/2-128,y)
 draw_sprite(sprite,image,xcenter+width/2+128,y)
-draw_set_alpha(1)
 draw_self()
 </string>
           </argument>

@@ -131,10 +131,12 @@ else
         instance_destroy()
     }
 }
-
+draw_set_color(c_black)
+draw_set_alpha(0.5)
 str = "OPTIONS"
 scl = 256/string_width(str)
 draw_text_transformed(lerp(x,room_width/2,popup_smooth),lerp(y,128+string_height(str)/2,popup_smooth),str,scl,scl,0)
+draw_set_alpha(1)
 </string>
           </argument>
         </arguments>

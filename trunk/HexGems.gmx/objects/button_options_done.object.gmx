@@ -61,7 +61,8 @@ ini_close()
 var str,scl;
 str = "DONE"
 scl = 200/string_width(str)
-draw_set_alpha(image_alpha)
+draw_set_color(c_black)
+draw_set_alpha(button_options.popup_smooth/2)
 draw_text_transformed(x,y,str,scl,scl,0)
 draw_set_alpha(1)
 </string>

@@ -238,7 +238,8 @@ draw_set_color(blue)
 draw_rectangle(x,y,x-112,room_height-y*2,false)
 draw_set_color(c_white)
 draw_rectangle(x-16,y+128,x-112+16,room_height-y*2 -16,false)
-draw_set_color(c_purple)
+var purp = make_color_rgb(168,137,206);
+draw_set_color(purp)
 var diff;
 diff = (room_height-y*2-24)-(y+128+8)
 spreadmeter = (spreadmeter*4 + ((next_spread)/(spread_delay-1)) )/5
@@ -258,9 +259,10 @@ draw_roundrect_ext(lerp(x-72,384,overview_smooth),lerp(y-72,256,overview_smooth)
 draw_set_color(blue3)
 
 var str,scl;
+draw_set_color(c_black)
+draw_set_alpha(0.5)
 str = string(score)
 scl = lerp(min(1,215/string_width(str)),1,overview_smooth)
-draw_set_alpha(image_alpha)
 draw_text_transformed(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2,overview_smooth),str,scl,scl,0)
 draw_set_alpha(1)
 
