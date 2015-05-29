@@ -5,9 +5,81 @@
   <visible>-1</visible>
   <depth>-2</depth>
   <persistent>0</persistent>
-  <parentName>menu_new</parentName>
+  <parentName>menu_ad</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(irandom(5)==1)
+{
+    mask_index = spr_empty
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>mask_index = sprite_index
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[0] = 1
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="6" enumb="7">
       <action>
         <libid>1</libid>
@@ -25,14 +97,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(lost==false)
-{
-    audio_play_sound(snd_button,1,false)
-    obj_control.alarm[10] = 1
-    game_save("save.dat")
-    showad = true
-    room_goto(rm_menu)
-}
+            <string>obj_logo.popup = 0
 </string>
           </argument>
         </arguments>
@@ -57,9 +122,10 @@
             <kind>1</kind>
             <string>draw_self()
 var str,scl;
-str = "B#A#C#K"
-scl = 160/string_height(str)
-draw_set_alpha(0.5)
+str = "CLOSE"
+scl = 200/string_width(str)
+draw_set_color(c_black)
+draw_set_alpha(obj_logo.popup_smooth/2)
 draw_text_transformed(x,y,str,scl,scl,0)
 draw_set_alpha(1)
 </string>
