@@ -164,7 +164,7 @@ if(popup_smooth&gt;0)
     scl = 200/string_width(str)
     draw_text_transformed(room_width/2-512,room_height/2-72,str,scl,scl,0)
     
-    str = "NUMBER"
+    str = "STARTING#INFECTION"
     scl = 200/string_width(str)
     draw_text_transformed(room_width/2-512,room_height/2+72,str,scl,scl,0)
     
