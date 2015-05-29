@@ -9,8 +9,8 @@
     <sound>sound\snd_new</sound>
     <sound>sound\snd_lose</sound>
     <sound>sound\snd_win</sound>
-    <sound>sound\mus_main</sound>
     <sound>sound\snd_button</sound>
+    <sound>sound\mus_main</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_hex</sprite>
