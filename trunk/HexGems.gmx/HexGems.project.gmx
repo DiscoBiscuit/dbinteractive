@@ -19,6 +19,7 @@
     <sprite>sprites\spr_button</sprite>
     <sprite>sprites\spr_slider</sprite>
     <sprite>sprites\spr_sfxicon</sprite>
+    <sprite>sprites\spr_logo</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_menu</background>
@@ -61,6 +62,7 @@
       <object>objects\button_slider</object>
       <object>objects\button_tutorial</object>
       <object>objects\button_exit</object>
+      <object>objects\obj_logo</object>
     </objects>
   </objects>
   <rooms name="rooms">

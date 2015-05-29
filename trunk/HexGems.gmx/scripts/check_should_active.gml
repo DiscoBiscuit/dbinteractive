@@ -37,11 +37,13 @@ if(gem>0)
             active = true
             with(obj_hex)
             {
+                depth = 0
                 if(counted>0)
                 {
-                    image_blend = c_teal
+                    image_blend = merge_color(c_teal,c_white,0.5)
                 }
             }
+            depth = -2
         }
         else
         {

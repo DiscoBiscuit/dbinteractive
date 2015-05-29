@@ -47,13 +47,12 @@ audio_sound_gain(snd_new,vol_sfx,0)
 audio_sound_gain(snd_win,vol_sfx,0)
 audio_sound_gain(snd_lose,vol_sfx,0)
 audio_sound_gain(snd_button,vol_sfx,0)
-audio_sound_gain(mus_main,vol_music,0)
+audio_sound_gain(mus_main,0,0)
+audio_sound_gain(mus_main,vol_music,8000)
 
 audio_play_sound(mus_main,0,true)
 
 draw_set_color(blue3)
-
-
 </string>
           </argument>
         </arguments>
