@@ -34,7 +34,9 @@ if(showad==true)
     depth = -1
     showad = false
     popup = 1
+    GoogleMobileAds_LoadInterstitial()
     alarm[0] = 120
+    adloaded = false
 }
 </string>
           </argument>
@@ -58,8 +60,48 @@ if(showad==true)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(room_width/2+144,room_height-256,button_closead);
+            <string>//If the other way works, then this should be done when the interstitial is loaded
+GoogleMobileAds_ShowInterstitial();
+
+instance_create(room_width/2+144,room_height-256,button_closead);
 instance_create(room_width/2-144,room_height-256,button_pay);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="70">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*
+var ident = ds_map_find_value(async_load, "type" );
+var loaded = ds_map_find_value(async_load, "loaded");
+if ident == "interstitial_load"
+{
+if loaded
+    {
+    var bw = ds_map_find_value(async_load, "width");
+    var bh = ds_map_find_value(async_load, "height");
+    var px = (display_get_width() - bw)/2;
+    var py = (display_get_height() - bh)/2;
+    GoogleMobileAds_MoveBanner(px, py);
+    }
+}
+*/
 </string>
           </argument>
         </arguments>
@@ -86,6 +128,15 @@ instance_create(room_width/2-144,room_height-256,button_pay);
 popup_smooth = (popup_smooth*4 + popup)/5
 
 draw_self()
+
+/*
+if(GoogleMobileAds_InterstitialStatus() == "Ready" and adloaded==false)
+{
+    GoogleMobileAds_ShowInterstitial();
+    alarm[0] = 120
+    adloaded = true
+}
+*/
 
 if(popup_smooth&gt;0.01)
 {

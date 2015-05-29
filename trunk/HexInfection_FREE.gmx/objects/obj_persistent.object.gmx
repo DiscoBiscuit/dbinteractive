@@ -55,6 +55,8 @@ audio_play_sound(mus_main,0,true)
 
 draw_set_color(blue3)
 showad = false
+
+GoogleMobileAds_Init("ca-app-pub-8580967003199776/3863292246")
 </string>
           </argument>
         </arguments>
