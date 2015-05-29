@@ -35,7 +35,7 @@ if(showad==true)
     showad = false
     popup = 1
     GoogleMobileAds_LoadInterstitial()
-    alarm[0] = 120
+    //alarm[0] = 120
     adloaded = false
 }
 </string>
@@ -87,7 +87,7 @@ instance_create(room_width/2-144,room_height-256,button_pay);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*
+            <string>
 var ident = ds_map_find_value(async_load, "type" );
 var loaded = ds_map_find_value(async_load, "loaded");
 if ident == "interstitial_load"
@@ -101,7 +101,7 @@ if loaded
     GoogleMobileAds_MoveBanner(px, py);
     }
 }
-*/
+
 </string>
           </argument>
         </arguments>
@@ -129,14 +129,12 @@ popup_smooth = (popup_smooth*4 + popup)/5
 
 draw_self()
 
-/*
 if(GoogleMobileAds_InterstitialStatus() == "Ready" and adloaded==false)
 {
     GoogleMobileAds_ShowInterstitial();
     alarm[0] = 120
     adloaded = true
 }
-*/
 
 if(popup_smooth&gt;0.01)
 {
