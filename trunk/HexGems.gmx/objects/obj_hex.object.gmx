@@ -284,7 +284,7 @@ else
     image_xscale = scale;
     image_yscale = scale;
 }
-draw_sprite_ext(sprite_index,status,x+scale*10,y+scale*10,image_xscale,image_yscale,image_angle,c_ltgray,image_alpha/2);
+draw_sprite_ext(sprite_index,status,x+scale*10,y+scale*10,image_xscale,image_yscale,image_angle,merge_color(image_blend,c_gray,0.5),image_alpha/2);
 draw_sprite_ext(sprite_index,status,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 if(gem&gt;0)
 {
