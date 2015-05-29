@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar blue,blue2,blue3,vol_sfx,vol_music,game_diff,game_num,game_name;
+            <string>globalvar blue,blue2,blue3,vol_sfx,vol_music,game_diff,game_num,game_fullscreen,game_name;
 blue = make_color_rgb(159,205,241);
 blue2 = make_color_rgb(141,182,214);
 blue3 = make_color_rgb(40,80,200)
@@ -39,6 +39,7 @@ vol_sfx = ini_read_real("options","sfx",0.5)
 vol_music = ini_read_real("options","music",0.5)
 game_diff = ini_read_real("game","difficulty",6)
 game_num = ini_read_real("game","number",3)
+game_fullscreen = ini_read_real("game","fullscreen",0)
 game_name = ini_read_string("game","name","Player")
 ini_close()
 
@@ -79,6 +80,20 @@ draw_set_color(blue3)
 {
     view_wport = display_get_height();
     view_hport = display_get_width();
+}
+if(os_type==os_windows)
+{
+    if(game_fullscreen==1)
+    {
+        view_wport = display_get_width();
+        view_hport = display_get_height();  
+    }
+    else
+    {
+        view_wport = display_get_width()/2;
+        view_hport = display_get_height()/2;
+    }
+    window_set_fullscreen(game_fullscreen)
 }
 </string>
           </argument>

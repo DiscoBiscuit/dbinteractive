@@ -59,6 +59,7 @@
       <object>objects\button_options</object>
       <object>objects\menu_options</object>
       <object>objects\button_options_done</object>
+      <object>objects\button_fullscreen</object>
       <object>objects\button_slider</object>
       <object>objects\button_tutorial</object>
       <object>objects\button_exit</object>

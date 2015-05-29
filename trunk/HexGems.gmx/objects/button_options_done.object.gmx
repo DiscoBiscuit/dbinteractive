@@ -38,7 +38,22 @@ audio_sound_gain(mus_main,vol_music,0)
 ini_open("settings.ini")
 ini_write_real("options","sfx",vol_sfx)
 ini_write_real("options","music",vol_music)
+ini_write_real("game","fullscreen",game_fullscreen)
 ini_close()
+if(os_type==os_windows)
+{
+    if(game_fullscreen==1)
+    {
+        view_wport = display_get_width();
+        view_hport = display_get_height();
+    }
+    else
+    {
+        view_wport = display_get_width()/2;
+        view_hport = display_get_height()/2;
+    }
+    window_set_fullscreen(game_fullscreen)
+}
 </string>
           </argument>
         </arguments>
