@@ -31,4 +31,3 @@ draw_sprite_part_ext(sprite,index,border*2,border,border,border,x2-border,y1+bor
 //center
 draw_sprite_part_ext(sprite,index,border,border,border,border,x1+border,y1+border,hor/border,vert/border,blend,alpha)
 
-

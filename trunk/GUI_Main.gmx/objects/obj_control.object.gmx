@@ -34,6 +34,12 @@ gui_addto("console_dragbar","console_panel", gui_dragbar_create(0,0,256,128,c_wh
 gui_edit(gui_lookup("console_dragbar"),"alpha",0)
 gui_addto("console_textlog","console_panel", gui_textlog_create(8,8,240,80,c_dkgray,c_white,-1) )
 gui_addto("console_textbox","console_panel", gui_textbox_create(8,102,240,18,c_dkgray,c_white,-1,0,append_to_console) )
+
+gui_add("new_panel", gui_panel_create(256,256,256,128,c_blue,true) )
+gui_addto("new_panel_drag","new_panel", gui_dragbar_create(0,0,256,16,c_white) )
+
+gui_add("new_panel2", gui_panel_create(128,128,256,128,c_red,true) )
+gui_addto("new_panel2_drag","new_panel2", gui_dragbar_create(0,0,256,16,c_white) )
 </string>
           </argument>
         </arguments>
