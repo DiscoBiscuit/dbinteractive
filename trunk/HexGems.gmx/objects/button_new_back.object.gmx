@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>buttons.lock = false
+            <string>audio_play_sound(snd_button,1,false)
+buttons.lock = false
 button_new.popup = 0
 </string>
           </argument>

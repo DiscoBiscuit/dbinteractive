@@ -53,6 +53,7 @@ width = 512
             <string>if(drag==true)
 {
     drag = false
+    audio_play_sound(snd_button,1,false)
 }
 </string>
           </argument>
@@ -104,6 +105,7 @@ width = 512
           <argument>
             <kind>1</kind>
             <string>drag = true
+audio_play_sound(snd_button,1,false)
 </string>
           </argument>
         </arguments>

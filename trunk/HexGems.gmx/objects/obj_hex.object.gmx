@@ -107,7 +107,7 @@ if(clickme = true and status&gt;0)
             addscore(500)
         lookout = irandom(6)
         lookout_smooth = lookout
-        sound_play(snd_upgrade)
+        audio_play_sound(snd_upgrade,1,false)
         upgrade = true
         if(active==true)
         {
@@ -127,7 +127,7 @@ if(clickme = true and status&gt;0)
             spread()
             addscore(10)
         }
-        sound_play(snd_new)
+        audio_play_sound(snd_new,1,false)
         upgrade = true
     }
     
@@ -197,17 +197,31 @@ if(clickme = true and status&gt;0)
             }
         }
     }
-    
-    if(lost==1)
-    {
-        obj_control.alarm[0] = 120
-        sound_play(snd_lose)
-    }
+}
+
+if(lost==0)
+{
     if(ds_list_size(obj_control.hexes_infected)==0)
     {
         lost = -1
         obj_control.alarm[0] = 120
-        sound_play(snd_win)
+        audio_play_sound(snd_win,2,false)
+    }
+    else
+    {
+        lost = 1
+        with(obj_hex)
+        {
+            if( (status&gt;0 and gem==0) or active==true )
+            {
+                lost = 0
+            }
+        }
+        if(lost==1)
+        {
+            obj_control.alarm[0] = 120
+            audio_play_sound(snd_lose,2,false)
+        }
     }
 }
 

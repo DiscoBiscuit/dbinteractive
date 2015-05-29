@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>if(lost==false)
 {
+    audio_play_sound(snd_button,1,false)
     obj_control.alarm[10] = 1
     game_save("save.dat")
     room_goto(rm_menu)

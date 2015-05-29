@@ -52,6 +52,7 @@ lock = false
             <kind>1</kind>
             <string>if(file_exists("save.dat") and lock==false)
 {
+    audio_play_sound(snd_button,1,false)
     game_load("save.dat")
 }
 </string>

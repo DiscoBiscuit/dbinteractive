@@ -66,6 +66,7 @@ num_button[5] = noone
 {
     if(popup_smooth&lt;0.01)
     {
+        audio_play_sound(snd_button,1,false)
         popup = 1
         buttons.lock = true
         buttons.depth = 0

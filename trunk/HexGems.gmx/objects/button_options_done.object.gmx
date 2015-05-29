@@ -25,14 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>button_options.popup = 0
+            <string>audio_play_sound(snd_button,1,false)
+button_options.popup = 0
 buttons.lock = false
 vol_sfx = button_options.sfxslider.val
 vol_music = button_options.musicslider.val
-sound_volume(snd_upgrade,vol_sfx)
-sound_volume(snd_new,vol_sfx)
-sound_volume(snd_win,vol_sfx)
-sound_volume(snd_lose,vol_sfx)
+audio_sound_gain(snd_upgrade,vol_sfx,0)
+audio_sound_gain(snd_new,vol_sfx,0)
+audio_sound_gain(snd_win,vol_sfx,0)
+audio_sound_gain(snd_lose,vol_sfx,0)
+audio_sound_gain(snd_button,vol_sfx,0)
+audio_sound_gain(mus_main,vol_music,0)
 ini_open("settings.ini")
 ini_write_real("options","sfx",vol_sfx)
 ini_write_real("options","music",vol_music)

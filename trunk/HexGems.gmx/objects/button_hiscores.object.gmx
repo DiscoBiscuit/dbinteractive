@@ -54,6 +54,7 @@ popup_smooth = 0
             <kind>1</kind>
             <string>if(popup_smooth&gt;0.99)
 {
+    audio_play_sound(snd_button,1,false)
     popup = 0
     buttons.lock = false
 }
@@ -83,6 +84,7 @@ popup_smooth = 0
 {
     if(popup_smooth&lt;0.01)
     {
+        audio_play_sound(snd_button,1,false)
         popup = 1
         buttons.lock = true
         buttons.depth = 0
