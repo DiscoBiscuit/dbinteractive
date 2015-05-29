@@ -170,12 +170,14 @@ if(popup_smooth&gt;0)
     
     draw_set_alpha(1)
 }
-else
+if(popup_smooth&lt;0.01 and popup_smooth&gt;0)
 {
     with(menu_new)
     {
         instance_destroy()
     }
+    buttons.lock = false
+    popup_smooth = 0
 }
 
 str = "NEW#GAME"

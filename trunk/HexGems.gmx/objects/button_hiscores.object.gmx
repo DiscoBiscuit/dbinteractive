@@ -56,7 +56,6 @@ popup_smooth = 0
 {
     audio_play_sound(snd_button,1,false)
     popup = 0
-    buttons.lock = false
 }
 </string>
           </argument>
@@ -136,6 +135,11 @@ if(popup_smooth&gt;0)
     draw_highscore(lerp(x-72,384-16,popup_smooth),lerp(y-72,256-16,popup_smooth),lerp(x+72,room_width-384+16,popup_smooth),lerp(y+72,room_height-64+16,popup_smooth))
     draw_set_halign(fa_center)
     draw_set_alpha(1)
+}
+if(popup_smooth&lt;0.01 and popup_smooth&gt;0)
+{
+    buttons.lock = false
+    popup_smooth = 0
 }
 draw_set_alpha(0.5)
 var str,scl;

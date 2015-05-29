@@ -27,7 +27,6 @@
             <kind>1</kind>
             <string>audio_play_sound(snd_button,1,false)
 button_options.popup = 0
-buttons.lock = false
 vol_sfx = button_options.sfxslider.val
 vol_music = button_options.musicslider.val
 audio_sound_gain(snd_upgrade,vol_sfx,0)

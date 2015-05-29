@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>audio_play_sound(snd_button,1,false)
-buttons.lock = false
 ini_open("settings.ini")
 ini_write_real("game","difficulty",game_diff)
 ini_write_real("game","number",game_num)

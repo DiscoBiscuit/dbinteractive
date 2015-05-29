@@ -132,12 +132,13 @@ if(popup_smooth&gt;0.01)
         menu_options.image_alpha = max(0,-2+popup_smooth*3)
     }
 }
-else
+if(popup_smooth&lt;0.01 and popup_smooth&gt;0)
 {
     with(menu_options)
     {
         instance_destroy()
     }
+    buttons.lock = false
 }
 draw_set_color(c_black)
 draw_set_alpha(0.5)
