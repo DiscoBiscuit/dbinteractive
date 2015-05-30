@@ -33,7 +33,6 @@
       <init></init>
       <final></final>
       <kind>4</kind>
-      <uncompress>0</uncompress>
       <ConfigOptions>
         <Config name="Default">
           <CopyToMask>49385710</CopyToMask>
