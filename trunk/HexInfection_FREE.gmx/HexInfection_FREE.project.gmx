@@ -37,11 +37,13 @@
     <script>scripts\clean.gml</script>
     <script>scripts\spread.gml</script>
     <script>scripts\addscore.gml</script>
+    <script>scripts\scr_showinterstitial.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
   </fonts>
   <objects name="objects">
+    <object>objects\obj_ad</object>
     <object>objects\obj_persistent</object>
     <object>objects\obj_control</object>
     <object>objects\obj_pausebutton</object>

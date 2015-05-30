@@ -25,19 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>popup = 0
-popup_smooth = 0
-if(showad==true)
-{
-    buttons.lock = true
-    buttons.depth = 0
-    depth = -1
-    showad = false
-    popup = 1
-    GoogleMobileAds_LoadInterstitial()
-    //alarm[0] = 120
-    adloaded = false
-}
+            <string>alarm[0] = 90
 </string>
           </argument>
         </arguments>
@@ -60,104 +48,9 @@ if(showad==true)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//If the other way works, then this should be done when the interstitial is loaded
-GoogleMobileAds_ShowInterstitial();
-
-instance_create(room_width/2+144,room_height-256,button_closead);
-instance_create(room_width/2-144,room_height-256,button_pay);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="70">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>
-var ident = ds_map_find_value(async_load, "type" );
-var loaded = ds_map_find_value(async_load, "loaded");
-if ident == "interstitial_load"
+            <string>if showad == true and os_type == os_android
 {
-if loaded
-    {
-    var bw = ds_map_find_value(async_load, "width");
-    var bh = ds_map_find_value(async_load, "height");
-    var px = (display_get_width() - bw)/2;
-    var py = (display_get_height() - bh)/2;
-    GoogleMobileAds_MoveBanner(px, py);
-    }
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_set_alpha(1)
-popup_smooth = (popup_smooth*4 + popup)/5
-
-draw_self()
-
-if(GoogleMobileAds_InterstitialStatus() == "Ready" and adloaded==false)
-{
-    GoogleMobileAds_ShowInterstitial();
-    alarm[0] = 120
-    adloaded = true
-}
-
-if(popup_smooth&gt;0.01)
-{
-    draw_set_color(c_black)
-    draw_set_alpha(min(1,popup_smooth*3))
-    draw_rectangle(lerp(room_width/2,0,popup_smooth),lerp(room_height/2,0,popup_smooth),lerp(room_width/2,room_width,popup_smooth),lerp(room_height/2,room_height,popup_smooth),false)
-    draw_set_alpha(1)
-    
-    if(popup_smooth&lt;0.99)
-    {
-        with(menu_ad)
-        {
-            image_alpha = max(0,-2+obj_logo.popup_smooth*3)
-        }
-    }
-}
-if(popup_smooth&lt;0.01 and popup_smooth&gt;0)
-{
-    with(menu_ad)
-    {
-        instance_destroy()
-    }
-    buttons.lock = false
+    scr_showinterstitial();
 }
 </string>
           </argument>
