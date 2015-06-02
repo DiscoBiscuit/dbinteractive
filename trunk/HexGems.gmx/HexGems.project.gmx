@@ -26,6 +26,7 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\scr_screenresize.gml</script>
     <script>scripts\scr_creategrid.gml</script>
     <script>scripts\get_adjacent.gml</script>
     <script>scripts\check_near.gml</script>

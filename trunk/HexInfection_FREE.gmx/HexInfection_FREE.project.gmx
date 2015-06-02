@@ -38,6 +38,7 @@
     <script>scripts\spread.gml</script>
     <script>scripts\addscore.gml</script>
     <script>scripts\scr_showinterstitial.gml</script>
+    <script>scripts\scr_screenresize.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>

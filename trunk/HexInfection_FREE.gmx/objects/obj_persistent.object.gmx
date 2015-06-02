@@ -79,33 +79,7 @@ GoogleMobileAds_Init("ca-app-pub-8580967003199776/3863292246")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(os_type==os_android)
-{
-    if(game_fullscreen==1)
-    {
-        view_wport = display_get_height()/2;
-        view_hport = display_get_width()/2;  
-    }
-    else
-    {
-        view_wport = display_get_height();
-        view_hport = display_get_width();
-    }
-}
-else
-{
-    if(game_fullscreen==1)
-    {
-        view_wport = display_get_width();
-        view_hport = display_get_height();  
-    }
-    else
-    {
-        view_wport = display_get_width()/2;
-        view_hport = display_get_height()/2;
-    }
-    window_set_fullscreen(game_fullscreen)
-}
+            <string>scr_screenresize();
 </string>
           </argument>
         </arguments>
@@ -131,6 +105,10 @@ else
             <string>draw_set_blend_mode(bm_subtract);
 draw_circle_colour(room_width/2,room_height/2,room_width/1.5,c_black,c_dkgray,false);
 draw_set_blend_mode(bm_normal);
+draw_set_halign(fa_left);
+draw_text(0,32,view_wport);
+draw_text(0,96,view_hport);
+draw_set_halign(fa_center);
 </string>
           </argument>
         </arguments>

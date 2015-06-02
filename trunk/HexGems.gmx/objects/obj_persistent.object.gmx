@@ -76,25 +76,7 @@ draw_set_color(blue3)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if os_type == os_android
-{
-    view_wport = display_get_height();
-    view_hport = display_get_width();
-}
-if(os_type==os_windows)
-{
-    if(game_fullscreen==1)
-    {
-        view_wport = display_get_width();
-        view_hport = display_get_height();  
-    }
-    else
-    {
-        view_wport = display_get_width()/2;
-        view_hport = display_get_height()/2;
-    }
-    window_set_fullscreen(game_fullscreen)
-}
+            <string>scr_screenresize();
 </string>
           </argument>
         </arguments>

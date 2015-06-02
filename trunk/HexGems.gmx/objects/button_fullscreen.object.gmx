@@ -90,7 +90,14 @@ else
             <kind>1</kind>
             <string>draw_self()
 var str,scl;
-str = "FULLSCREEN"
+if(os_type==os_android)
+{
+    str = "PERFORMANCE#MODE"
+}
+else
+{
+    str = "FULLSCREEN"
+}
 scl = 200/string_width(str)
 draw_set_color(c_black)
 draw_set_alpha(button_options.popup_smooth/2)

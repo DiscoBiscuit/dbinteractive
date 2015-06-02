@@ -92,7 +92,7 @@ else
 var str,scl;
 if(os_type==os_android)
 {
-    str = "HALF#RESOLUTION"
+    str = "PERFORMANCE#MODE"
 }
 else
 {
