@@ -79,12 +79,20 @@ GoogleMobileAds_Init("ca-app-pub-8580967003199776/3863292246")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if os_type == os_android
+            <string>if(os_type==os_windows)
 {
-    view_wport = display_get_height();
-    view_hport = display_get_width();
+    if(game_fullscreen==1)
+    {
+        view_wport = display_get_height()/2;
+        view_hport = display_get_width()/2;  
+    }
+    else
+    {
+        view_wport = display_get_height();
+        view_hport = display_get_width();
+    }
 }
-if(os_type==os_windows)
+else
 {
     if(game_fullscreen==1)
     {

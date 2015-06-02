@@ -40,7 +40,20 @@ ini_write_real("options","sfx",vol_sfx)
 ini_write_real("options","music",vol_music)
 ini_write_real("game","fullscreen",game_fullscreen)
 ini_close()
-if(os_type==os_windows)
+if(os_type==os_android)
+{
+    if(game_fullscreen==1)
+    {
+        view_wport = display_get_height()/2;
+        view_hport = display_get_width()/2;  
+    }
+    else
+    {
+        view_wport = display_get_height();
+        view_hport = display_get_width();
+    }
+}
+else
 {
     if(game_fullscreen==1)
     {
