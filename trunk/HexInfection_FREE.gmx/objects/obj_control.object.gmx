@@ -32,11 +32,12 @@ hexh = hexw*sin(degtorad(60))
 xoff = room_width/2-(hexw*width)/2.6
 yoff = room_height/2-(hexh*height)/2.4
 
-globalvar count,activehex,lost,spreadturns;
+globalvar count,activehex,lost,spreadturns,clickturns;
 count = 0
 activehex = 0
 lost = 0
 spreadturns = 0
+clickturns = 0
 
 hexes_clean = ds_list_create()
 hexes_infected = ds_list_create()
@@ -150,11 +151,14 @@ else
             <kind>1</kind>
             <string>if(os_type!=os_windows and lost!=0 and overview_smooth&gt;0.99)
 {
-    highscore_add(keyboard_string,score)
-    game_name = keyboard_string
-    ini_open("settings.ini")
-    ini_write_string("game","name",keyboard_string)
-    ini_close()
+    if(lost!=-2)
+    {
+        highscore_add(keyboard_string,score)
+        game_name = keyboard_string
+        ini_open("settings.ini")
+        ini_write_string("game","name",keyboard_string)
+        ini_close()
+    }
     room_goto(rm_menu)
 }
 </string>
@@ -278,11 +282,15 @@ draw_set_alpha(max(0,-1+overview_smooth*1.5))
 
 keyboard_string = string_copy(keyboard_string,1,12)
 
-if(sin(current_time/100)&lt;0)
-draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+128,overview_smooth),keyboard_string+"|")
-else
-draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+128,overview_smooth),keyboard_string)
-draw_line_width(lerp(x,room_width/2-512,overview_smooth),lerp(y,room_height/2+192,overview_smooth),lerp(x,room_width/2+512,overview_smooth),lerp(y,room_height/2+192,overview_smooth),8)
+if(lost!=-2)
+{
+    if(sin(current_time/100)&lt;0)
+    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+128,overview_smooth),keyboard_string+"|")
+    else
+    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y,room_height/2+128,overview_smooth),keyboard_string)
+    draw_line_width(lerp(x,room_width/2-512,overview_smooth),lerp(y,room_height/2+192,overview_smooth),lerp(x,room_width/2+512,overview_smooth),lerp(y,room_height/2+192,overview_smooth),8)
+}
+
 if(lost==1)
 {
     draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-128,overview_smooth),"LOSER")
@@ -290,6 +298,10 @@ if(lost==1)
 if(lost==-1)
 {
     draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-128,overview_smooth),"WINNER")
+}
+if(lost==-2)
+{
+    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-128,overview_smooth),"BUY FULL VERSION")
 }
 draw_set_alpha(1)
 </string>
@@ -344,11 +356,14 @@ draw_set_alpha(1)
             <kind>1</kind>
             <string>if(os_type==os_windows and lost!=0 and overview_smooth&gt;0.99)
 {
-    highscore_add(keyboard_string,score)
-    game_name = keyboard_string
-    ini_open("settings.ini")
-    ini_write_string("game","name",keyboard_string)
-    ini_close()
+    if(lost!=-2)
+    {
+        highscore_add(keyboard_string,score)
+        game_name = keyboard_string
+        ini_open("settings.ini")
+        ini_write_string("game","name",keyboard_string)
+        ini_close()
+    }
     room_goto(rm_menu)
 }
 </string>

@@ -45,4 +45,5 @@ with(obj_control)
         ds_list_destroy(checklist)
     }
     next_spread -= 1
+    clickturns += 1
 }

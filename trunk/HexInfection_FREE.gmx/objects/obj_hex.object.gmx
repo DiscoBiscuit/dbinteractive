@@ -223,6 +223,11 @@ if(lost==0)
             audio_play_sound(snd_lose,2,false)
         }
     }
+    if(lost==0 and clickturns&gt;=100)
+    {
+        lost = -2
+        obj_control.alarm[0] = 30
+    }
 }
 
 clickme = false
