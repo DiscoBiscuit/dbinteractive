@@ -105,10 +105,6 @@ GoogleMobileAds_Init("ca-app-pub-8580967003199776/3863292246")
             <string>draw_set_blend_mode(bm_subtract);
 draw_circle_colour(room_width/2,room_height/2,room_width/1.5,c_black,c_dkgray,false);
 draw_set_blend_mode(bm_normal);
-draw_set_halign(fa_left);
-draw_text(0,32,view_wport);
-draw_text(0,96,view_hport);
-draw_set_halign(fa_center);
 </string>
           </argument>
         </arguments>

@@ -85,10 +85,7 @@ fullscreenbutton = noone
         musicslider.image = 1
         musicslider.x = musicslider.x-musicslider.width/2+musicslider.width*musicslider.val
         
-        if(os_type==os_windows)
-        {
-            fullscreenbutton = instance_create(room_width/2,room_height/2+120,button_fullscreen);
-        }
+        fullscreenbutton = instance_create(room_width/2,room_height/2+120,button_fullscreen);
     }
 }
 </string>
