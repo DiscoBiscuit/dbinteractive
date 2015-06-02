@@ -79,7 +79,7 @@ GoogleMobileAds_Init("ca-app-pub-8580967003199776/3863292246")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(os_type==os_windows)
+            <string>if(os_type==os_android)
 {
     if(game_fullscreen==1)
     {
