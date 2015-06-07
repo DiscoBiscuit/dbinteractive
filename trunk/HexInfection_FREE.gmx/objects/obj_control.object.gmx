@@ -165,6 +165,7 @@ else
         ini_write_string("game","name",keyboard_string)
         ini_close()
     }
+    scr_showinterstitial()
     room_goto(rm_menu)
 }
 </string>
