@@ -122,8 +122,10 @@ if(os_type==os_windows)
 }
 else
 {
-
-    name = get_string_async("High Score Name:",game_name)
+    if(lost!=-2)
+    {
+        name = get_string_async("High Score Name:",game_name)
+    }
 }
 
 
@@ -151,7 +153,11 @@ else
             <kind>1</kind>
             <string>if(os_type!=os_windows and lost!=0 and overview_smooth&gt;0.99)
 {
-    if(lost!=-2)
+    if(lost==-2)
+    {
+        url_open("https://play.google.com/store/apps/details?id=com.fiveloop.HexInfection"); 
+    }
+    else
     {
         highscore_add(keyboard_string,score)
         game_name = keyboard_string
@@ -301,7 +307,7 @@ if(lost==-1)
 }
 if(lost==-2)
 {
-    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-128,overview_smooth),"BUY FULL VERSION")
+    draw_text(lerp(x,room_width/2,overview_smooth),lerp(y-64,room_height/2-128,overview_smooth),"PLEASE BUY FULL VERSION")
 }
 draw_set_alpha(1)
 </string>

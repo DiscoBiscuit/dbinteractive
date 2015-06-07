@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>//This code will only be called once because our object is persistent. You don't want to call GoogleMobileAds_Init more than once
-GoogleMobileAds_Init("ca-app-pub-8580967003199776/3863292246"); //Your Interstitial ID from admob
-global.bannerId = "ca-app-pub-8580967003199776/3863292246"; //Your Banner ID from admob
+global.bannerId = "ca-app-pub-5190539697896615/9160639000"; //Your Banner ID from admob
+GoogleMobileAds_Init(global.bannerId); //Your Interstitial ID from admob
 
 
 GoogleMobileAds_LoadInterstitial();
