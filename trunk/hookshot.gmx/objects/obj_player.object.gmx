@@ -255,7 +255,21 @@ if phy_fixed_rotation = true and phy_rotation != 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>phy_position_x = xstart;
+            <string>if instance_exists(obj_hook)
+{
+    with obj_rope
+    {
+        instance_destroy();
+    }
+    with obj_hook
+    {
+        instance_destroy();
+    }
+    hooked = false;
+    ds_list_clear(ropearray);
+}
+
+phy_position_x = xstart;
 phy_position_y = ystart;
 </string>
           </argument>
@@ -285,7 +299,7 @@ phy_position_y = ystart;
   <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
+  <PhysicsObjectLinearDamping>0.025000000372529</PhysicsObjectLinearDamping>
   <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>

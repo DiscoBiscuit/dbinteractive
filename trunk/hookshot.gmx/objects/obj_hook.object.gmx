@@ -112,16 +112,17 @@ if not hooked
             <kind>1</kind>
             <string>///create rope physics
 var dist = point_distance(self.x,self.y,other.x,other.y);
-attach = physics_joint_weld_create(self,other,x,y,phy_rotation,10,1,false);
+attach = physics_joint_weld_create(self,other,x,y,phy_rotation,10,100,false);
 hooked = true;
 obj_player.hooked = true;
 obj_player.roperetractnum = 0;
 //create rope
-var number = point_distance(x,y,obj_player.x,obj_player.y)/70;
+var number = point_distance(x,y,obj_player.x,obj_player.y)/50;
 var count = 0;
 next_rope = instance_create(x,y,obj_rope);
 ds_list_add(ropearray,next_rope.id);
-attachrope = physics_joint_distance_create(self,next_rope,self.x,self.y,next_rope.x,next_rope.y,false);
+//attachrope = physics_joint_distance_create(self,next_rope,self.x,self.y,next_rope.x,next_rope.y,false);
+attachrope = physics_joint_rope_create(self,next_rope,self.x,self.y,next_rope.x,next_rope.y,1,false);
 with next_rope
 {
     parent = other.id;
@@ -144,9 +145,11 @@ repeat number
             phy_rotation = -dir2+90;
         }
     }
-    link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
+    link = physics_joint_rope_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,len/number,false);
+    //link = physics_joint_distance_create(last_rope,next_rope,last_rope.x,last_rope.y,next_rope.x,next_rope.y,false);
 }
-attachtoplayer = physics_joint_distance_create(obj_player,next_rope,obj_player.x,obj_player.y-32,next_rope.x,next_rope.y,false);
+//attachtoplayer = physics_joint_distance_create(obj_player,next_rope,obj_player.x,obj_player.y-32,next_rope.x,next_rope.y,false);
+attachtoplayer = physics_joint_rope_create(obj_player,next_rope,obj_player.x,obj_player.y-32,next_rope.x,next_rope.y,1,false);
 </string>
           </argument>
         </arguments>
