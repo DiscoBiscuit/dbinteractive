@@ -7,6 +7,8 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_heels</sprite>
+    <sprite>sprites\spr_head</sprite>
+    <sprite>sprites\spr_hand</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -35,6 +37,7 @@
     </scripts>
     <scripts name="bodyparts">
       <script>scripts\draw_human_leg.gml</script>
+      <script>scripts\draw_human_arm.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
