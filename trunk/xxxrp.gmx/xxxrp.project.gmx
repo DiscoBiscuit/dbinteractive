@@ -21,6 +21,8 @@
       <script>scripts\local_vec.gml</script>
       <script>scripts\lerp2.gml</script>
       <script>scripts\inv_kin.gml</script>
+      <script>scripts\sinx.gml</script>
+      <script>scripts\cosx.gml</script>
     </scripts>
     <scripts name="bones">
       <script>scripts\bone_new.gml</script>
@@ -38,11 +40,14 @@
     <scripts name="bodyparts">
       <script>scripts\draw_human_leg.gml</script>
       <script>scripts\draw_human_arm.gml</script>
+      <script>scripts\draw_human_torso.gml</script>
+      <script>scripts\draw_human_breast.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\obj_character</object>
     <object>objects\bone</object>
+    <object>objects\obj_control</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_test</room>

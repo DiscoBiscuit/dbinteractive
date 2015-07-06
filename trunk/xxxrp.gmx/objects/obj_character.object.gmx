@@ -28,8 +28,9 @@
             <string>skin_color = make_color_rgb(255,220,200)
 //skin_color = make_color_rgb(128,192,255)
 children[0] = 0
+frame = 0
 
-hip = bone_new(0,0,0,id)
+hip = bone_new(0,-270,0,id)
 spine = bone_new(16,-72,0,hip)
 neck = bone_new(-16,-72,0,spine)
 head = bone_new(0,-24,0,neck)
@@ -74,58 +75,37 @@ hand_right = bone_new(0,78,0,arm_right)
             <string>draw_set_color(c_black)
 draw_text(0,0,fps)
 
-hip.ly = sin(-current_time/200)*4
+frame = (-current_time/5)
 
-thigh_left.ld = sin(-current_time/400)*15
-thigh_left.lx = sin(-current_time/400)*8
-calf_left.ld = min(0,cos(-current_time/400)*30)
+hip.ly = -270+sinx(frame*2)*4
 
-thigh_right.ld = sin(-current_time/400 + pi)*15
-thigh_right.lx = sin(-current_time/400 + pi)*8
-calf_right.ld = min(0,cos(-current_time/400 + pi)*30)
+thigh_left.ld = sinx(frame)*15
+thigh_left.lx = sinx(frame)*8
+calf_left.ld = min(0,cosx(frame)*30)
 
-bicep_left.ld = sin(-current_time/400 + pi)*15
-bicep_left.lx = -16+sin(-current_time/400 + pi)*6
-arm_left.ld = max(0,cos(-current_time/400 + pi/2)*30)
+thigh_right.ld = sinx(frame+180)*15
+thigh_right.lx = sinx(frame+180)*8
+calf_right.ld = min(0,cosx(frame+180)*30)
 
-bicep_right.ld = sin(-current_time/400)*15
-bicep_right.lx = -16+sin(-current_time/400)*6
-arm_right.ld = max(0,cos(-current_time/400 - pi/2)*30)
+bicep_left.ld = sinx(frame+180)*8
+bicep_left.lx = -16+sinx(frame+180)*4
+arm_left.ld = max(0,8+cosx(frame+45)*8)
 
-spine.ld = sin(current_time/200 -pi/2)*3
-neck.ld = sin(current_time/200 +pi)*3
+bicep_right.ld = sinx(frame)*8
+bicep_right.lx = -16+sinx(frame)*4
+arm_right.ld = max(0,8+cosx(frame-45)*8)
+
+spine.ld = sinx(frame*2 - 45)*3
+neck.ld = sinx(frame*2 + 180)*3
 
 bone_localize_children(id)
 
 draw_human_arm(spine,bicep_left,arm_left,hand_left)
 draw_human_leg(hip,thigh_left,calf_left,foot_left)
 
-lowback = spline_points( local_handle(hip,spline_handle(-32,-32,70,16)) , local_handle(spine,spline_handle(-40,-16,280,32)) , 4)
-highback = spline_points( local_handle(spine,spline_handle(-40,-16,100,32)) , local_handle(spine,spline_handle(-32,-72,225,16)) , 6)
-chest = spline_points( local_handle(spine,spline_handle(3,-72,-30,16)) , local_handle(hip,spline_handle(48,-48,90,32)) , 5)
-groin = spline_points( local_handle(hip,spline_handle(48,-48,270,32)) , local_handle(hip,spline_handle(0,32,0,48)) , 5)
-
-cp = local_vec(head,vec2(0,0))
-draw_sprite_ext(spr_head,0,cp[1],cp[2],0.4,0.4,head.direction,skin_color,1)
-
-draw_set_color(skin_color)
-draw_primitive_begin(pr_trianglefan)
-cp = local_vec(spine,vec2(0,0))
-draw_vertex(cp[1],cp[2])
-draw_spline_vertex(lowback)
-draw_spline_vertex(highback,2)
-draw_spline_vertex(chest)
-draw_spline_vertex(groin,2)
-cp = lowback[1]
-draw_vertex(cp[1],cp[2])
-draw_primitive_end()
-
-draw_set_color(merge_color(skin_color,c_black,0.66))
-
-draw_spline(lowback)
-draw_spline(highback)
-draw_spline(chest)
-draw_spline(groin)
+draw_human_breast(spine)
+draw_human_torso(hip,spine,neck,head)
+draw_human_breast(spine)
 
 draw_human_leg(hip,thigh_right,calf_right,foot_right)
 draw_human_arm(spine,bicep_right,arm_right,hand_right)
