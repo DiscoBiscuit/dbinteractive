@@ -45,9 +45,9 @@
     </scripts>
   </scripts>
   <objects name="objects">
+    <object>objects\obj_control</object>
     <object>objects\obj_character</object>
     <object>objects\bone</object>
-    <object>objects\obj_control</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_test</room>

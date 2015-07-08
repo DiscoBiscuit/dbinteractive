@@ -72,9 +72,7 @@ hand_right = bone_new(0,78,0,arm_right)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_black)
-draw_text(0,0,fps)
-
+            <string>
 frame = (-current_time/5)
 
 hip.ly = -270+sinx(frame*2)*4
