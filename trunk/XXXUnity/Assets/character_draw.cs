@@ -67,10 +67,97 @@ public class character_draw : MonoBehaviour
 	SplineHandle armback_top;
 	SplineHandle armback_bottom;
 	SplineHandle arm_center;
+	
+	float bodyfat = 0.1f;
+	float ass = 0.3f;
+	float hips = 0.3f;
+	
+	void OnGUI() 
+	{
+		GUI.Label(new Rect(8,32,80,32), "Body Fat"); bodyfat = GUI.HorizontalSlider(new Rect(80, 32+5, 128, 16), bodyfat, 0f, 1f);
+		GUI.Label(new Rect(8,48,80,32), "Ass"); ass = GUI.HorizontalSlider(new Rect(80, 48+5, 128, 16), ass, 0f, 1f);
+		GUI.Label(new Rect(8,64,80,32), "Hips"); hips = GUI.HorizontalSlider(new Rect(80, 64+5, 128, 16), hips, 0f, 1f);
+	}
+	
+	void ModHandles()
+	{
+		lowback_bottom.lx = -2.6f - 0.6f*ass - 1.2f*hips - 0.8f*bodyfat;
+		lowback_bottom.direction = 70f + 50f*bodyfat;
+		
+		lowback_top.lx = -4f - 1.2f*bodyfat;
+		
+		highback_bottom.lx = -4f - 1.2f*bodyfat;
+		
+		ass_top.lx = -2.6f - 0.6f*ass - 1.2f*hips - 0.8f*bodyfat;
+		ass_top.direction = 240f - 45f*ass;
+		ass_top.distance = 2.4f + 2f*ass;
+		
+		ass_bottom.lx = -2.6f - 0.8f*ass - 2f*hips - 0.8f*bodyfat;
+		ass_bottom.ly = -3.2f - Mathf.Min (1.6f,3.2f*ass) - 1.6f*bodyfat;
+		ass_bottom.direction = 130f + 32f*ass + 12f*hips*bodyfat;
+		ass_bottom.distance = 2.4f + 1.6f*ass;
+		
+		thighback_top.lx = -2.6f - 0.8f*ass - 2f*hips - 0.8f*bodyfat;
+		thighback_top.ly = -3.2f - Mathf.Min (1.6f,3.2f*ass) - 1.6f*bodyfat;
+		thighback_top.direction = 260f - 16f*ass;
+		thighback_top.distance = 1.6f + 0.6f*ass + 0.6f*bodyfat + 0.6f*hips;
+		
+		thighback_bottom.lx = 1.2f + 1.2f*bodyfat;
+		
+		thighfront_top.lx = 2.6f + 1f*hips + 0.8f*bodyfat;
+		thighfront_top.distance = 3.2f + 1.2f*hips + 1.2f*bodyfat;
+		thighfront_top.direction = -80f + 10f*hips + 30f*bodyfat;
+		
+		thighback_bottom.lx = -1.2f - 1f*hips - 1f*bodyfat;
+		thighback_bottom.direction = 100f + 10f*hips + 20f*bodyfat;
+		
+		calfback_top.lx = -1.2f - 1f*hips - 1f*bodyfat;
+		calfback_top.direction = 230f - 12f*hips - 16*bodyfat;
+		
+		thighfront_bottom.lx = 1.2f + 1f*hips + 1f*bodyfat;
+		
+		calffront_top.lx = 1.2f + 1f*hips + 1f*bodyfat;
+		
+		float bodyfat_extra = Mathf.Max (0f,bodyfat-0.5f);
+		
+		chest_bottom.lx = 2f + 1.6f*bodyfat;
+		belly_top.lx = 2f + 1.6f*bodyfat;
+		
+		belly_bottom.lx = 3.8f + 1f*hips + 5f*bodyfat;
+		belly_bottom.ly = 2.4f - 3.6f*bodyfat;
+		belly_bottom.distance = 3.2f + 2.4f*bodyfat;
+		belly_bottom.direction = 90f - 30f*bodyfat;
+		
+		groin_top.lx = 3.8f + 1f*hips + 5f*bodyfat;
+		groin_top.ly = 2.4f - 3.6f*bodyfat;
+		groin_top.direction = 270f + 20f*bodyfat;
+		groin_top.distance = 2.4f + 3.2f*bodyfat_extra;
+		
+		groin_bottom.ly = -3.2f - 1.6f*bodyfat_extra;
+		groin_bottom.direction = -40*bodyfat_extra;
+		groin_bottom.distance = 1.6f + 3.2f*bodyfat;
+		
+		bicepback_top.direction = 270f - 40f*bodyfat;
+		bicepfront_top.direction = 280f + 40f*bodyfat;
+		
+		bicepback_bottom.lx = -1.2f - 0.8f*bodyfat;
+		bicepback_bottom.direction = 90f + 40f*bodyfat;
+		bicepfront_bottom.direction = 90f - 40f*bodyfat;
+		
+		armback_top.lx = -1.2f - 0.8f*bodyfat;
+		armback_top.direction = 265f - 20f*bodyfat;
+		armfront_top.direction = 280f + 20f*bodyfat;
+		
+		armback_bottom.direction = 100f + 15f*bodyfat;
+		armfront_bottom.direction = 90f - 15f*bodyfat;
+		
+	}
 
 	// Use this for initialization
 	void Start () 
 	{
+		gameObject.transform.localScale = new Vector3( 1f,1f,1f );
+		
 		GetComponent<MeshFilter>().mesh.MarkDynamic();
 		
 		//Set up bones
@@ -87,50 +174,51 @@ public class character_draw : MonoBehaviour
 		bicep_right = 	NewBone ( new Vector3(-1.6f,7f,1f), spine ,"bicep_right");
 		arm_right = 	NewBone ( new Vector3(0f,-7.8f,0f), bicep_right ,"arm_right");
 		
-		thighfront_top = 	new SplineHandle(new Vector3(3.2f,0f,0f) , -60f, 3.2f, 0f, thigh_left);
-		ass_top = 			new SplineHandle(new Vector3(-3.2f,3.2f,0f) , 200f, 3.2f, 180f, hip);
-		ass_bottom = 		new SplineHandle(new Vector3(-3.2f,-4.8f,0f) , 160f, 3.2f, 180f, thigh_left);
-		thighback_top = 	new SplineHandle(new Vector3(-3.2f,-4.8f,0f) , 200f, 1.6f, 180f, thigh_left);
-		thighback_bottom = 	new SplineHandle(new Vector3(-1.6f,-12.8f,0f) , 135f, 3.2f, 180f, thigh_left);
-		calfback_top = 		new SplineHandle(new Vector3(-1.6f,-12.8f,0f) , 190f, 1.6f, 180f, thigh_left);
-		thighfront_bottom = new SplineHandle(new Vector3(1.6f,-12.8f,0f) , 80f, 1.6f, 0f, thigh_left);
-		calffront_top = 	new SplineHandle(new Vector3(1.6f,-12.8f,0f) , 315f, 0.8f, 0f, thigh_left);
-		thigh_center = 		new SplineHandle( new Vector3(0f,-4.8f,0f),0f,0f,0f,thigh_left);
-		calfback_bottom = 	new SplineHandle(new Vector3(-1.2f,-12.8f,0f) , 115f, 3.2f, 180f, calf_left);
-		calffront_bottom = 	new SplineHandle(new Vector3(1.2f,-12.8f,0f) , 100f, 4.8f, 0f, calf_left);
-		calf_center = 		new SplineHandle( new Vector3(0f,-6.4f,0f),0f,0f,0f,calf_left);
+		ass_top = 			new SplineHandle(-2.6f,3.2f,0f , 240f, 2.4f, 180f, hip);
+		ass_bottom = 		new SplineHandle(-2.6f,-3.2f,0f , 130f, 2.4f, 180f, thigh_left);
+		thighback_top = 	new SplineHandle(-2.6f,-3.2f,0f , 260f, 1.6f, 180f, thigh_left);
+		thighback_bottom = 	new SplineHandle(-1.2f,-12.8f,0f , 100f, 3.2f, 180f, thigh_left);
+		thighfront_top = 	new SplineHandle(2.6f,0f,0f , -80f, 3.2f, 0f, thigh_left);
+		thighfront_bottom = new SplineHandle(1.2f,-12.8f,0f , 80f, 1.6f, 0f, thigh_left);
+		calffront_top = 	new SplineHandle(1.2f,-12.8f,0f , 315f, 0.8f, 0f, thigh_left);
+		calfback_top = 		new SplineHandle(-1.2f,-12.8f,0f , 230f, 3.2f, 180f, thigh_left);
+		thigh_center = 		new SplineHandle(0f,-4.8f,0f ,0f,0f,0f,thigh_left);
+		calfback_bottom = 	new SplineHandle(-1.2f,-12.8f,0f , 115f, 3.2f, 180f, calf_left);
+		calffront_bottom = 	new SplineHandle(1.2f,-12.8f,0f , 100f, 4.8f, 0f, calf_left);
+		calf_center = 		new SplineHandle(0f,-6.4f,0f ,0f,0f,0f,calf_left);
 		
-		lowback_bottom = 	new SplineHandle(new Vector3(-3.2f,3.2f,0f) , 70f, 1.6f, 180f, hip);
-		lowback_top = 		new SplineHandle(new Vector3(-4f,1.6f,0f) , 280f, 3.2f, 180f, spine);
-		highback_bottom = 	new SplineHandle(new Vector3(-4f,1.6f,0f) , 100f, 3.2f, 180f, spine);
-		highback_top = 		new SplineHandle(new Vector3(-3.2f,7.2f,0f) , 225f, 1.6f, 180f, spine);
-		chest_top = 		new SplineHandle(new Vector3(0.4f,7.2f,0f) , 330f, 1.6f, 0f, spine);
-		chest_bottom = 		new SplineHandle(new Vector3(2f,2.4f,0f) , 100f, 1.6f, 0f, spine);
-		belly_top = 		new SplineHandle(new Vector3(2f,2.4f,0f) , 280f, 1.6f, 0f, spine);
-		belly_bottom =		new SplineHandle(new Vector3(4.8f,2.4f,0f) , 90f, 3.2f, 0f, hip);
-		groin_top = 		new SplineHandle(new Vector3(4.8f,2.4f,0f) , 270f, 2.4f, 0f, hip);
-		groin_bottom = 		new SplineHandle(new Vector3(0f,-3.2f,0f) , 0f, 1.6f, 270f, hip);
-		torso_center = 		new SplineHandle(new Vector3(0f,0f,0f) , 0f, 0f, 0f, spine);
+		lowback_bottom = 	new SplineHandle(-2.6f,3.2f,0f , 70f, 3.2f, 180f, hip);
+		lowback_top = 		new SplineHandle(-4f,2.4f,0f , 280f, 3.2f, 180f, spine);
+		highback_bottom = 	new SplineHandle(-4f,2.4f,0f , 100f, 1.2f, 180f, spine);
+		highback_top = 		new SplineHandle(-3.2f,7.2f,0f , 260f, 1.2f, 180f, spine);
+		chest_top = 		new SplineHandle(0.4f,7.2f,0f , 310f, 1.6f, 0f, spine);
+		chest_bottom = 		new SplineHandle(2f,2.4f,0f , 100f, 1.6f, 0f, spine);
+		belly_top = 		new SplineHandle(2f,2.4f,0f, 280f, 1.6f, 0f, spine);
+		belly_bottom =		new SplineHandle(3.2f,2.4f,0f , 90f, 3.2f, 0f, hip);
+		groin_top = 		new SplineHandle(3.2f,2.4f,0f , 270f, 2.4f, 0f, hip);
+		groin_bottom = 		new SplineHandle(0f,-3.2f,0f , 0f, 1.6f, 270f, hip);
+		torso_center = 		new SplineHandle(0f,0f,0f , 0f, 0f, 0f, spine);
 		
-		bicepback_top = 	new SplineHandle( new Vector3(-1.2f,0f,0f) , 260f, 2.4f, 180f, bicep_left);
-		bicepfront_top = 	new SplineHandle( new Vector3(1.2f,0f,0f) , 280f, 2.4f, 0f, bicep_left);
-		bicepback_bottom = 	new SplineHandle( new Vector3(-1.2f,-7.8f,0f) , 100f, 2.4f, 180f, bicep_left);
-		bicepfront_bottom = new SplineHandle( new Vector3(1.2f,-7.8f,0f) , 80f, 2.4f, 0f, bicep_left);
-		bicep_center = 		new SplineHandle( new Vector3(0f,-3.9f,0f) , 0f, 0f, 0f, bicep_left);
+		bicepback_top = 	new SplineHandle( -1.2f,0f,0f , 270f, 2.4f, 180f, bicep_left);
+		bicepfront_top = 	new SplineHandle( 1.2f,0f,0f , 280f, 2.4f, 0f, bicep_left);
+		bicepback_bottom = 	new SplineHandle( -1.2f,-7.8f,0f , 90f, 2.4f, 180f, bicep_left);
+		bicepfront_bottom = new SplineHandle( 1.2f,-7.8f,0f , 90f, 2.4f, 0f, bicep_left);
+		bicep_center = 		new SplineHandle( 0f,-3.9f,0f , 0f, 0f, 0f, bicep_left);
 		
-		armback_top = 		new SplineHandle( new Vector3(-1.2f,-7.8f,0f) , 265f, 2.4f, 180f, bicep_left);
-		armfront_top = 		new SplineHandle( new Vector3(1.2f,-7.8f,0f) , 270f, 2.4f, 0f, bicep_left);
-		armback_bottom = 	new SplineHandle( new Vector3(-1f,-7.8f,0f) , 100f, 2.4f, 180f, arm_left);
-		armfront_bottom = 	new SplineHandle( new Vector3(1f,-7.8f,0f) , 90f, 2.4f, 0f, arm_left);
-		arm_center = 		new SplineHandle( new Vector3(0f,-3.9f,0f) , 0f, 0f, 0f, arm_left);
+		armback_top = 		new SplineHandle( -1.2f,-7.8f,0f , 265f, 2.4f, 180f, bicep_left);
+		armfront_top = 		new SplineHandle( 1.2f,-7.8f,0f , 270f, 2.4f, 0f, bicep_left);
+		armback_bottom = 	new SplineHandle( -1f,-7.8f,0f , 100f, 2.4f, 180f, arm_left);
+		armfront_bottom = 	new SplineHandle( 1f,-7.8f,0f , 90f, 2.4f, 0f, arm_left);
+		arm_center = 		new SplineHandle( 0f,-3.9f,0f , 0f, 0f, 0f, arm_left);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		
 		EmptyMyMesh();
 		
-		frame -= 2f;
+		frame -= 3f;
 		
 		hip.transform.localPosition = -gameObject.transform.position;
 			
@@ -149,6 +237,8 @@ public class character_draw : MonoBehaviour
 		spine.transform.localRotation = Util.DirRot(sinx(frame*2f - 45f)*3f);
 		neck.transform.localRotation = Util.DirRot(sinx(frame*2f + 180f)*3f);
 		
+		ModHandles();
+		
 		//Set parents to left leg
 		thighfront_top.parent = thigh_left;
 		ass_bottom.parent = thigh_left;
@@ -162,6 +252,13 @@ public class character_draw : MonoBehaviour
 		calffront_bottom.parent = calf_left;
 		calf_center.parent = calf_left;
 		
+		float nly = sinx(frame)*0.8f;
+		float nd = sinx (frame)*20f;
+		
+		ass_bottom.ly += nly;
+		thighback_top.ly += nly;
+		ass_bottom.direction += nd;
+		
 		//Draw left leg
 		AddSplineMesh( ass_top, ass_bottom,	thigh_center, 8, 1);
 		AddSplineMesh( thighback_top, thighback_bottom, thigh_center, 6, 1);
@@ -172,6 +269,10 @@ public class character_draw : MonoBehaviour
 		AddSplineMesh( calffront_bottom, calffront_top, calf_center, 6, 1);
 		CapSplineMesh( calffront_top, calfback_top, calf_center, 1);
 		CapSplineMesh( calfback_bottom, calffront_bottom, calf_center, 1);
+		
+		ass_bottom.ly -= nly*2f;
+		thighback_top.ly -= nly*2f;
+		ass_bottom.direction -= nd*2f;
 		
 		//Set parents to right leg
 		thighfront_top.parent = thigh_right;
@@ -197,12 +298,15 @@ public class character_draw : MonoBehaviour
 		CapSplineMesh( calffront_top, calfback_top, calf_center, 1);
 		CapSplineMesh( calfback_bottom, calffront_bottom, calf_center, 1);
 		
+		belly_bottom.ly += Mathf.Abs( sinx(frame-30) )*1.6f*bodyfat;
+		groin_top.ly += Mathf.Abs( sinx(frame-30) )*1.6f*bodyfat;
+		
 		//Draw torso
 		AddSplineMesh( highback_top, highback_bottom, torso_center, 4, 1);
-		AddSplineMesh( lowback_top, lowback_bottom, torso_center, 4, 1);
+		AddSplineMesh( lowback_top, lowback_bottom, torso_center, 6, 1);
 		CapSplineMesh( lowback_bottom, groin_bottom, torso_center, 1);
-		AddSplineMesh( groin_bottom, groin_top, torso_center, 6, 1);
-		AddSplineMesh( belly_bottom, belly_top, torso_center, 5, 1);
+		AddSplineMesh( groin_bottom, groin_top, torso_center, 10, 1);
+		AddSplineMesh( belly_bottom, belly_top, torso_center, 10, 1);
 		AddSplineMesh( chest_bottom, chest_top, torso_center, 4, 1);
 		CapSplineMesh( chest_top, highback_top, torso_center, 1);
 		
@@ -219,12 +323,12 @@ public class character_draw : MonoBehaviour
 		arm_center.parent = arm_left;
 		
 		//Draw left arm
-		AddSplineMesh( bicepback_top, bicepback_bottom, bicep_center, 4, 1);
-		AddSplineMesh( bicepfront_bottom, bicepfront_top, bicep_center, 4, 1);
+		AddSplineMesh( bicepback_top, bicepback_bottom, bicep_center, 6, 1);
+		AddSplineMesh( bicepfront_bottom, bicepfront_top, bicep_center, 6, 1);
 		CapSplineMesh( bicepback_bottom, bicepfront_bottom, bicep_center, 1);
 		CapSplineMesh( bicepfront_top, bicepback_top, bicep_center, 0);
-		AddSplineMesh( armback_top, armback_bottom, arm_center, 4, 1);
-		AddSplineMesh( armfront_bottom, armfront_top, arm_center, 4, 1);
+		AddSplineMesh( armback_top, armback_bottom, arm_center, 6, 1);
+		AddSplineMesh( armfront_bottom, armfront_top, arm_center, 6, 1);
 		CapSplineMesh( armfront_top, armback_top, arm_center, 1);
 		CapSplineMesh( armback_bottom, armfront_bottom, arm_center, 1);
 		
@@ -241,12 +345,12 @@ public class character_draw : MonoBehaviour
 		arm_center.parent = arm_right;
 		
 		//Draw right arm
-		AddSplineMesh( bicepback_top, bicepback_bottom, bicep_center, 4, 1);
-		AddSplineMesh( bicepfront_bottom, bicepfront_top, bicep_center, 4, 1);
+		AddSplineMesh( bicepback_top, bicepback_bottom, bicep_center, 6, 1);
+		AddSplineMesh( bicepfront_bottom, bicepfront_top, bicep_center, 6, 1);
 		CapSplineMesh( bicepback_bottom, bicepfront_bottom, bicep_center, 1);
 		CapSplineMesh( bicepfront_top, bicepback_top, bicep_center, 0);
-		AddSplineMesh( armback_top, armback_bottom, arm_center, 4, 1);
-		AddSplineMesh( armfront_bottom, armfront_top, arm_center, 4, 1);
+		AddSplineMesh( armback_top, armback_bottom, arm_center, 6, 1);
+		AddSplineMesh( armfront_bottom, armfront_top, arm_center, 6, 1);
 		CapSplineMesh( armfront_top, armback_top, arm_center, 1);
 		CapSplineMesh( armback_bottom, armfront_bottom, arm_center, 1);
 		
