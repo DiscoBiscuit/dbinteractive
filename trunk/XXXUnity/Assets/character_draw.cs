@@ -13,6 +13,7 @@ public class character_draw : MonoBehaviour
 	//Bones
 	
 	public GameObject bone_prefab;
+	GameObject origin;
 	GameObject hip;
 	GameObject spine;
 	GameObject neck;
@@ -69,7 +70,7 @@ public class character_draw : MonoBehaviour
 	SplineHandle arm_center;
 	
 	float bodyfat = 0.1f;
-	float ass = 0.3f;
+	float ass = 0.4f;
 	float hips = 0.3f;
 	
 	void OnGUI() 
@@ -90,12 +91,12 @@ public class character_draw : MonoBehaviour
 		
 		ass_top.lx = -2.6f - 0.6f*ass - 1.2f*hips - 0.8f*bodyfat;
 		ass_top.direction = 240f - 45f*ass;
-		ass_top.distance = 2.4f + 2f*ass;
+		ass_top.distance = 2.4f + 2.4f*ass;
 		
 		ass_bottom.lx = -2.6f - 0.8f*ass - 2f*hips - 0.8f*bodyfat;
 		ass_bottom.ly = -3.2f - Mathf.Min (1.6f,3.2f*ass) - 1.6f*bodyfat;
 		ass_bottom.direction = 130f + 32f*ass + 12f*hips*bodyfat;
-		ass_bottom.distance = 2.4f + 1.6f*ass;
+		ass_bottom.distance = 2.4f + 2f*ass;
 		
 		thighback_top.lx = -2.6f - 0.8f*ass - 2f*hips - 0.8f*bodyfat;
 		thighback_top.ly = -3.2f - Mathf.Min (1.6f,3.2f*ass) - 1.6f*bodyfat;
@@ -156,13 +157,12 @@ public class character_draw : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		gameObject.transform.localScale = new Vector3( 1f,1f,1f );
-		
 		GetComponent<MeshFilter>().mesh.MarkDynamic();
 		
 		//Set up bones
 		
-		hip = 			NewBone ( new Vector3(0f,0f,0f), gameObject ,"hip");
+		origin = 		NewBone ( new Vector3(0f,0f,0f), gameObject ,"origin");
+		hip = 			NewBone ( new Vector3(0f,28f,0f), origin ,"hip");
 		spine = 		NewBone ( new Vector3(1.6f,7.2f,0f), hip ,"spine");
 		neck = 			NewBone ( new Vector3(-1.6f,7.2f,0f), spine ,"neck");
 		thigh_left = 	NewBone ( new Vector3(0f,0f,-1f), hip ,"thigh_left");
@@ -199,8 +199,8 @@ public class character_draw : MonoBehaviour
 		groin_bottom = 		new SplineHandle(0f,-3.2f,0f , 0f, 1.6f, 270f, hip);
 		torso_center = 		new SplineHandle(0f,0f,0f , 0f, 0f, 0f, spine);
 		
-		bicepback_top = 	new SplineHandle( -1.2f,0f,0f , 270f, 2.4f, 180f, bicep_left);
-		bicepfront_top = 	new SplineHandle( 1.2f,0f,0f , 280f, 2.4f, 0f, bicep_left);
+		bicepback_top = 	new SplineHandle( -1.2f,0f,0f , 270f, 2.4f, 135f, bicep_left);
+		bicepfront_top = 	new SplineHandle( 1.2f,0f,0f , 280f, 2.4f, 45f, bicep_left);
 		bicepback_bottom = 	new SplineHandle( -1.2f,-7.8f,0f , 90f, 2.4f, 180f, bicep_left);
 		bicepfront_bottom = new SplineHandle( 1.2f,-7.8f,0f , 90f, 2.4f, 0f, bicep_left);
 		bicep_center = 		new SplineHandle( 0f,-3.9f,0f , 0f, 0f, 0f, bicep_left);
@@ -215,25 +215,20 @@ public class character_draw : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		origin.transform.localPosition = -gameObject.transform.position;
 		
 		EmptyMyMesh();
 		
-		frame -= 3f;
+		frame = CycleFrame( frame, -3f );
 		
-		hip.transform.localPosition = -gameObject.transform.position;
-			
 		thigh_left.transform.localRotation = Util.DirRot(sinx(frame)*15f);
 		calf_left.transform.localRotation = Util.DirRot(Mathf.Min(0f,cosx(frame)*30f));
-		
 		thigh_right.transform.localRotation = Util.DirRot(sinx(frame+180f)*15f);
 		calf_right.transform.localRotation = Util.DirRot(Mathf.Min(0f,cosx(frame+180f)*30f));
-
 		bicep_left.transform.localRotation = Util.DirRot(sinx(frame+180f)*8f);
 		arm_left.transform.localRotation = Util.DirRot(Mathf.Max(0f,8f+cosx(frame+45f)*8f));
-		
 		bicep_right.transform.localRotation = Util.DirRot(sinx(frame)*8f);
 		arm_right.transform.localRotation = Util.DirRot(Mathf.Max(0f,8f+cosx(frame-45f)*8f));
-		
 		spine.transform.localRotation = Util.DirRot(sinx(frame*2f - 45f)*3f);
 		neck.transform.localRotation = Util.DirRot(sinx(frame*2f + 180f)*3f);
 		
@@ -355,6 +350,14 @@ public class character_draw : MonoBehaviour
 		CapSplineMesh( armback_bottom, armfront_bottom, arm_center, 1);
 		
 		CreateMyMesh();
+	}
+	
+	float CycleFrame( float current, float delta )
+	{
+		float output = current+delta;
+		if(output>=360f){output-=360f;}
+		if(output<0f){output+=360f;}
+		return output;
 	}
 	
 	GameObject NewBone(Vector3 lpos, GameObject newpar, string newname)
