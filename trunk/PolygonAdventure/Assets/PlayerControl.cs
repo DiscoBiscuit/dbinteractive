@@ -99,7 +99,7 @@ public class PlayerControl : MonoBehaviour {
 		
 		//Set grounded to false, which will be re-evaluated in OnCollisionStay for the next run of the code
 		grounded = false;
-		
+
 		//Accelerate the camera for smoothness
 		camVel = (camVel + new Vector3( -Input.GetAxis("Mouse Y")*50f*dt, Input.GetAxis("Mouse X")*50f*dt, 0f ) )*0.8f;
 		//Add the camera velocity to the camera's angles
