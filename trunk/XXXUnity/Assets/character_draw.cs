@@ -12,6 +12,7 @@ public class character_draw : MonoBehaviour
 	
 	//Bones
 	
+	public GameObject handmesh;
 	public GameObject bone_prefab;
 	GameObject origin;
 	GameObject hip;
@@ -28,6 +29,9 @@ public class character_draw : MonoBehaviour
 	GameObject bicep_right;
 	GameObject arm_left;
 	GameObject arm_right;
+	
+	GameObject hand_left;
+	GameObject hand_right;
 	
 	//Handles
 	
@@ -68,17 +72,23 @@ public class character_draw : MonoBehaviour
 	SplineHandle armback_top;
 	SplineHandle armback_bottom;
 	SplineHandle arm_center;
+
+	float walk_speed = 0f;
+	float float_speed = 0f;
+	float perc = 0f;
 	
 	float bodyfat = 0.1f;
 	float ass = 0.4f;
 	float hips = 0.3f;
 	
+	/*
 	void OnGUI() 
 	{
 		GUI.Label(new Rect(8,32,80,32), "Body Fat"); bodyfat = GUI.HorizontalSlider(new Rect(80, 32+5, 128, 16), bodyfat, 0f, 1f);
 		GUI.Label(new Rect(8,48,80,32), "Ass"); ass = GUI.HorizontalSlider(new Rect(80, 48+5, 128, 16), ass, 0f, 1f);
 		GUI.Label(new Rect(8,64,80,32), "Hips"); hips = GUI.HorizontalSlider(new Rect(80, 64+5, 128, 16), hips, 0f, 1f);
 	}
+	*/
 	
 	void ModHandles()
 	{
@@ -173,6 +183,14 @@ public class character_draw : MonoBehaviour
 		arm_left = 		NewBone ( new Vector3(0f,-7.8f,0f), bicep_left ,"arm_left");
 		bicep_right = 	NewBone ( new Vector3(-1.6f,7f,1f), spine ,"bicep_right");
 		arm_right = 	NewBone ( new Vector3(0f,-7.8f,0f), bicep_right ,"arm_right");
+		hand_left = 	NewBone ( new Vector3(0f,-7.8f,0f), arm_left ,"hand_left");
+		hand_right = 	NewBone ( new Vector3(0f,-7.8f,0f), arm_right ,"hand_right");
+		
+		hand_left.AddComponent<MeshFilter>().mesh = handmesh.GetComponent<MeshFilter>().mesh;
+		hand_left.AddComponent<MeshRenderer>();
+		
+		hand_right.AddComponent<MeshFilter>().mesh = handmesh.GetComponent<MeshFilter>().mesh;
+		hand_right.AddComponent<MeshRenderer>();
 		
 		ass_top = 			new SplineHandle(-2.6f,3.2f,0f , 240f, 2.4f, 180f, hip);
 		ass_bottom = 		new SplineHandle(-2.6f,-3.2f,0f , 130f, 2.4f, 180f, thigh_left);
@@ -212,27 +230,55 @@ public class character_draw : MonoBehaviour
 		arm_center = 		new SplineHandle( 0f,-3.9f,0f , 0f, 0f, 0f, arm_left);
 	}
 	
+	void Animate()
+	{
+		float dest = 0f;
+		if(walk_speed!=0f)
+		{
+			dest = 1f;
+		}
+		
+		perc = (perc*9f + dest )/10f;
+		float_speed = (float_speed*9f + walk_speed )/10f;
+
+		if(float_speed!=0f)
+		{
+			gameObject.transform.position += new Vector3(float_speed,0f,0f);
+			gameObject.transform.localScale = new Vector3(Mathf.Sign(float_speed),1f,1f);
+			Camera.main.transform.position = gameObject.transform.position + new Vector3(0f,32f,-10f);
+		}
+		
+		frame = CycleFrame( frame, -3f*perc );
+		
+		hip.transform.localPosition = new Vector3(0f,28f + Mathf.Abs(cosx( frame ))*perc ,0f);
+		thigh_left.transform.localRotation = Util.DirRot(sinx(frame)*15f*perc);
+		calf_left.transform.localRotation = Util.DirRot(Mathf.Min(0f,cosx(frame)*30f*perc));
+		thigh_right.transform.localRotation = Util.DirRot(sinx(frame+180f)*15f*perc);
+		calf_right.transform.localRotation = Util.DirRot(Mathf.Min(0f,cosx(frame+180f)*30f*perc));
+		bicep_left.transform.localRotation = Util.DirRot(sinx(frame+180f)*8f*perc);
+		arm_left.transform.localRotation = Util.DirRot(Mathf.Max(0f,8f+cosx(frame+45f)*8f*perc));
+		bicep_right.transform.localRotation = Util.DirRot(sinx(frame)*8f*perc);
+		arm_right.transform.localRotation = Util.DirRot(Mathf.Max(0f,8f+cosx(frame-45f)*8f*perc));
+		spine.transform.localRotation = Util.DirRot(sinx(frame*2f - 45f)*3f*perc);
+		neck.transform.localRotation = Util.DirRot(sinx(frame*2f + 180f)*3f*perc);
+		
+		belly_bottom.ly += Mathf.Abs( sinx(frame-30) )*1.6f*bodyfat*perc;
+		groin_top.ly += Mathf.Abs( sinx(frame-30) )*1.6f*bodyfat*perc;
+	}
+	
 	// Update is called once per frame
 	void Update () 
 	{
-		origin.transform.localPosition = -gameObject.transform.position;
 		
 		EmptyMyMesh();
-		
-		frame = CycleFrame( frame, -3f );
-		
-		thigh_left.transform.localRotation = Util.DirRot(sinx(frame)*15f);
-		calf_left.transform.localRotation = Util.DirRot(Mathf.Min(0f,cosx(frame)*30f));
-		thigh_right.transform.localRotation = Util.DirRot(sinx(frame+180f)*15f);
-		calf_right.transform.localRotation = Util.DirRot(Mathf.Min(0f,cosx(frame+180f)*30f));
-		bicep_left.transform.localRotation = Util.DirRot(sinx(frame+180f)*8f);
-		arm_left.transform.localRotation = Util.DirRot(Mathf.Max(0f,8f+cosx(frame+45f)*8f));
-		bicep_right.transform.localRotation = Util.DirRot(sinx(frame)*8f);
-		arm_right.transform.localRotation = Util.DirRot(Mathf.Max(0f,8f+cosx(frame-45f)*8f));
-		spine.transform.localRotation = Util.DirRot(sinx(frame*2f - 45f)*3f);
-		neck.transform.localRotation = Util.DirRot(sinx(frame*2f + 180f)*3f);
-		
 		ModHandles();
+		Animate();
+		
+		Vector3 lastScale = gameObject.transform.localScale;
+		gameObject.transform.localScale = Vector3.one;
+		origin.transform.localPosition = -gameObject.transform.position;
+		
+		int windorder = (int)gameObject.transform.localScale.x;
 		
 		//Set parents to left leg
 		thighfront_top.parent = thigh_left;
@@ -255,15 +301,15 @@ public class character_draw : MonoBehaviour
 		ass_bottom.direction += nd;
 		
 		//Draw left leg
-		AddSplineMesh( ass_top, ass_bottom,	thigh_center, 8, 1);
-		AddSplineMesh( thighback_top, thighback_bottom, thigh_center, 6, 1);
-		AddSplineMesh( thighfront_bottom, thighfront_top, thigh_center, 6, 1);
-		CapSplineMesh( thighback_bottom, thighfront_bottom, thigh_center, 1);
-		CapSplineMesh( thighfront_top, ass_top, thigh_center, 1);
-		AddSplineMesh( calfback_top, calfback_bottom, calf_center, 6, 1);
-		AddSplineMesh( calffront_bottom, calffront_top, calf_center, 6, 1);
-		CapSplineMesh( calffront_top, calfback_top, calf_center, 1);
-		CapSplineMesh( calfback_bottom, calffront_bottom, calf_center, 1);
+		AddSplineMesh( ass_top, ass_bottom,	thigh_center, 8, windorder);
+		AddSplineMesh( thighback_top, thighback_bottom, thigh_center, 6, windorder);
+		AddSplineMesh( thighfront_bottom, thighfront_top, thigh_center, 6, windorder);
+		CapSplineMesh( thighback_bottom, thighfront_bottom, thigh_center, windorder, true);
+		CapSplineMesh( thighfront_top, ass_top, thigh_center, windorder, true);
+		AddSplineMesh( calfback_top, calfback_bottom, calf_center, 6, windorder);
+		AddSplineMesh( calffront_bottom, calffront_top, calf_center, 6, windorder);
+		CapSplineMesh( calffront_top, calfback_top, calf_center, windorder, true);
+		CapSplineMesh( calfback_bottom, calffront_bottom, calf_center, windorder, true);
 		
 		ass_bottom.ly -= nly*2f;
 		thighback_top.ly -= nly*2f;
@@ -283,27 +329,24 @@ public class character_draw : MonoBehaviour
 		calf_center.parent = calf_right;
 		
 		//Draw right leg
-		AddSplineMesh( ass_top, ass_bottom,	thigh_center, 8, 1);
-		AddSplineMesh( thighback_top, thighback_bottom, thigh_center, 6, 1);
-		AddSplineMesh( thighfront_bottom, thighfront_top, thigh_center, 6, 1);
-		CapSplineMesh( thighback_bottom, thighfront_bottom, thigh_center, 1);
-		CapSplineMesh( thighfront_top, ass_top, thigh_center, 1);
-		AddSplineMesh( calfback_top, calfback_bottom, calf_center, 6, 1);
-		AddSplineMesh( calffront_bottom, calffront_top, calf_center, 6, 1);
-		CapSplineMesh( calffront_top, calfback_top, calf_center, 1);
-		CapSplineMesh( calfback_bottom, calffront_bottom, calf_center, 1);
-		
-		belly_bottom.ly += Mathf.Abs( sinx(frame-30) )*1.6f*bodyfat;
-		groin_top.ly += Mathf.Abs( sinx(frame-30) )*1.6f*bodyfat;
+		AddSplineMesh( ass_top, ass_bottom,	thigh_center, 8, windorder);
+		AddSplineMesh( thighback_top, thighback_bottom, thigh_center, 6, windorder);
+		AddSplineMesh( thighfront_bottom, thighfront_top, thigh_center, 6, windorder);
+		CapSplineMesh( thighback_bottom, thighfront_bottom, thigh_center, windorder, true);
+		CapSplineMesh( thighfront_top, ass_top, thigh_center, windorder, true);
+		AddSplineMesh( calfback_top, calfback_bottom, calf_center, 6, windorder);
+		AddSplineMesh( calffront_bottom, calffront_top, calf_center, 6, windorder);
+		CapSplineMesh( calffront_top, calfback_top, calf_center, windorder, true);
+		CapSplineMesh( calfback_bottom, calffront_bottom, calf_center, windorder, true);
 		
 		//Draw torso
-		AddSplineMesh( highback_top, highback_bottom, torso_center, 4, 1);
-		AddSplineMesh( lowback_top, lowback_bottom, torso_center, 6, 1);
-		CapSplineMesh( lowback_bottom, groin_bottom, torso_center, 1);
-		AddSplineMesh( groin_bottom, groin_top, torso_center, 10, 1);
-		AddSplineMesh( belly_bottom, belly_top, torso_center, 10, 1);
-		AddSplineMesh( chest_bottom, chest_top, torso_center, 4, 1);
-		CapSplineMesh( chest_top, highback_top, torso_center, 1);
+		AddSplineMesh( highback_top, highback_bottom, torso_center, 4, windorder);
+		AddSplineMesh( lowback_top, lowback_bottom, torso_center, 6, windorder);
+		CapSplineMesh( lowback_bottom, groin_bottom, torso_center, windorder, true);
+		AddSplineMesh( groin_bottom, groin_top, torso_center, 10, windorder);
+		AddSplineMesh( belly_bottom, belly_top, torso_center, 10, windorder);
+		AddSplineMesh( chest_bottom, chest_top, torso_center, 4, windorder);
+		CapSplineMesh( chest_top, highback_top, torso_center, windorder, true);
 		
 		//Set parents to left arm
 		bicepfront_top.parent = bicep_left;
@@ -318,14 +361,14 @@ public class character_draw : MonoBehaviour
 		arm_center.parent = arm_left;
 		
 		//Draw left arm
-		AddSplineMesh( bicepback_top, bicepback_bottom, bicep_center, 6, 1);
-		AddSplineMesh( bicepfront_bottom, bicepfront_top, bicep_center, 6, 1);
-		CapSplineMesh( bicepback_bottom, bicepfront_bottom, bicep_center, 1);
-		CapSplineMesh( bicepfront_top, bicepback_top, bicep_center, 0);
-		AddSplineMesh( armback_top, armback_bottom, arm_center, 6, 1);
-		AddSplineMesh( armfront_bottom, armfront_top, arm_center, 6, 1);
-		CapSplineMesh( armfront_top, armback_top, arm_center, 1);
-		CapSplineMesh( armback_bottom, armfront_bottom, arm_center, 1);
+		AddSplineMesh( bicepback_top, bicepback_bottom, bicep_center, 6, windorder);
+		AddSplineMesh( bicepfront_bottom, bicepfront_top, bicep_center, 6, windorder);
+		CapSplineMesh( bicepback_bottom, bicepfront_bottom, bicep_center, windorder, true);
+		CapSplineMesh( bicepfront_top, bicepback_top, bicep_center, windorder, false);
+		AddSplineMesh( armback_top, armback_bottom, arm_center, 6, windorder);
+		AddSplineMesh( armfront_bottom, armfront_top, arm_center, 6, windorder);
+		CapSplineMesh( armfront_top, armback_top, arm_center, windorder, true);
+		CapSplineMesh( armback_bottom, armfront_bottom, arm_center, windorder, true);
 		
 		//Set parents to right arm
 		bicepfront_top.parent = bicep_right;
@@ -340,16 +383,18 @@ public class character_draw : MonoBehaviour
 		arm_center.parent = arm_right;
 		
 		//Draw right arm
-		AddSplineMesh( bicepback_top, bicepback_bottom, bicep_center, 6, 1);
-		AddSplineMesh( bicepfront_bottom, bicepfront_top, bicep_center, 6, 1);
-		CapSplineMesh( bicepback_bottom, bicepfront_bottom, bicep_center, 1);
-		CapSplineMesh( bicepfront_top, bicepback_top, bicep_center, 0);
-		AddSplineMesh( armback_top, armback_bottom, arm_center, 6, 1);
-		AddSplineMesh( armfront_bottom, armfront_top, arm_center, 6, 1);
-		CapSplineMesh( armfront_top, armback_top, arm_center, 1);
-		CapSplineMesh( armback_bottom, armfront_bottom, arm_center, 1);
+		AddSplineMesh( bicepback_top, bicepback_bottom, bicep_center, 6, windorder);
+		AddSplineMesh( bicepfront_bottom, bicepfront_top, bicep_center, 6, windorder);
+		CapSplineMesh( bicepback_bottom, bicepfront_bottom, bicep_center, windorder, true);
+		CapSplineMesh( bicepfront_top, bicepback_top, bicep_center, windorder, false);
+		AddSplineMesh( armback_top, armback_bottom, arm_center, 6, windorder);
+		AddSplineMesh( armfront_bottom, armfront_top, arm_center, 6, windorder);
+		CapSplineMesh( armfront_top, armback_top, arm_center, windorder, true);
+		CapSplineMesh( armback_bottom, armfront_bottom, arm_center, windorder, true);
 		
 		CreateMyMesh();
+		
+		gameObject.transform.localScale = lastScale;	
 	}
 	
 	float CycleFrame( float current, float delta )
@@ -416,7 +461,7 @@ public class character_draw : MonoBehaviour
 		}
 	}
 	
-	void CapSplineMesh( SplineHandle handle1, SplineHandle handle2, SplineHandle center, int captype)
+	void CapSplineMesh( SplineHandle handle1, SplineHandle handle2, SplineHandle center, int winding, bool captype)
 	{
 		int thiscenter = verts.Count;
 		verts.Add ( center.GetStart () );
@@ -429,11 +474,11 @@ public class character_draw : MonoBehaviour
 		norms.Add (handle1.GetNormal() );
 		
 		verts.Add ( Vector3.Lerp(start1,start2,0.5f) );
-		if(captype==1)
+		if(captype==true)
 		{
 			norms.Add ( new Vector3(0f,0f,-1f) );
 		}
-		if(captype==0)
+		if(captype==false)
 		{
 			norms.Add ( Vector3.Lerp(handle1.GetNormal(),handle2.GetNormal(),0.5f) );
 		}
@@ -441,14 +486,32 @@ public class character_draw : MonoBehaviour
 		verts.Add ( start2 );
 		norms.Add ( handle2.GetNormal() );
 		
-		tris.Add (thiscenter);
-		tris.Add (thiscenter+2);
-		tris.Add (thiscenter+1);
+		if(winding==1)
+		{
+			tris.Add (thiscenter);
+			tris.Add (thiscenter+2);
+			tris.Add (thiscenter+1);
+			
+			tris.Add (thiscenter);
+			tris.Add (thiscenter+3);
+			tris.Add (thiscenter+2);
+		}
+		if(winding==-1)
+		{
+			tris.Add (thiscenter);
+			tris.Add (thiscenter+1);
+			tris.Add (thiscenter+2);
+			
+			tris.Add (thiscenter);
+			tris.Add (thiscenter+2);
+			tris.Add (thiscenter+3);
+		}
 		
-		tris.Add (thiscenter);
-		tris.Add (thiscenter+3);
-		tris.Add (thiscenter+2);
-		
+	}
+	
+	public void SetWalkSpeed( float newspeed )
+	{
+		walk_speed = newspeed;
 	}
 	
 	float sinx( float input )

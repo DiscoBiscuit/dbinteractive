@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: bde1f094dca400148b3f21653c4c4132
-timeCreated: 1436387924
+timeCreated: 1437000285
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - handmesh: {fileID: 100002, guid: 0c57c146c26dc01498645fa9a73ed492, type: 3}
+  - bone_prefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
