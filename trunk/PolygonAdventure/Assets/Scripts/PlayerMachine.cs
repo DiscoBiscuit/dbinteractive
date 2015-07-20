@@ -13,6 +13,8 @@ public class PlayerMachine : SuperStateMachine {
     public float JumpAcceleration = 5.0f;
     public float JumpHeight = 3.0f;
     public float Gravity = 25.0f;
+    
+    private float WalkSpeedMult = 1f;
 
     // Add more states by comma separating them
     enum PlayerStates { Idle, Walk, Jump, Fall }
@@ -58,15 +60,17 @@ public class PlayerMachine : SuperStateMachine {
         transform.position += moveDirection * Time.deltaTime;
 
         // Rotate our mesh to face where we are "looking"
-        if(moveDirection.magnitude>0f)
+        if(input.Current.MoveInput != Vector3.zero)
         {
         	if(input.Current.FaceInput==false)
         	{
-        		transform.rotation = UprightRotation( Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(moveDirection, controller.up), 360f*Time.deltaTime) );
+				transform.rotation = UprightRotation( Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LocalMovement(), controller.up), 5*Time.deltaTime) );
+        		WalkSpeedMult = 1f;
         	}
         	else
         	{
-				transform.rotation = UprightRotation( Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lookDirection, controller.up), 360f*Time.deltaTime) );
+				transform.rotation = UprightRotation( Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection, controller.up), 5*Time.deltaTime) );
+				WalkSpeedMult = 0.4f;
         	}
         }
     }
@@ -183,7 +187,7 @@ public class PlayerMachine : SuperStateMachine {
 
         if (input.Current.MoveInput != Vector3.zero)
         {
-            moveDirection = Vector3.MoveTowards(moveDirection, LocalMovement() * WalkSpeed, WalkAcceleration * Time.deltaTime);
+            moveDirection = Vector3.MoveTowards(moveDirection, LocalMovement() * WalkSpeed * WalkSpeedMult, WalkAcceleration * Time.deltaTime);
         }
         else
         {
@@ -202,6 +206,11 @@ public class PlayerMachine : SuperStateMachine {
 
     void Jump_SuperUpdate()
     {
+		if (input.Current.MoveInput != Vector3.zero)
+		{
+			moveDirection = Vector3.MoveTowards(moveDirection, LocalMovement() * WalkSpeed * WalkSpeedMult + Vector3.up*moveDirection.y, WalkAcceleration/2f * Time.deltaTime);
+		}
+    	
         Vector3 planarMoveDirection = Math3d.ProjectVectorOnPlane(controller.up, moveDirection);
         Vector3 verticalMoveDirection = moveDirection - planarMoveDirection;
 
