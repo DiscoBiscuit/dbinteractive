@@ -22,7 +22,7 @@ public class PlayerMachine : SuperStateMachine {
     private SuperCharacterController controller;
 
     // current velocity
-    private Vector3 moveDirection;
+    public Vector3 moveDirection {get; private set; }
     // current direction our character's art is facing
     public Vector3 lookDirection { get; private set; }
 
@@ -64,12 +64,12 @@ public class PlayerMachine : SuperStateMachine {
         {
         	if(input.Current.FaceInput==false)
         	{
-				transform.rotation = UprightRotation( Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LocalMovement(), controller.up), 5*Time.deltaTime) );
+				transform.rotation = UprightRotation( Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(LocalMovement(), controller.up), 5f*Time.deltaTime) );
         		WalkSpeedMult = 1f;
         	}
         	else
         	{
-				transform.rotation = UprightRotation( Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection, controller.up), 5*Time.deltaTime) );
+				transform.rotation = UprightRotation( Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection, controller.up), 5f*Time.deltaTime) );
 				WalkSpeedMult = 0.4f;
         	}
         }

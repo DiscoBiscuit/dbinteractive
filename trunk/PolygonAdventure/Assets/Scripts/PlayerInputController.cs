@@ -18,7 +18,7 @@ public class PlayerInputController : MonoBehaviour {
         // Using GetAxisRaw removes any kind of gravity or filtering being applied to the input
         // Ensuring that we are getting either -1, 0 or 1
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        Vector2 mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        Vector2 mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"))*3f;
         bool jumpInput = Input.GetButtonDown("Jump");
         faceTimer = Mathf.Max(0f,faceTimer-Time.deltaTime);
 		bool attacking = ( Input.GetButton("Fire1") || Input.GetButton("Fire2") );
