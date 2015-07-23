@@ -49,7 +49,9 @@ public class Anims_Humanoid : Anims_Generic
 	
 	void Walk( float frame )
 	{
-		float perc = machine.moveDirection.magnitude/machine.WalkSpeed;
+		Vector3 vel = machine.moveDirection;
+		vel.y = 0f;
+		float perc = vel.magnitude/machine.WalkSpeed;
 	
 		Torso.localPosition = new Vector3(0f, 0.756f + Sin(frame*2f)*0.05f*perc ,0f);
 	
