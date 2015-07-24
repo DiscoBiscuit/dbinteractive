@@ -21,7 +21,7 @@ public class PlayerInputController : MonoBehaviour {
         Vector2 mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"))*3f;
         bool jumpInput = Input.GetButtonDown("Jump");
         faceTimer = Mathf.Max(0f,faceTimer-Time.deltaTime);
-		bool attacking = ( Input.GetButton("Fire1") || Input.GetButton("Fire2") );
+		bool attacking = ( Input.GetButton("Fire1") || Input.GetButton("Fire2") ) && moveInput.z<0f;
 		if(attacking)
 		{
 			faceTimer = 0.65f;

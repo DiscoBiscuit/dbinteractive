@@ -72,6 +72,10 @@ public class PlayerMachine : SuperStateMachine {
 				transform.rotation = UprightRotation( Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection, controller.up), 5f*Time.deltaTime) );
 				WalkSpeedMult = 0.4f;
         	}
+        	if(Input.GetButton ("Sprint"))
+        	{
+        		WalkSpeedMult = 0.4f;
+        	}
         }
     }
     
