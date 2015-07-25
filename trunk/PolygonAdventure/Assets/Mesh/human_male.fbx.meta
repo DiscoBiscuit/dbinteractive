@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: efd55fdc615be7b46a53e96e1f09f48a
-timeCreated: 1437681685
+timeCreated: 1437778410
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -18,9 +18,10 @@ ModelImporter:
     100020: human_male
     100022: KneeLeft
     100024: KneeRight
-    100026: ShoulderLeft
-    100028: ShoulderRight
-    100030: Torso
+    100026: Origin
+    100028: ShoulderLeft
+    100030: ShoulderRight
+    100032: Torso
     400000: ElbowLeft
     400002: ElbowRight
     400004: FootLeft
@@ -30,13 +31,14 @@ ModelImporter:
     400012: Head
     400014: HipLeft
     400016: HipRight
-    400018: //RootNode
-    400020: human_male
+    400018: human_male
+    400020: //RootNode
     400022: KneeLeft
     400024: KneeRight
-    400026: ShoulderLeft
-    400028: ShoulderRight
-    400030: Torso
+    400026: Origin
+    400028: ShoulderLeft
+    400030: ShoulderRight
+    400032: Torso
     4300000: human_male
     9500000: //RootNode
     13700000: human_male
@@ -79,9 +81,9 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 0
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Anims_Humanoid : Anims_Generic 
 {
+	Transform Origin;
 	Transform Torso;
 	Transform Head;
 	Transform ShoulderLeft;
@@ -22,12 +23,13 @@ public class Anims_Humanoid : Anims_Generic
 
 	void Start () 
 	{
-		Torso = transform.GetChild(1);
+		Origin = transform.GetChild(1);
+		Torso = Origin.GetChild(2);
+		HipLeft = Origin.GetChild(0);
+		HipRight = Origin.GetChild(1);
 		Head = Torso.GetChild(0);
-		ShoulderLeft = Torso.GetChild(3);
-		ShoulderRight = Torso.GetChild(4);
-		HipLeft = Torso.GetChild(1);
-		HipRight = Torso.GetChild(2);
+		ShoulderLeft = Torso.GetChild(1);
+		ShoulderRight = Torso.GetChild(2);
 		ElbowLeft = ShoulderLeft.GetChild(0);
 		HandLeft = ElbowLeft.GetChild(0);
 		ElbowRight = ShoulderRight.GetChild(0);
@@ -45,6 +47,14 @@ public class Anims_Humanoid : Anims_Generic
 	
 	void Update()
 	{
+		if(machine.IsJumping() && CurrentMoveAnim!=Jump && MoveAnimLerp==0f)
+		{
+			SetMoveAnim( Jump, 0.3f );
+		}
+		if(!machine.IsJumping() && CurrentMoveAnim==Jump)
+		{
+			SetMoveAnim( Run, 0.3f );
+		}
 		if(Input.GetButtonDown("Sprint"))
 		{
 			SetMoveAnim( Walk, 0.5f );
@@ -53,6 +63,7 @@ public class Anims_Humanoid : Anims_Generic
 		{
 			SetMoveAnim( Run, 0.5f );
 		}
+		
 		if(Input.GetButtonDown("Fire1"))
 		{
 			SetActionAnim( Strike, 0.3f ,false, false);
@@ -66,8 +77,8 @@ public class Anims_Humanoid : Anims_Generic
 	
 	float Identity( float frame, float speed, float lerp )
 	{
-		Torso.localPosition = new Vector3(0f,0.756f,0f);
-		ResetChildRotations( Torso , lerp);
+		Origin.localPosition = new Vector3(0f,0f,0f);
+		ResetChildRotations( Origin , lerp);
 		
 		return frame;
 	}
@@ -75,8 +86,12 @@ public class Anims_Humanoid : Anims_Generic
 	float Strike( float frame, float speed, float lerp )
 	{
 		frame += speed*Time.deltaTime/0.75f;
+		if(Input.GetButton("Fire1"))
+		{
+			frame = Mathf.Min (0.4f,frame);
+		}
 		
-		float c = Mathf.Min(360f,frame*360f);
+		float c = Mathf.Min(360f,frame*360f) + Cos(Time.time*1500f)*2f;
 		c -= Sin(c)*45f;
 		
 		SetTransformRotation( Torso, Torso.localRotation* Ang(-Sin(c)*15f,Sin (c)*30f, 0f), lerp);
@@ -90,17 +105,17 @@ public class Anims_Humanoid : Anims_Generic
 	
 	float Walk( float frame, float speed, float lerp )
 	{
-		frame += speed*(Time.deltaTime/0.9f);
+		frame += speed*(Time.deltaTime/1.1f);
 		
 		Vector3 vel = machine.moveDirection;
 		vel.y = 0f;
 		float perc = vel.magnitude/(8f*0.4f);
 		float c = frame*360f;
 		
-		SetTransformRotation( Head, Ang(-3f*perc + Sin(c*2 + 45f)*3f*perc, Sin (c-45f)*3f*perc,0f) ,lerp);
+		SetTransformRotation( Head, Ang(-3f*perc + Sin(c*2f + 45f)*3f*perc, Sin (c-45f)*3f*perc,0f) ,lerp);
 		
-		SetTransformPosition( Torso, new Vector3(0f, 0.756f + Cos(c*2f)*0.05f*perc ,0f) ,lerp);
-		SetTransformRotation( Torso, Ang( 5f*perc - Cos(c*2)*1f*perc, -Sin(c-45f)*3f*perc ,0f) ,lerp);
+		SetTransformPosition( Origin, new Vector3(0f, Cos(c*2f)*0.05f*perc ,0f) ,lerp);
+		SetTransformRotation( Origin, Ang( 5f*perc - Cos(c*2f)*1f*perc, -Sin(c-45f)*3f*perc ,0f) ,lerp);
 		
 		SetTransformRotation( HipLeft, Ang( Sin(c)*30f*perc ,0f,0f) ,lerp);
 		SetTransformRotation( HipRight, Ang( Sin(c + 180f)*30f*perc ,0f,0f) ,lerp);
@@ -127,10 +142,10 @@ public class Anims_Humanoid : Anims_Generic
 		float c = frame*360f;
 		c += Sin(c*2f)*10f*lerp;
 		
-		SetTransformRotation( Head, Ang(-10f*perc + Sin(c*2 + 45f)*10f*perc, Sin (c-45f)*10f*perc,0f) ,lerp);
+		SetTransformRotation( Head, Ang(-10f*perc + Sin(c*2f + 45f)*10f*perc, Sin (c-45f)*10f*perc,0f) ,lerp);
 		
-		SetTransformPosition( Torso, new Vector3(0f, 0.756f - Cos(c*2f)*0.1f*perc ,0f) ,lerp);
-		SetTransformRotation( Torso, Ang( 20f*perc - Cos(c*2)*5f*perc, -Sin(c-45f)*10f*perc ,0f) ,lerp);
+		SetTransformPosition( Origin, new Vector3(0f, -Cos(c*2f)*0.1f*perc ,0f) ,lerp);
+		SetTransformRotation( Origin, Ang( 20f*perc - Cos(c*2f)*5f*perc, -Sin(c-45f)*10f*perc ,0f) ,lerp);
 	
 		SetTransformRotation( HipLeft, Ang( Sin(c)*45f*perc -15f*perc,0f,0f) ,lerp);
 		SetTransformRotation( HipRight, Ang( Sin(c + 180f)*45f*perc -15f*perc,0f,0f) ,lerp);
@@ -145,6 +160,38 @@ public class Anims_Humanoid : Anims_Generic
 		c -= 45f;
 		SetTransformRotation( ElbowLeft, Ang(0f, 25f+Sin(c)*25f*perc +30f*perc,0f) ,lerp);
 		SetTransformRotation( ElbowRight, Ang(0f, -25f+Sin(c)*25f*perc -30f*perc,0f) ,lerp);
+		
+		return frame;
+	}
+	
+	float Jump( float frame, float speed, float lerp )
+	{
+		frame += speed*(Time.deltaTime/0.9f);
+		
+		Vector3 vel = machine.moveDirection;
+		vel.y = 0f;
+		float perc = vel.magnitude/8f;
+		perc = 1f;
+		float c = frame*360f;
+		
+		SetTransformRotation( Head, Ang( 15f + Cos(c)*1f*perc,0f,0f) ,lerp);
+		
+		//SetTransformPosition( Origin, new Vector3(0f, 0f ,0f) ,lerp);
+		SetTransformRotation( Origin, Ang( -10f*perc - Cos(c)*1f*perc, 0f ,0f) ,lerp);
+		
+		SetTransformRotation( Torso, Ang(0f,0f,Cos(c)*5f), lerp);
+		
+		SetTransformRotation( HipLeft, Ang( -20f + Sin(c)*20f*perc,-20f,-10f) ,lerp);
+		SetTransformRotation( HipRight, Ang( -20f + Sin(c + 180f)*20f*perc,20f,10f) ,lerp);
+		
+		SetTransformRotation( KneeLeft, Ang( 20f - Cos(c)*40f*perc ,0f,0f) ,lerp);
+		SetTransformRotation( KneeRight, Ang( 20f - Cos(c + 180f)*40f*perc ,0f,0f) ,lerp);
+		
+		SetTransformRotation( ShoulderLeft, Ang(0f,0f,30f + Cos(c)*10f ) ,lerp);
+		SetTransformRotation( ShoulderRight, Ang(0f,0f,-30f + Cos(c)*10f ) ,lerp);
+
+		SetTransformRotation( ElbowLeft, Ang(0f,30f,0f) ,lerp);
+		SetTransformRotation( ElbowRight, Ang(0f,-30f,0f) ,lerp);
 		
 		return frame;
 	}

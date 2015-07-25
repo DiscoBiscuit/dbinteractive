@@ -17,7 +17,7 @@ public class PlayerMachine : SuperStateMachine {
     private float WalkSpeedMult = 1f;
 
     // Add more states by comma separating them
-    enum PlayerStates { Idle, Walk, Jump, Fall }
+    public enum PlayerStates { Idle, Walk, Jump, Fall };
 
     private SuperCharacterController controller;
 
@@ -41,6 +41,23 @@ public class PlayerMachine : SuperStateMachine {
 
         // Set our currentState to idle on startup
         currentState = PlayerStates.Idle;
+	}
+	
+	public bool IsIdle()
+	{
+		return currentState.Equals(PlayerStates.Idle);
+	}
+	public bool IsMoving()
+	{
+		return currentState.Equals(PlayerStates.Walk);
+	}
+	public bool IsJumping()
+	{
+		return currentState.Equals(PlayerStates.Jump);
+	}
+	public bool IsFalling()
+	{
+		return currentState.Equals(PlayerStates.Fall);
 	}
 
     protected override void EarlyGlobalSuperUpdate()

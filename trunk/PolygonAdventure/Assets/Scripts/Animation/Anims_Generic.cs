@@ -4,10 +4,10 @@ using System.Collections;
 public class Anims_Generic : MonoBehaviour 
 {
 	protected delegate float Anim( float frame, float speed, float lerp );
-	private Anim AnimIdentity;
-	private Anim CurrentMoveAnim;
-	private Anim LastMoveAnim;
-	private Anim CurrentActionAnim;
+	protected Anim AnimIdentity;
+	protected Anim CurrentMoveAnim;
+	protected Anim LastMoveAnim;
+	protected Anim CurrentActionAnim;
 	
 	protected float MoveAnimFrame = 0f;
 	protected float MoveAnimTransitionTime = 1f;
