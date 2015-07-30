@@ -63,7 +63,13 @@
       <script>scripts\console_input.gml</script>
       <script>scripts\print.gml</script>
     </scripts>
+    <scripts name="gameplay">
+      <script>scripts\equip_weapon.gml</script>
+    </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_console</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_camera</object>
@@ -77,6 +83,7 @@
     </objects>
     <objects name="enemies">
       <object>objects\obj_enemy_drone</object>
+      <object>objects\obj_enemy</object>
     </objects>
   </objects>
   <rooms name="rooms">
