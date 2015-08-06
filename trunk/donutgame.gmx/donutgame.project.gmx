@@ -18,6 +18,9 @@
     <background>background\bg_iso_tile</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_moveto.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
     <object>objects\obj_person</object>
