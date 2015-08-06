@@ -86,15 +86,11 @@ public class Anims_Humanoid : Anims_Generic
 	float Strike( float frame, float speed, float lerp )
 	{
 		frame += speed*Time.deltaTime/0.75f;
-		if(Input.GetButton("Fire1"))
-		{
-			frame = Mathf.Min (0.4f,frame);
-		}
 		
-		float c = Mathf.Min(360f,frame*360f) + Cos(Time.time*1500f)*2f;
+		float c = Mathf.Min(360f,frame*360f);
 		c -= Sin(c)*45f;
 		
-		SetTransformRotation( Torso, Torso.localRotation* Ang(-Sin(c)*15f,Sin (c)*30f, 0f), lerp);
+		SetTransformRotation( Torso, Ang( -Sin(c)*15f, Sin(c)*30f, 0f), lerp);
 		SetTransformRotation( Head, Head.localRotation* Ang( Sin(c)*10f, -Sin(c)*20f, 0f), lerp);
 		
 		SetTransformRotation( ShoulderRight, Ang( -60f+Cos(c)*90f, 0f ,-50f + Sin(c)*30f ) ,lerp);

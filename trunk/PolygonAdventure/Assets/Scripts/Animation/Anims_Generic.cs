@@ -153,4 +153,8 @@ public class Anims_Generic : MonoBehaviour
 	{
 		return Mathf.Cos( angle*Mathf.Deg2Rad );
 	}
+	public float LawCos(float A, float B, float C)
+	{
+		return Mathf.Acos(( Mathf.Pow(A,2f) + Mathf.Pow(B,2f) - Mathf.Pow(C,2f) ) / (2f*A*B) );
+	}
 }

@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Animation\Anims_Generic.cs" />
      <Compile Include="Assets\Scripts\Animation\Anims_Humanoid.cs" />
+     <Compile Include="Assets\Scripts\Generation\WorldGenerator.cs" />
      <Compile Include="Assets\Scripts\Gravity.cs" />
      <Compile Include="Assets\Scripts\Old\CharacterMove.cs" />
      <Compile Include="Assets\Scripts\Old\PlayerController.cs" />

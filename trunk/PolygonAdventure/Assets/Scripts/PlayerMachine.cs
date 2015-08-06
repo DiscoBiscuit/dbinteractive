@@ -96,6 +96,15 @@ public class PlayerMachine : SuperStateMachine {
         }
     }
     
+    public Quaternion GetMoveRotation()
+    {
+		return Quaternion.LookRotation(moveDirection,controller.up);
+    }
+	public Quaternion GetLookRotation()
+	{
+		return UprightRotation( Quaternion.LookRotation(lookDirection,controller.up) );
+	}
+    
     private Quaternion UprightRotation( Quaternion newRot )
     {
     	return Quaternion.Euler( new Vector3(0f, newRot.eulerAngles.y ,0f) );
