@@ -16,10 +16,13 @@
   <backgrounds name="background">
     <background>background\bg_tile</background>
     <background>background\bg_iso_tile</background>
+    <background>background\bg_test</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_moveto.gml</script>
+    <script>scripts\scr_iso_x.gml</script>
+    <script>scripts\scr_iso_y.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_control</object>
