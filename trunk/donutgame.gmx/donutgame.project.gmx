@@ -15,7 +15,6 @@
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tile</background>
-    <background>background\bg_iso_tile</background>
     <background>background\bg_test</background>
   </backgrounds>
   <paths name="paths"/>

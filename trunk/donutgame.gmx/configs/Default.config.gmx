@@ -269,9 +269,10 @@
     <option_textureGroup1_parent>&lt;none&gt;</option_textureGroup1_parent>
     <option_textureGroup1_scaled>0</option_textureGroup1_scaled>
     <option_textureGroup1_targets>9223372036854775807</option_textureGroup1_targets>
+    <option_textureGroup2_nocropping>0</option_textureGroup2_nocropping>
     <option_textureGroup_count>2</option_textureGroup_count>
     <option_textureGroups0>Default</option_textureGroups0>
-    <option_textureGroups1>tg_walls</option_textureGroups1>
+    <option_textureGroups1>bg_test</option_textureGroups1>
     <option_tizen_app_id>http://yourdomain/donutgame</option_tizen_app_id>
     <option_tizen_build_version>0</option_tizen_build_version>
     <option_tizen_display_name>donutgame</option_tizen_display_name>
