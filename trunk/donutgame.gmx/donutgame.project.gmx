@@ -12,10 +12,21 @@
       <sprite>sprites\spr_iso_tile</sprite>
       <sprite>sprites\spr_person_iso</sprite>
     </sprites>
+    <sprites name="people">
+      <sprite>sprites\spr_head</sprite>
+      <sprite>sprites\spr_body</sprite>
+      <sprite>sprites\spr_hand</sprite>
+      <sprite>sprites\spr_foot</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_tile</background>
-    <background>background\bg_test</background>
+    <backgrounds name="textures">
+      <background>background\bg_test</background>
+      <background>background\bg_wall</background>
+      <background>background\bg_gradient</background>
+      <background>background\bg_floor</background>
+    </backgrounds>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
