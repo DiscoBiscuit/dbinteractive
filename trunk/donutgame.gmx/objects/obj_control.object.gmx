@@ -175,35 +175,18 @@ if (global.drawmode == -1)
     //draw back left wall
     t = background_get_texture(bg_wall);
     draw_primitive_begin_texture(pr_trianglestrip,t);
-    draw_vertex_texture(scr_iso_x(0,rh),scr_iso_y(0,rh),0,0);
-    draw_vertex_texture(scr_iso_x(0,rh),scr_iso_y(0,rh)-256,0,2);
-    draw_vertex_texture(scr_iso_x(0,0),scr_iso_y(0,0),9,0);
-    draw_vertex_texture(scr_iso_x(0,0),scr_iso_y(0,0)-256,9,2);
+    draw_vertex_texture_color(scr_iso_x(0,rh),scr_iso_y(0,rh),0,0,c_gray,1);
+    draw_vertex_texture_color(scr_iso_x(0,rh),scr_iso_y(0,rh)-256,0,2,c_white,1);
+    draw_vertex_texture_color(scr_iso_x(0,0),scr_iso_y(0,0),9,0,c_gray,1);
+    draw_vertex_texture_color(scr_iso_x(0,0),scr_iso_y(0,0)-256,9,2,c_white,1);
     draw_primitive_end();
     //draw back right wall
     draw_primitive_begin_texture(pr_trianglestrip,t);
-    draw_vertex_texture(scr_iso_x(0,0),scr_iso_y(0,0),0,0);
-    draw_vertex_texture(scr_iso_x(0,0),scr_iso_y(0,0)-256,0,2);
-    draw_vertex_texture(scr_iso_x(rw,0),scr_iso_y(rw,0),16,0);
-    draw_vertex_texture(scr_iso_x(rw,0),scr_iso_y(rw,0)-256,16,2);
+    draw_vertex_texture_color(scr_iso_x(0,0),scr_iso_y(0,0),0,0,c_gray,1);
+    draw_vertex_texture_color(scr_iso_x(0,0),scr_iso_y(0,0)-256,0,2,c_white,1);
+    draw_vertex_texture_color(scr_iso_x(rw,0),scr_iso_y(rw,0),16,0,c_gray,1);
+    draw_vertex_texture_color(scr_iso_x(rw,0),scr_iso_y(rw,0)-256,16,2,c_white,1);
     draw_primitive_end();
-    //draw back left gradient
-    draw_set_alpha(0.5);
-    t = background_get_texture(bg_gradient);
-    draw_primitive_begin_texture(pr_trianglestrip,t);
-    draw_vertex_texture(scr_iso_x(0,rh),scr_iso_y(0,rh),0,0);
-    draw_vertex_texture(scr_iso_x(0,rh),scr_iso_y(0,rh)-256,0,1);
-    draw_vertex_texture(scr_iso_x(0,0),scr_iso_y(0,0),1,0);
-    draw_vertex_texture(scr_iso_x(0,0),scr_iso_y(0,0)-256,1,1);
-    draw_primitive_end();
-    //draw back right gradient
-    draw_primitive_begin_texture(pr_trianglestrip,t);
-    draw_vertex_texture(scr_iso_x(0,0),scr_iso_y(0,0),0,0);
-    draw_vertex_texture(scr_iso_x(0,0),scr_iso_y(0,0)-256,0,1);
-    draw_vertex_texture(scr_iso_x(rw,0),scr_iso_y(rw,0),1,0);
-    draw_vertex_texture(scr_iso_x(rw,0),scr_iso_y(rw,0)-256,1,1);
-    draw_primitive_end();
-    draw_set_alpha(1);
 }
 </string>
           </argument>
